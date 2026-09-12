@@ -1,6 +1,6 @@
 # Invinceible Core HMS
 
-Invinceible Core HMS is a multi-facility hospital management system for real clinical, billing, pharmacy, laboratory, inpatient, reporting, and platform administration workflows.
+MarkCare HMS is a multi-facility hospital management system for real clinical, billing, pharmacy, laboratory, inpatient, reporting, and platform administration workflows.
 
 The project is built as critical healthcare software. Facility and branch scoping, role-based permissions, auditability, payment safety, resilient APIs, and operational monitoring are treated as core system behavior, not optional extras.
 
