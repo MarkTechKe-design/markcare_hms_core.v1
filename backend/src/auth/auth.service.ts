@@ -1,4 +1,4 @@
-import {
+﻿import {
   Injectable,
   UnauthorizedException,
   BadRequestException,
@@ -149,7 +149,7 @@ export class AuthService {
         user,
         meta: auditMeta,
       });
-      throw new UnauthorizedException('User account is inactive');
+      throw new UnauthorizedException('Invalid username or password');
     }
 
     const passwordMatches = await bcrypt.compare(password, user.passwordHash);
@@ -515,8 +515,10 @@ export class AuthService {
   }
 
   private shouldReturnDevResetToken() {
+    const nodeEnv = (this.configService.get<string>('NODE_ENV') ?? '').toLowerCase();
+    const isDevEnv = nodeEnv === 'development' || nodeEnv === 'dev' || nodeEnv === 'test';
     return (
-      this.configService.get<string>('NODE_ENV') !== 'production' &&
+      isDevEnv &&
       this.configService.get<string>('RETURN_DEV_RESET_TOKEN') === 'true'
     );
   }
@@ -589,3 +591,4 @@ export class AuthService {
     };
   }
 }
+

@@ -51,7 +51,7 @@ const loginHighlights = [
   {
     icon: Wallet,
     title: "Payment integrity",
-    text: "Cash, M-PESA, SHA coverage â€” reconciled and fiscal-ready.",
+    text: "Cash, M-PESA, SHA coverage — reconciled and fiscal-ready.",
   },
   {
     icon: FlaskConical,
@@ -153,7 +153,7 @@ export default function LoginPageClient() {
             Smarter care starts with a connected hospital.
           </h1>
           <p className="mt-4 max-w-md text-base leading-7 opacity-85">
-            Patient flow, billing, pharmacy, laboratory, and admissions â€”
+            Patient flow, billing, pharmacy, laboratory, and admissions —
             one secure, audited workspace for the whole facility.
           </p>
         </div>
@@ -301,7 +301,7 @@ export default function LoginPageClient() {
                   className="h-11 w-full text-[0.95rem] font-semibold"
                   disabled={isLoading}
                 >
-                  {isLoading ? "Signing inâ€¦" : "Sign in"}
+                  {isLoading ? "Signing in..." : "Sign in"}
                   <ArrowRight data-icon="inline-end" aria-hidden />
                 </Button>
                 
@@ -369,4 +369,5 @@ export default function LoginPageClient() {
     </main>
   );
 }
+
 
