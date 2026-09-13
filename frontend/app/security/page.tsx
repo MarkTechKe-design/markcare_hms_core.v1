@@ -4,7 +4,8 @@ import { ArrowRight, ShieldCheck, Lock, KeyRound, Building2, ScrollText, UserChe
 import { MarketingHeader } from "@/components/marketing/marketing-header";
 import { MarketingFooter } from "@/components/marketing/marketing-footer";
 import { MarketingContainer } from "@/components/marketing/marketing-container";
-import { MarketingBadge } from "@/components/marketing/marketing-badge";
+import { MarketingBadge } from '@/components/marketing/marketing-badge';
+import { MarketingCtaBanner } from '@/components/marketing/marketing-cta-banner';
 import { Button } from "@/components/ui/button";
 
 export const metadata: Metadata = {
@@ -142,22 +143,18 @@ export default function SecurityPage() {
         </section>
 
         {/* CTA */}
-        <section className="py-16 bg-card">
-          <MarketingContainer className="text-center max-w-2xl">
-            <h2 className="text-2xl font-bold text-foreground">Have questions about your hospital&apos;s IT compliance?</h2>
-            <p className="text-sm text-muted-foreground mt-2">
-              Speak directly with our technical architecture team regarding network topography, data sovereignty, and backup schedules.
-            </p>
-            <div className="mt-6 flex justify-center gap-3">
-              <Button asChild>
-                <Link href="/request-demo">Schedule Technical Review</Link>
-              </Button>
-              <Button variant="outline" asChild>
-                <Link href="/pricing">Review Deployment Options</Link>
-              </Button>
-            </div>
-          </MarketingContainer>
-        </section>
+                <MarketingCtaBanner
+          headline="Schedule a Security & Architecture Review"
+          description="Speak directly with our technical architecture team regarding network topography, data sovereignty, and backup schedules."
+          primaryCta={{
+            label: "Schedule Technical Review",
+            href: "/request-demo",
+          }}
+          secondaryCta={{
+            label: "Review Deployment Options",
+            href: "/pricing",
+          }}
+        />
       </main>
 
       <MarketingFooter />

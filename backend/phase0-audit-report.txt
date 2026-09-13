@@ -1,0 +1,623 @@
+﻿=================================================================
+      MARKCARE HMS — PHASE 0 BACKEND FOUNDATION AUDIT            
+      Timestamp: 2026-09-12 19:48:52       
+=================================================================
+
+=================================================================
+SECTION: 1. GIT WORKING TREE & COMMIT BASELINE
+=================================================================
+Current Branch:
+main
+
+Git Status (Short):
+ M package-lock.json
+ M ../frontend/app/layout.tsx
+ M ../frontend/app/page.tsx
+ M ../frontend/package-lock.json
+?? backend-audit-output.txt
+?? phase0-audit-report.txt
+?? ../frontend/audit-output.txt
+
+Last 3 Commits:
+4b7c4f8 Merge pull request #158 from Owinovative/fix/frontend-build-ci
+4874126 fix(security): remove insurance URL regex backtracking
+274cacf fix(ci): restore exact emnapi lock entries
+
+=================================================================
+SECTION: 2. RUNTIME & DEPENDENCY ENVIRONMENT
+=================================================================
+Node Version: v24.19.0
+NPM Version : 12.0.2
+Package Name   : backend
+Package Version: 0.0.1
+
+Available Scripts:
+  build -> nest build
+  format -> prettier --write "src/**/*.ts" "test/**/*.ts"
+  start -> nest start
+  start:worker -> nest start --entryFile worker
+  start:dev -> nest start --watch
+  start:debug -> nest start --debug --watch
+  start:prod -> node dist/main
+  start:prod:worker -> node dist/worker
+  lint -> eslint "{src,apps,libs,test}/**/*.ts" --fix
+  test -> jest
+  test:watch -> jest --watch
+  test:cov -> jest --coverage
+  test:unit:ci -> jest --runInBand --testPathIgnorePatterns=integration/
+  test:integration -> jest --config test/jest-integration.json --runInBand --testTimeout=15000
+  test:integration:cov -> jest --config test/jest-integration.json --runInBand --coverage
+  lint:integration -> eslint "src/integration/**/*.ts"
+  test:debug -> node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand
+  test:e2e -> jest --config ./test/jest-e2e.json
+  prisma:generate -> node scripts/generate-prisma-client.mjs
+  prisma:migrate:deploy -> prisma migrate deploy
+  prisma:schema:postgres -> node scripts/create-postgres-prisma-schema.mjs
+  prisma:generate:postgres -> npm run prisma:schema:postgres && prisma generate --schema prisma-postgresql/schema.prisma
+  prisma:migrate:postgres -> npm run prisma:schema:postgres && prisma migrate deploy --schema prisma-postgresql/schema.prisma
+  db:validate -> node scripts/validate-critical-data.mjs
+  db:validate:dry-run -> node scripts/validate-critical-data.mjs --dry-run
+  db:seed:safe -> node scripts/safe-seed.mjs
+  admin:create-super -> node scripts/create-super-admin.mjs
+  demo:setup-facility -> node scripts/setup-demo-facility.mjs
+  demo:setup-staff -> node scripts/setup-demo-staff.mjs
+  demo:setup-terminology -> node scripts/setup-demo-terminology.mjs
+  dha:uat -> node scripts/run-dha-uat-checklist.mjs
+  dha:uat:validate -> node scripts/run-dha-uat-checklist.mjs --validate-only
+  db:backup:notes -> node scripts/render-db-backup-notes.mjs
+  db:storage:audit -> node scripts/storage-audit.mjs
+  db:cleanup:dry-run -> node scripts/storage-cleanup.mjs --dry-run
+  db:cleanup -> node scripts/storage-cleanup.mjs --execute
+  db:large-fields:report -> node scripts/large-fields-report.mjs
+  db:index:audit -> node scripts/index-audit.mjs
+  prestart:dev -> npm run prisma:generate
+  prestart:debug -> npm run prisma:generate
+  postinstall -> node scripts/generate-prisma-client.mjs
+
+=================================================================
+SECTION: 3. PRISMA VALIDATION & MIGRATION STATUS
+=================================================================
+Validating Prisma Schema (Read-Only):
+node.exe : npm notice run backend@0.0.1 npx
+At line:1 char:1
++ & "C:\Program Files\nodejs/node.exe" "C:\Users\MARK OCHIENG ODUOR\App ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (npm notice run backend@0.0.1 npx:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+npm notice run prisma validate
+warn The configuration property `package.json#prisma` is deprecated and will be removed in Prisma 7. Please migrate to 
+a Prisma config file (e.g., `prisma.config.ts`).
+For more information, see: https://pris.ly/prisma-config
+
+Loaded Prisma config from prisma.config.ts.
+
+warn The Prisma config file in prisma.config.ts overrides the deprecated `package.json#prisma` property in 
+package.json.
+  For more information, see: https://pris.ly/prisma-config
+
+Prisma config detected, skipping environment variable loading.
+Prisma schema loaded from prisma\schema.prisma
+The schema at prisma\schema.prisma is valid ≡ƒÜÇ
+
+Checking Migration Status:
+node.exe : npm notice run backend@0.0.1 npx
+At line:1 char:1
++ & "C:\Program Files\nodejs/node.exe" "C:\Users\MARK OCHIENG ODUOR\App ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (npm notice run backend@0.0.1 npx:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+npm notice run prisma migrate status
+warn The configuration property `package.json#prisma` is deprecated and will be removed in Prisma 7. Please migrate to 
+a Prisma config file (e.g., `prisma.config.ts`).
+For more information, see: https://pris.ly/prisma-config
+
+Loaded Prisma config from prisma.config.ts.
+
+warn The Prisma config file in prisma.config.ts overrides the deprecated `package.json#prisma` property in 
+package.json.
+  For more information, see: https://pris.ly/prisma-config
+
+Prisma config detected, skipping environment variable loading.
+Prisma schema loaded from prisma\schema.prisma
+Datasource "db": MySQL database "markcare_hms" at "localhost:3306"
+
+31 migrations found in prisma/migrations
+Following migrations have not yet been applied:
+20260421202753_finalize_billing_and_invoice_tracking
+20260424190000_add_user_login_lockout
+20260425090000_add_single_active_session
+20260425120000_add_service_tariffs
+20260425130000_add_branch_stock_buying_price
+20260425143000_add_operational_module_records
+20260426110000_add_user_location_tracking
+20260502033000_add_invoice_payment_display_fields
+20260502053000_add_document_identity_location_fields
+20260502100000_sha_receipts_sessions_and_printouts
+20260502123000_sha_claim_signatures_and_mpesa_indexes
+20260503090000_add_user_reviews
+20260503100000_sha_feedback_subscriptions
+20260506100000_facility_compliance_and_mpesa_credentials
+20260506173000_performance_resilience_indexes
+20260506200000_enterprise_patient_portal_outbox
+20260507053000_prescription_item_route_snapshots
+20260507120000_fast_master_catalog_indexes
+20260507170000_consultation_stock_notification_list_indexes
+20260523120000_add_otc_sales_backend_foundation
+20260702090000_add_dha_etims_integration
+20260716090000_payment_transaction_integrity
+20260718090000_dha_production_foundation
+20260723110000_broadway_pharmacy_inventory
+20260723120000_payment_adjustment_ledger
+20260723130000_lab_result_validation_release
+20260723140000_external_laboratory_referrals
+20260723150000_dental_orthopedic_clinical_records
+20260723160000_private_insurance_workflow
+20260723170000_append_only_audit_ledger
+20260723180000_external_lab_billing_secure_shares
+
+To apply migrations in development run prisma migrate dev.
+To apply migrations in production run prisma migrate deploy.
+
+=================================================================
+SECTION: 4. ENVIRONMENT VARIABLE KEYS (PRESENCE ONLY)
+=================================================================
+File: .env
+  - DATABASE_URL : PRESENT
+  - JWT_SECRET : PRESENT
+  - JWT_ACCESS_SECRET : NOT SET
+  - JWT_REFRESH_SECRET : NOT SET
+  - MPESA_CONSUMER_KEY : PRESENT
+  - MPESA_CONSUMER_SECRET : PRESENT
+  - MPESA_PASSKEY : PRESENT
+  - MPESA_SHORTCODE : PRESENT
+  - PAYHERO_API_KEY : NOT SET
+  - SHA_API_KEY : NOT SET
+  - SHA_CLIENT_SECRET : NOT SET
+  - ETIMS_API_KEY : NOT SET
+  - ETIMS_SIGNING_KEY : NOT SET
+  - SMS_API_KEY : PRESENT
+  - SMTP_PASSWORD : NOT SET
+  - REDIS_URL : PRESENT
+  - PORT : PRESENT
+File: .env.local (NOT PRESENT)
+File: .env.example
+  - DATABASE_URL : PRESENT
+  - JWT_SECRET : PRESENT
+  - JWT_ACCESS_SECRET : NOT SET
+  - JWT_REFRESH_SECRET : NOT SET
+  - MPESA_CONSUMER_KEY : PRESENT
+  - MPESA_CONSUMER_SECRET : PRESENT
+  - MPESA_PASSKEY : PRESENT
+  - MPESA_SHORTCODE : PRESENT
+  - PAYHERO_API_KEY : NOT SET
+  - SHA_API_KEY : NOT SET
+  - SHA_CLIENT_SECRET : NOT SET
+  - ETIMS_API_KEY : NOT SET
+  - ETIMS_SIGNING_KEY : NOT SET
+  - SMS_API_KEY : PRESENT
+  - SMTP_PASSWORD : NOT SET
+  - REDIS_URL : PRESENT
+  - PORT : PRESENT
+
+=================================================================
+SECTION: 5. EXISTING DOCUMENTATION DISCOVERY
+=================================================================
+  Found Doc: D:\MarkCare\markcare_hms_core.v1\docs\compliance\third-party-license-review.md (1.8 KB)
+  Found Doc: D:\MarkCare\markcare_hms_core.v1\docs\deployment\mysql-to-render-postgres.md (10.6 KB)
+  Found Doc: D:\MarkCare\markcare_hms_core.v1\docs\deployment\render.md (17.9 KB)
+  Found Doc: D:\MarkCare\markcare_hms_core.v1\docs\dha-integration\DEPLOYMENT_AND_CONFIGURATION_GUIDE.md (2 KB)
+  Found Doc: D:\MarkCare\markcare_hms_core.v1\docs\dha-integration\DHA_SHA_IMPLEMENTATION_STATUS_REPORT.md (2.4 KB)
+  Found Doc: D:\MarkCare\markcare_hms_core.v1\docs\dha-integration\SHA_OPERATIONS_GUIDE.md (2.5 KB)
+  Found Doc: D:\MarkCare\markcare_hms_core.v1\docs\dha-integration\SYSTEM_INTEGRATION_ARCHITECTURE.md (2.2 KB)
+  Found Doc: D:\MarkCare\markcare_hms_core.v1\docs\dha-integration\TESTING_AND_UAT_GUIDE.md (1.7 KB)
+  Found Doc: D:\MarkCare\markcare_hms_core.v1\docs\integrations\configuration.md (5.4 KB)
+  Found Doc: D:\MarkCare\markcare_hms_core.v1\docs\integrations\deployment.md (2.6 KB)
+  Found Doc: D:\MarkCare\markcare_hms_core.v1\docs\integrations\dha-production-readiness.md (5.4 KB)
+  Found Doc: D:\MarkCare\markcare_hms_core.v1\docs\integrations\dha.md (4 KB)
+  Found Doc: D:\MarkCare\markcare_hms_core.v1\docs\integrations\etims.md (4 KB)
+  Found Doc: D:\MarkCare\markcare_hms_core.v1\docs\integrations\README.md (7.2 KB)
+  Found Doc: D:\MarkCare\markcare_hms_core.v1\docs\integrations\testing.md (3.4 KB)
+  Found Doc: D:\MarkCare\markcare_hms_core.v1\docs\integrations\troubleshooting.md (3 KB)
+  Found Doc: D:\MarkCare\markcare_hms_core.v1\docs\master\MASTER_SYSTEM_DOCUMENTATION.md (177.6 KB)
+  Found Doc: D:\MarkCare\markcare_hms_core.v1\docs\payments\payhero.md (2 KB)
+  Found Doc: D:\MarkCare\markcare_hms_core.v1\docs\releases\v2.0.0.md (3.3 KB)
+  Found Doc: D:\MarkCare\markcare_hms_core.v1\docs\ai-assistant-safety.md (0.9 KB)
+  Found Doc: D:\MarkCare\markcare_hms_core.v1\docs\API_REFERENCE.md (42.9 KB)
+  Found Doc: D:\MarkCare\markcare_hms_core.v1\docs\AUTHENTICATION.md (4.7 KB)
+  Found Doc: D:\MarkCare\markcare_hms_core.v1\docs\AUTHORIZATION.md (4.7 KB)
+  Found Doc: D:\MarkCare\markcare_hms_core.v1\docs\BACKEND.md (9 KB)
+  Found Doc: D:\MarkCare\markcare_hms_core.v1\docs\CHANGELOG.md (2.1 KB)
+  Found Doc: D:\MarkCare\markcare_hms_core.v1\docs\clinical-decision-support.md (0.7 KB)
+  Found Doc: D:\MarkCare\markcare_hms_core.v1\docs\clinical-workflow.md (0.9 KB)
+  Found Doc: D:\MarkCare\markcare_hms_core.v1\docs\communication-notifications.md (0.7 KB)
+  Found Doc: D:\MarkCare\markcare_hms_core.v1\docs\CONFIGURATION.md (5.5 KB)
+  Found Doc: D:\MarkCare\markcare_hms_core.v1\docs\CONTRIBUTING.md (2.1 KB)
+  Found Doc: D:\MarkCare\markcare_hms_core.v1\docs\data-privacy-consent.md (0.8 KB)
+  Found Doc: D:\MarkCare\markcare_hms_core.v1\docs\data-warehouse-plan.md (0.7 KB)
+  Found Doc: D:\MarkCare\markcare_hms_core.v1\docs\database-storage-efficiency.md (7.3 KB)
+  Found Doc: D:\MarkCare\markcare_hms_core.v1\docs\DATABASE.md (9.8 KB)
+  Found Doc: D:\MarkCare\markcare_hms_core.v1\docs\DEMONSTRATION_TESTING_PROCEDURE.md (53.2 KB)
+  Found Doc: D:\MarkCare\markcare_hms_core.v1\docs\DEPLOYMENT.md (4.9 KB)
+  Found Doc: D:\MarkCare\markcare_hms_core.v1\docs\DESIGN_SYSTEM.md (3.3 KB)
+  Found Doc: D:\MarkCare\markcare_hms_core.v1\docs\DEVELOPMENT_GUIDE.md (5.5 KB)
+  Found Doc: D:\MarkCare\markcare_hms_core.v1\docs\ERROR_HANDLING.md (3.2 KB)
+  Found Doc: D:\MarkCare\markcare_hms_core.v1\docs\feature-flags.md (0.5 KB)
+  Found Doc: D:\MarkCare\markcare_hms_core.v1\docs\FRONTEND.md (6.7 KB)
+  Found Doc: D:\MarkCare\markcare_hms_core.v1\docs\high-availability-architecture.md (1.7 KB)
+  Found Doc: D:\MarkCare\markcare_hms_core.v1\docs\hms-benchmark-gap-analysis.md (6.3 KB)
+  Found Doc: D:\MarkCare\markcare_hms_core.v1\docs\INTEGRATIONS.md (4.9 KB)
+  Found Doc: D:\MarkCare\markcare_hms_core.v1\docs\lab-quality-controls.md (0.8 KB)
+  Found Doc: D:\MarkCare\markcare_hms_core.v1\docs\LEGAL_COMPLIANCE.md (3.2 KB)
+  Found Doc: D:\MarkCare\markcare_hms_core.v1\docs\load-testing.md (2.4 KB)
+  Found Doc: D:\MarkCare\markcare_hms_core.v1\docs\logging-observability.md (2.3 KB)
+  Found Doc: D:\MarkCare\markcare_hms_core.v1\docs\mobile-tablet-readiness.md (0.6 KB)
+  Found Doc: D:\MarkCare\markcare_hms_core.v1\docs\MONITORING.md (2.6 KB)
+  Found Doc: D:\MarkCare\markcare_hms_core.v1\docs\mpesa-reconciliation.md (1.6 KB)
+  Found Doc: D:\MarkCare\markcare_hms_core.v1\docs\multi-tenant-facility-isolation.md (1.1 KB)
+  Found Doc: D:\MarkCare\markcare_hms_core.v1\docs\operations-alerting.md (1.3 KB)
+  Found Doc: D:\MarkCare\markcare_hms_core.v1\docs\operations-dashboard.md (0.5 KB)
+  Found Doc: D:\MarkCare\markcare_hms_core.v1\docs\patient-portal.md (1 KB)
+  Found Doc: D:\MarkCare\markcare_hms_core.v1\docs\pdf-printout-audit.md (2.4 KB)
+  Found Doc: D:\MarkCare\markcare_hms_core.v1\docs\performance-scalability.md (7 KB)
+  Found Doc: D:\MarkCare\markcare_hms_core.v1\docs\PERFORMANCE.md (2.8 KB)
+  Found Doc: D:\MarkCare\markcare_hms_core.v1\docs\pharmacy-stock-safety.md (0.8 KB)
+  Found Doc: D:\MarkCare\markcare_hms_core.v1\docs\prescriptions-pharmacy.md (1.8 KB)
+  Found Doc: D:\MarkCare\markcare_hms_core.v1\docs\production-security-checklist.md (2.3 KB)
+  Found Doc: D:\MarkCare\markcare_hms_core.v1\docs\README.md (5.2 KB)
+  Found Doc: D:\MarkCare\markcare_hms_core.v1\docs\release-checklist.md (4.2 KB)
+  Found Doc: D:\MarkCare\markcare_hms_core.v1\docs\reporting-bi.md (0.7 KB)
+  Found Doc: D:\MarkCare\markcare_hms_core.v1\docs\reports-printouts.md (1.6 KB)
+  Found Doc: D:\MarkCare\markcare_hms_core.v1\docs\repository-audit.md (3.7 KB)
+  Found Doc: D:\MarkCare\markcare_hms_core.v1\docs\ROADMAP.md (2 KB)
+  Found Doc: D:\MarkCare\markcare_hms_core.v1\docs\roles-permissions-matrix.md (1.1 KB)
+  Found Doc: D:\MarkCare\markcare_hms_core.v1\docs\security-monitoring.md (1.3 KB)
+  Found Doc: D:\MarkCare\markcare_hms_core.v1\docs\security-testing.md (1.7 KB)
+  Found Doc: D:\MarkCare\markcare_hms_core.v1\docs\SECURITY.md (5.4 KB)
+  Found Doc: D:\MarkCare\markcare_hms_core.v1\docs\sha-insurance-workflow.md (0.6 KB)
+  Found Doc: D:\MarkCare\markcare_hms_core.v1\docs\SYSTEM_ARCHITECTURE.md (11.9 KB)
+  Found Doc: D:\MarkCare\markcare_hms_core.v1\docs\TESTING.md (3.2 KB)
+  Found Doc: D:\MarkCare\markcare_hms_core.v1\docs\UI_UX_GUIDE.md (6.5 KB)
+  Found Doc: D:\MarkCare\markcare_hms_core.v1\docs\WORKFLOWS.md (9 KB)
+  Found Doc: \README.md (5 KB)
+  Found Doc: D:\MarkCare\markcare_hms_core.v1\README.md (9.1 KB)
+
+=================================================================
+SECTION: 6. TEST SUITE EXECUTION
+=================================================================
+Running backend test suite (npm test):
+node.exe : npm notice run backend@0.0.1 test
+At line:1 char:1
++ & "C:\Program Files\nodejs/node.exe" "C:\Users\MARK OCHIENG ODUOR\App ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (npm notice run backend@0.0.1 test:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+npm notice run jest --runInBand
+[31m[Nest] 14024  - [39m09/12/2026, 7:49:58 PM [31m  ERROR[39m [38;5;3m[HMS] [39m[31m[integration] Outbound 
+integration request dead-lettered {"requestId":1,"integration":"DHA","operation":"SUBMIT_CLAIM","attemptCount":1,"maxAt
+tempts":3,"permanent":true,"error":"DHA rejected CLAIM_SUBMISSION for transaction 1"}[39m
+[31m[Nest] 14024  - [39m09/12/2026, 7:49:58 PM [31m  ERROR[39m [38;5;3m[HMS] [39m[31m[integration] Outbound 
+integration request dead-lettered {"requestId":1,"integration":"DHA","operation":"SUBMIT_CLAIM","attemptCount":1,"maxAt
+tempts":3,"permanent":true,"error":"Queue payload is missing dhaTransactionId"}[39m
+[31m[Nest] 14024  - [39m09/12/2026, 7:49:58 PM [31m  ERROR[39m [38;5;3m[HMS] [39m[31m[integration] Failed to 
+poll claim SHA-000001 {"error":{},"claimId":1}[39m
+PASS src/integration/dha/dha.service.spec.ts (7.26 s)
+[33m[Nest] 14024  - [39m09/12/2026, 7:49:58 PM [33m   WARN[39m [38;5;3m[HMS] [39m[33m[integration] DHA synchronous operation failed {"transactionType":"PATIENT_VERIFICATION","transactionId":1,"error":"DHA unavailable"}[39m
+[32m[Nest] 14024  - [39m09/12/2026, 7:49:58 PM [32m    LOG[39m [38;5;3m[HMS] [39m[32m[integration] Queued outbound integration request {"requestId":1,"integration":"DHA","operation":"SUBMIT_CLAIM","entityType":"DHA_TRANSACTION","entityId":"1"}[39m
+[32m[Nest] 14024  - [39m09/12/2026, 7:49:58 PM [32m    LOG[39m [38;5;3m[HMS] [39m[32m[integration] Queued outbound integration request {"requestId":1,"integration":"DHA","operation":"SUBMIT_CLAIM","entityType":"DHA_TRANSACTION","entityId":"1","correlationId":"corr-claim"}[39m
+[32m[Nest] 14024  - [39m09/12/2026, 7:49:58 PM [32m    LOG[39m [38;5;3m[HMS] [39m[32m[integration] Queued outbound integration request {"requestId":1,"integration":"DHA","operation":"SUBMIT_CLAIM","entityType":"DHA_TRANSACTION","entityId":"1"}[39m
+[32m[Nest] 14024  - [39m09/12/2026, 7:49:58 PM [32m    LOG[39m [38;5;3m[HMS] [39m[32m[integration] Outbound integration request completed {"requestId":1,"integration":"DHA","operation":"SUBMIT_CLAIM","entityId":"1","correlationId":null,"durationMs":1,"retryCount":0}[39m
+[32m[Nest] 14024  - [39m09/12/2026, 7:49:58 PM [32m    LOG[39m [38;5;3m[HMS] [39m[32m[integration] Queued outbound integration request {"requestId":1,"integration":"DHA","operation":"SUBMIT_CLAIM","entityType":"DHA_TRANSACTION","entityId":"1"}[39m
+[33m[Nest] 14024  - [39m09/12/2026, 7:49:58 PM [33m   WARN[39m [38;5;3m[HMS] [39m[33m[integration] Outbound integration request will retry {"requestId":1,"integration":"DHA","operation":"SUBMIT_CLAIM","attemptCount":1,"maxAttempts":3,"nextRetryInMs":1070}[39m
+[32m[Nest] 14024  - [39m09/12/2026, 7:49:58 PM [32m    LOG[39m [38;5;3m[HMS] [39m[32m[integration] Outbound integration request completed {"requestId":1,"integration":"DHA","operation":"SUBMIT_CLAIM","entityId":"1","correlationId":null,"durationMs":0,"retryCount":1}[39m
+[32m[Nest] 14024  - [39m09/12/2026, 7:49:58 PM [32m    LOG[39m [38;5;3m[HMS] [39m[32m[integration] Queued outbound integration request {"requestId":1,"integration":"DHA","operation":"SUBMIT_CLAIM","entityType":"DHA_TRANSACTION","entityId":"1"}[39m
+[32m[Nest] 14024  - [39m09/12/2026, 7:49:58 PM [32m    LOG[39m [38;5;3m[HMS] [39m[32m[integration] Queued outbound integration request {"requestId":1,"integration":"DHA","operation":"SUBMIT_CLAIM","entityType":"DHA_TRANSACTION","entityId":"1"}[39m
+[32m[Nest] 14024  - [39m09/12/2026, 7:49:58 PM [32m    LOG[39m [38;5;3m[HMS] [39m[32m[integration] Outbound integration request completed {"requestId":1,"integration":"DHA","operation":"SUBMIT_CLAIM","entityId":"1","correlationId":null,"durationMs":0,"retryCount":0}[39m
+[32m[Nest] 14024  - [39m09/12/2026, 7:49:58 PM [32m    LOG[39m [38;5;3m[HMS] [39m[32m[integration] Queued outbound integration request {"requestId":1,"integration":"DHA","operation":"SUBMIT_CLAIM","entityType":"DHA_TRANSACTION","entityId":"missing"}[39m
+[32m[Nest] 14024  - [39m09/12/2026, 7:49:58 PM [32m    LOG[39m [38;5;3m[HMS] [39m[32m[integration] Queued outbound integration request {"requestId":1,"integration":"DHA","operation":"SUBMIT_ENCOUNTER","entityType":"DHA_TRANSACTION","entityId":"1"}[39m
+[32m[Nest] 14024  - [39m09/12/2026, 7:49:58 PM [32m    LOG[39m [38;5;3m[HMS] [39m[32m[integration] Outbound integration request completed {"requestId":1,"integration":"DHA","operation":"SUBMIT_ENCOUNTER","entityId":"1","correlationId":null,"durationMs":1,"retryCount":0}[39m
+[32m[Nest] 14024  - [39m09/12/2026, 7:49:58 PM [32m    LOG[39m [38;5;3m[HMS] [39m[32m[integration] Queued outbound integration request {"requestId":1,"integration":"DHA","operation":"SUBMIT_REFERRAL","entityType":"DHA_TRANSACTION","entityId":"1"}[39m
+[32m[Nest] 14024  - [39m09/12/2026, 7:49:58 PM [32m    LOG[39m [38;5;3m[HMS] [39m[32m[integration] Outbound integration request completed {"requestId":1,"integration":"DHA","operation":"SUBMIT_REFERRAL","entityId":"1","correlationId":null,"durationMs":0,"retryCount":0}[39m
+[33m[Nest] 14024  - [39m09/12/2026, 7:49:58 PM [33m   WARN[39m [38;5;3m[HMS] [39m[33m[integration] Claim status callback for unknown claim: UNKNOWN[39m
+[32m[Nest] 14024  - [39m09/12/2026, 7:50:00 PM [32m    LOG[39m [38;5;3m[HMS] [39m[32m[integration] Queued outbound integration request {"requestId":1,"integration":"ETIMS","operation":"SUBMIT_INVOICE","entityType":"ETIMS_INVOICE","entityId":"1","correlationId":"corr-test"}[39m
+[32m[Nest] 14024  - [39m09/12/2026, 7:50:00 PM [32m    LOG[39m [38;5;3m[HMS] [39m[32m[integration] eTIMS document queued for submission {"etimsInvoiceId":1,"invoiceNumber":"INV-000001","queued":true,"correlationId":"corr-test"}[39m
+[32m[Nest] 14024  - [39m09/12/2026, 7:50:01 PM [32m    LOG[39m [38;5;3m[HMS] [39m[32m[integration] Outbound integration request completed {"requestId":1,"integration":"ETIMS","operation":"SUBMIT_INVOICE","entityId":"1","correlationId":"corr-test","durationMs":877,"retryCount":0}[39m
+[32m[Nest] 14024  - [39m09/12/2026, 7:50:01 PM [32m    LOG[39m [38;5;3m[HMS] [39m[32m[integration] Queued outbound integration request {"requestId":1,"integration":"ETIMS","operation":"FISCALIZE_INVOICE","entityType":"INVOICE","entityId":"1"}[39m
+[32m[Nest] 14024  - [39m09/12/2026, 7:50:01 PM [32m    LOG[39m [38;5;3m[HMS] [39m[32m[integration] Queued outbound integration request {"requestId":2,"integration":"ETIMS","operation":"SUBMIT_INVOICE","entityType":"ETIMS_INVOICE","entityId":"1"}[39m
+[32m[Nest] 14024  - [39m09/12/2026, 7:50:01 PM [32m    LOG[39m [38;5;3m[HMS] [39m[32m[integration] eTIMS document queued for submission {"etimsInvoiceId":1,"invoiceNumber":"INV-000001","queued":true}[39m
+[32m[Nest] 14024  - [39m09/12/2026, 7:50:01 PM [32m    LOG[39m [38;5;3m[HMS] [39m[32m[integration] Outbound integration request completed {"requestId":1,"integration":"ETIMS","operation":"FISCALIZE_INVOICE","entityId":"1","correlationId":null,"durationMs":1,"retryCount":0}[39m
+[31m[Nest] 14024  - [39m09/12/2026, 7:50:01 PM [31m  ERROR[39m [38;5;3m[HMS] [39m[31m[integration] Outbound 
+integration request dead-lettered {"requestId":1,"integration":"ETIMS","operation":"FISCALIZE_INVOICE","attemptCount":1
+,"maxAttempts":1,"permanent":false,"error":"Invalid invoice id in eTIMS fiscalization outbox 1"}[39m
+[32m[Nest] 14024  - [39m09/12/2026, 7:50:01 PM [32m    LOG[39m [38;5;3m[HMS] [39m[32m[integration] Outbound integration request completed {"requestId":2,"integration":"ETIMS","operation":"SUBMIT_INVOICE","entityId":"1","correlationId":null,"durationMs":708,"retryCount":0}[39m
+[32m[Nest] 14024  - [39m09/12/2026, 7:50:01 PM [32m    LOG[39m [38;5;3m[HMS] [39m[32m[integration] Queued outbound integration request {"requestId":1,"integration":"ETIMS","operation":"FISCALIZE_INVOICE","entityType":"INVOICE","entityId":"invalid"}[39m
+[32m[Nest] 14024  - [39m09/12/2026, 7:50:01 PM [32m    LOG[39m [38;5;3m[HMS] [39m[32m[integration] Queued outbound integration request {"requestId":1,"integration":"ETIMS","operation":"SUBMIT_INVOICE","entityType":"ETIMS_INVOICE","entityId":"1","correlationId":"corr-test"}[39m
+[32m[Nest] 14024  - [39m09/12/2026, 7:50:01 PM [32m    LOG[39m [38;5;3m[HMS] [39m[32m[integration] eTIMS document queued for submission {"etimsInvoiceId":1,"invoiceNumber":"INV-000001","queued":true,"correlationId":"corr-test"}[39m
+[32m[Nest] 14024  - [39m09/12/2026, 7:50:02 PM [32m    LOG[39m [38;5;3m[HMS] [39m[32m[integration] Outbound integration request completed {"requestId":1,"integration":"ETIMS","operation":"SUBMIT_INVOICE","entityId":"1","correlationId":"corr-test","durationMs":776,"retryCount":0}[39m
+[32m[Nest] 14024  - [39m09/12/2026, 7:50:02 PM [32m    LOG[39m [38;5;3m[HMS] [39m[32m[integration] Queued outbound integration request {"requestId":1,"integration":"ETIMS","operation":"SUBMIT_INVOICE","entityType":"ETIMS_INVOICE","entityId":"1"}[39m
+[32m[Nest] 14024  - [39m09/12/2026, 7:50:02 PM [32m    LOG[39m [38;5;3m[HMS] [39m[32m[integration] eTIMS document queued for submission {"etimsInvoiceId":1,"invoiceNumber":"INV-000001","queued":true}[39m
+[33m[Nest] 14024  - [39m09/12/2026, 7:50:02 PM [33m   WARN[39m [38;5;3m[HMS] [39m[33m[integration] Outbound integration request will retry {"requestId":1,"integration":"ETIMS","operation":"SUBMIT_INVOICE","attemptCount":1,"maxAttempts":3,"nextRetryInMs":831}[39m
+[32m[Nest] 14024  - [39m09/12/2026, 7:50:02 PM [32m    LOG[39m [38;5;3m[HMS] [39m[32m[integration] Queued outbound integration request {"requestId":1,"integration":"ETIMS","operation":"SUBMIT_INVOICE","entityType":"ETIMS_INVOICE","entityId":"1"}[39m
+[32m[Nest] 14024  - [39m09/12/2026, 7:50:02 PM [32m    LOG[39m [38;5;3m[HMS] [39m[32m[integration] eTIMS document queued for submission {"etimsInvoiceId":1,"invoiceNumber":"INV-000001","queued":true}[39m
+[33m[Nest] 14024  - [39m09/12/2026, 7:50:02 PM [33m   WARN[39m [38;5;3m[HMS] [39m[33m[integration] Outbound integration request will retry {"requestId":1,"integration":"ETIMS","operation":"SUBMIT_INVOICE","attemptCount":1,"maxAttempts":3,"nextRetryInMs":863}[39m
+[31m[Nest] 14024  - [39m09/12/2026, 7:50:03 PM [31m  ERROR[39m [38;5;3m[HMS] [39m[31m[integration] Outbound 
+integration request dead-lettered {"requestId":1,"integration":"ETIMS","operation":"SUBMIT_INVOICE","attemptCount":1,"m
+axAttempts":3,"permanent":true,"error":"Duplicate invoice number"}[39m
+[32m[Nest] 14024  - [39m09/12/2026, 7:50:03 PM [32m    LOG[39m [38;5;3m[HMS] [39m[32m[integration] Outbound integration request completed {"requestId":1,"integration":"ETIMS","operation":"SUBMIT_INVOICE","entityId":"1","correlationId":null,"durationMs":809,"retryCount":1}[39m
+[32m[Nest] 14024  - [39m09/12/2026, 7:50:03 PM [32m    LOG[39m [38;5;3m[HMS] [39m[32m[integration] Queued outbound integration request {"requestId":1,"integration":"ETIMS","operation":"SUBMIT_INVOICE","entityType":"ETIMS_INVOICE","entityId":"1"}[39m
+[32m[Nest] 14024  - [39m09/12/2026, 7:50:03 PM [32m    LOG[39m [38;5;3m[HMS] [39m[32m[integration] eTIMS document queued for submission {"etimsInvoiceId":1,"invoiceNumber":"INV-000001","queued":true}[39m
+[32m[Nest] 14024  - [39m09/12/2026, 7:50:03 PM [32m    LOG[39m [38;5;3m[HMS] [39m[32m[integration] Queued outbound integration request {"requestId":1,"integration":"ETIMS","operation":"SUBMIT_INVOICE","entityType":"ETIMS_INVOICE","entityId":"1","correlationId":"corr-test"}[39m
+[32m[Nest] 14024  - [39m09/12/2026, 7:50:03 PM [32m    LOG[39m [38;5;3m[HMS] [39m[32m[integration] eTIMS document queued for submission {"etimsInvoiceId":1,"invoiceNumber":"INV-000001","queued":true,"correlationId":"corr-test"}[39m
+[32m[Nest] 14024  - [39m09/12/2026, 7:50:04 PM [32m    LOG[39m [38;5;3m[HMS] [39m[32m[integration] Outbound integration request completed {"requestId":1,"integration":"ETIMS","operation":"SUBMIT_INVOICE","entityId":"1","correlationId":"corr-test","durationMs":850,"retryCount":0}[39m
+[32m[Nest] 14024  - [39m09/12/2026, 7:50:04 PM [32m    LOG[39m [38;5;3m[HMS] [39m[32m[integration] Queued outbound integration request {"requestId":1,"integration":"ETIMS","operation":"SUBMIT_INVOICE","entityType":"ETIMS_INVOICE","entityId":"1","correlationId":"corr-test"}[39m
+[32m[Nest] 14024  - [39m09/12/2026, 7:50:04 PM [32m    LOG[39m [38;5;3m[HMS] [39m[32m[integration] eTIMS document queued for submission {"etimsInvoiceId":1,"invoiceNumber":"INV-000001","queued":true,"correlationId":"corr-test"}[39m
+[32m[Nest] 14024  - [39m09/12/2026, 7:50:05 PM [32m    LOG[39m [38;5;3m[HMS] [39m[32m[integration] Outbound integration request completed {"requestId":1,"integration":"ETIMS","operation":"SUBMIT_INVOICE","entityId":"1","correlationId":"corr-test","durationMs":775,"retryCount":0}[39m
+[32m[Nest] 14024  - [39m09/12/2026, 7:50:05 PM [32m    LOG[39m [38;5;3m[HMS] [39m[32m[integration] Queued outbound integration request {"requestId":2,"integration":"ETIMS","operation":"SUBMIT_INVOICE","entityType":"ETIMS_INVOICE","entityId":"2"}[39m
+[32m[Nest] 14024  - [39m09/12/2026, 7:50:05 PM [32m    LOG[39m [38;5;3m[HMS] [39m[32m[integration] eTIMS document queued for submission {"etimsInvoiceId":2,"invoiceNumber":"INV-000001","queued":true}[39m
+[32m[Nest] 14024  - [39m09/12/2026, 7:50:05 PM [32m    LOG[39m [38;5;3m[HMS] [39m[32m[integration] Outbound integration request completed {"requestId":2,"integration":"ETIMS","operation":"SUBMIT_INVOICE","entityId":"2","correlationId":null,"durationMs":730,"retryCount":0}[39m
+[32m[Nest] 14024  - [39m09/12/2026, 7:50:05 PM [32m    LOG[39m [38;5;3m[HMS] [39m[32m[integration] Queued outbound integration request {"requestId":1,"integration":"ETIMS","operation":"SUBMIT_INVOICE","entityType":"ETIMS_INVOICE","entityId":"1","correlationId":"corr-test"}[39m
+[32m[Nest] 14024  - [39m09/12/2026, 7:50:05 PM [32m    LOG[39m [38;5;3m[HMS] [39m[32m[integration] eTIMS document queued for submission {"etimsInvoiceId":1,"invoiceNumber":"INV-000001","queued":true,"correlationId":"corr-test"}[39m
+[32m[Nest] 14024  - [39m09/12/2026, 7:50:06 PM [32m    LOG[39m [38;5;3m[HMS] [39m[32m[integration] Outbound integration request completed {"requestId":1,"integration":"ETIMS","operation":"SUBMIT_INVOICE","entityId":"1","correlationId":"corr-test","durationMs":762,"retryCount":0}[39m
+[32m[Nest] 14024  - [39m09/12/2026, 7:50:06 PM [32m    LOG[39m [38;5;3m[HMS] [39m[32m[integration] Queued outbound integration request {"requestId":2,"integration":"ETIMS","operation":"SUBMIT_INVOICE","entityType":"ETIMS_INVOICE","entityId":"2"}[39m
+[32m[Nest] 14024  - [39m09/12/2026, 7:50:06 PM [32m    LOG[39m [38;5;3m[HMS] [39m[32m[integration] eTIMS document queued for submission {"etimsInvoiceId":2,"invoiceNumber":"INV-000001","queued":true}[39m
+[32m[Nest] 14024  - [39m09/12/2026, 7:50:07 PM [32m    LOG[39m [38;5;3m[HMS] [39m[32m[integration] Outbound integration request completed {"requestId":2,"integration":"ETIMS","operation":"SUBMIT_INVOICE","entityId":"2","correlationId":null,"durationMs":737,"retryCount":0}[39m
+[32m[Nest] 14024  - [39m09/12/2026, 7:50:07 PM [32m    LOG[39m [38;5;3m[HMS] [39m[32m[integration] Queued outbound integration request {"requestId":1,"integration":"ETIMS","operation":"SUBMIT_INVOICE","entityType":"ETIMS_INVOICE","entityId":"1","correlationId":"corr-test"}[39m
+[32m[Nest] 14024  - [39m09/12/2026, 7:50:07 PM [32m    LOG[39m [38;5;3m[HMS] [39m[32m[integration] eTIMS document queued for submission {"etimsInvoiceId":1,"invoiceNumber":"INV-000001","queued":true,"correlationId":"corr-test"}[39m
+[32m[Nest] 14024  - [39m09/12/2026, 7:50:08 PM [32m    LOG[39m [38;5;3m[HMS] [39m[32m[integration] Outbound integration request completed {"requestId":1,"integration":"ETIMS","operation":"SUBMIT_INVOICE","entityId":"1","correlationId":"corr-test","durationMs":739,"retryCount":0}[39m
+[32m[Nest] 14024  - [39m09/12/2026, 7:50:08 PM [32m    LOG[39m [38;5;3m[HMS] [39m[32m[integration] Queued outbound integration request {"requestId":2,"integration":"ETIMS","operation":"SUBMIT_INVOICE","entityType":"ETIMS_INVOICE","entityId":"2"}[39m
+[32m[Nest] 14024  - [39m09/12/2026, 7:50:08 PM [32m    LOG[39m [38;5;3m[HMS] [39m[32m[integration] eTIMS document queued for submission {"etimsInvoiceId":2,"invoiceNumber":"INV-000001","queued":true}[39m
+[32m[Nest] 14024  - [39m09/12/2026, 7:50:08 PM [32m    LOG[39m [38;5;3m[HMS] [39m[32m[integration] Outbound integration request completed {"requestId":2,"integration":"ETIMS","operation":"SUBMIT_INVOICE","entityId":"2","correlationId":null,"durationMs":760,"retryCount":0}[39m
+[32m[Nest] 14024  - [39m09/12/2026, 7:50:08 PM [32m    LOG[39m [38;5;3m[HMS] [39m[32m[integration] Queued outbound integration request {"requestId":1,"integration":"ETIMS","operation":"SUBMIT_INVOICE","entityType":"ETIMS_INVOICE","entityId":"1","correlationId":"corr-test"}[39m
+[32m[Nest] 14024  - [39m09/12/2026, 7:50:08 PM [32m    LOG[39m [38;5;3m[HMS] [39m[32m[integration] eTIMS document queued for submission {"etimsInvoiceId":1,"invoiceNumber":"INV-000001","queued":true,"correlationId":"corr-test"}[39m
+[32m[Nest] 14024  - [39m09/12/2026, 7:50:09 PM [32m    LOG[39m [38;5;3m[HMS] [39m[32m[integration] Outbound integration request completed {"requestId":1,"integration":"ETIMS","operation":"SUBMIT_INVOICE","entityId":"1","correlationId":"corr-test","durationMs":762,"retryCount":0}[39m
+[32m[Nest] 14024  - [39m09/12/2026, 7:50:09 PM [32m    LOG[39m [38;5;3m[HMS] [39m[32m[integration] Queued outbound integration request {"requestId":1,"integration":"ETIMS","operation":"SUBMIT_INVOICE","entityType":"ETIMS_INVOICE","entityId":"1","correlationId":"corr-test"}[39m
+[32m[Nest] 14024  - [39m09/12/2026, 7:50:09 PM [32m    LOG[39m [38;5;3m[HMS] [39m[32m[integration] eTIMS document queued for submission {"etimsInvoiceId":1,"invoiceNumber":"INV-000001","queued":true,"correlationId":"corr-test"}[39m
+[32m[Nest] 14024  - [39m09/12/2026, 7:50:10 PM [32m    LOG[39m [38;5;3m[HMS] [39m[32m[integration] Outbound integration request completed {"requestId":1,"integration":"ETIMS","operation":"SUBMIT_INVOICE","entityId":"1","correlationId":"corr-test","durationMs":738,"retryCount":0}[39m
+[32m[Nest] 14024  - [39m09/12/2026, 7:50:10 PM [32m    LOG[39m [38;5;3m[HMS] [39m[32m[integration] Queued outbound integration request {"requestId":2,"integration":"ETIMS","operation":"SUBMIT_INVOICE","entityType":"ETIMS_INVOICE","entityId":"2"}[39m
+[32m[Nest] 14024  - [39m09/12/2026, 7:50:10 PM [32m    LOG[39m [38;5;3m[HMS] [39m[32m[integration] eTIMS document queued for submission {"etimsInvoiceId":2,"invoiceNumber":"INV-000001","queued":true}[39m
+[32m[Nest] 14024  - [39m09/12/2026, 7:50:11 PM [32m    LOG[39m [38;5;3m[HMS] [39m[32m[integration] Outbound integration request completed {"requestId":2,"integration":"ETIMS","operation":"SUBMIT_INVOICE","entityId":"2","correlationId":null,"durationMs":760,"retryCount":0}[39m
+[32m[Nest] 14024  - [39m09/12/2026, 7:50:11 PM [32m    LOG[39m [38;5;3m[HMS] [39m[32m[integration] Queued outbound integration request {"requestId":1,"integration":"ETIMS","operation":"SUBMIT_INVOICE","entityType":"ETIMS_INVOICE","entityId":"1","correlationId":"corr-test"}[39m
+[32m[Nest] 14024  - [39m09/12/2026, 7:50:11 PM [32m    LOG[39m [38;5;3m[HMS] [39m[32m[integration] eTIMS document queued for submission {"etimsInvoiceId":1,"invoiceNumber":"INV-000001","queued":true,"correlationId":"corr-test"}[39m
+[32m[Nest] 14024  - [39m09/12/2026, 7:50:11 PM [32m    LOG[39m [38;5;3m[HMS] [39m[32m[integration] Outbound integration request completed {"requestId":1,"integration":"ETIMS","operation":"SUBMIT_INVOICE","entityId":"1","correlationId":"corr-test","durationMs":748,"retryCount":0}[39m
+[32m[Nest] 14024  - [39m09/12/2026, 7:50:11 PM [32m    LOG[39m [38;5;3m[HMS] [39m[32m[integration] Queued outbound integration request {"requestId":2,"integration":"ETIMS","operation":"SUBMIT_INVOICE","entityType":"ETIMS_INVOICE","entityId":"2"}[39m
+[32m[Nest] 14024  - [39m09/12/2026, 7:50:11 PM [32m    LOG[39m [38;5;3m[HMS] [39m[32m[integration] eTIMS document queued for submission {"etimsInvoiceId":2,"invoiceNumber":"INV-000001","queued":true}[39m
+[32m[Nest] 14024  - [39m09/12/2026, 7:50:11 PM [32m    LOG[39m [38;5;3m[HMS] [39m[32m[integration] Queued outbound integration request {"requestId":1,"integration":"ETIMS","operation":"SUBMIT_INVOICE","entityType":"ETIMS_INVOICE","entityId":"1","correlationId":"corr-test"}[39m
+[32m[Nest] 14024  - [39m09/12/2026, 7:50:11 PM [32m    LOG[39m [38;5;3m[HMS] [39m[32m[integration] eTIMS document queued for submission {"etimsInvoiceId":1,"invoiceNumber":"INV-000001","queued":true,"correlationId":"corr-test"}[39m
+[32m[Nest] 14024  - [39m09/12/2026, 7:50:12 PM [32m    LOG[39m [38;5;3m[HMS] [39m[32m[integration] Outbound integration request completed {"requestId":1,"integration":"ETIMS","operation":"SUBMIT_INVOICE","entityId":"1","correlationId":"corr-test","durationMs":1002,"retryCount":0}[39m
+[32m[Nest] 14024  - [39m09/12/2026, 7:50:12 PM [32m    LOG[39m [38;5;3m[HMS] [39m[32m[integration] Queued outbound integration request {"requestId":1,"integration":"ETIMS","operation":"SUBMIT_INVOICE","entityType":"ETIMS_INVOICE","entityId":"1","correlationId":"corr-test"}[39m
+[32m[Nest] 14024  - [39m09/12/2026, 7:50:12 PM [32m    LOG[39m [38;5;3m[HMS] [39m[32m[integration] eTIMS document queued for submission {"etimsInvoiceId":1,"invoiceNumber":"INV-000001","queued":true,"correlationId":"corr-test"}[39m
+[32m[Nest] 14024  - [39m09/12/2026, 7:50:13 PM [32m    LOG[39m [38;5;3m[HMS] [39m[32m[integration] Outbound integration request completed {"requestId":1,"integration":"ETIMS","operation":"SUBMIT_INVOICE","entityId":"1","correlationId":"corr-test","durationMs":964,"retryCount":0}[39m
+[32m[Nest] 14024  - [39m09/12/2026, 7:50:13 PM [32m    LOG[39m [38;5;3m[HMS] [39m[32m[integration] Queued outbound integration request {"requestId":1,"integration":"ETIMS","operation":"SUBMIT_INVOICE","entityType":"ETIMS_INVOICE","entityId":"1","correlationId":"corr-test"}[39m
+[32m[Nest] 14024  - [39m09/12/2026, 7:50:13 PM [32m    LOG[39m [38;5;3m[HMS] [39m[32m[integration] eTIMS document queued for submission {"etimsInvoiceId":1,"invoiceNumber":"INV-000001","queued":true,"correlationId":"corr-test"}[39m
+[32m[Nest] 14024  - [39m09/12/2026, 7:50:14 PM [32m    LOG[39m [38;5;3m[HMS] [39m[32m[integration] Outbound integration request completed {"requestId":1,"integration":"ETIMS","operation":"SUBMIT_INVOICE","entityId":"1","correlationId":"corr-test","durationMs":683,"retryCount":0}[39m
+[32m[Nest] 14024  - [39m09/12/2026, 7:50:14 PM [32m    LOG[39m [38;5;3m[HMS] [39m[32m[integration] Queued outbound integration request {"requestId":1,"integration":"ETIMS","operation":"SUBMIT_INVOICE","entityType":"ETIMS_INVOICE","entityId":"1"}[39m
+[32m[Nest] 14024  - [39m09/12/2026, 7:50:14 PM [32m    LOG[39m [38;5;3m[HMS] [39m[32m[integration] eTIMS document queued for submission {"etimsInvoiceId":1,"invoiceNumber":"INV-000001","queued":true}[39m
+PASS src/integration/etims/etims.service.spec.ts (16.633 s)
+[32m[Nest] 14024  - [39m09/12/2026, 7:50:15 PM [32m    LOG[39m [38;5;3m[HMS] [39m[32m[integration] Outbound integration request completed {"requestId":1,"integration":"ETIMS","operation":"SUBMIT_INVOICE","entityId":"1","correlationId":null,"durationMs":660,"retryCount":0}[39m
+PASS src/integration/dha/dha-eclaims.service.spec.ts
+PASS src/integration/dha/adapters/dha-http.client.spec.ts
+[32m[Nest] 14024  - [39m09/12/2026, 7:50:17 PM [32m    LOG[39m [38;5;3m[HMS] [39m[32m[integration] Queued outbound integration request {"requestId":1,"integration":"ETIMS","operation":"SUBMIT_INVOICE","entityType":"ETIMS_INVOICE","entityId":"1","correlationId":"flow-1"}[39m
+[32m[Nest] 14024  - [39m09/12/2026, 7:50:17 PM [32m    LOG[39m [38;5;3m[HMS] [39m[32m[integration] eTIMS document queued for submission {"etimsInvoiceId":1,"invoiceNumber":"INV-000001","queued":true,"correlationId":"flow-1"}[39m
+[32m[Nest] 14024  - [39m09/12/2026, 7:50:17 PM [32m    LOG[39m [38;5;3m[HMS] [39m[32m[integration] Queued outbound integration request {"requestId":2,"integration":"DHA","operation":"SUBMIT_CLAIM","entityType":"DHA_TRANSACTION","entityId":"1","correlationId":"flow-1"}[39m
+[32m[Nest] 14024  - [39m09/12/2026, 7:50:18 PM [32m    LOG[39m [38;5;3m[HMS] [39m[32m[integration] Outbound integration request completed {"requestId":1,"integration":"ETIMS","operation":"SUBMIT_INVOICE","entityId":"1","correlationId":"flow-1","durationMs":812,"retryCount":0}[39m
+[32m[Nest] 14024  - [39m09/12/2026, 7:50:18 PM [32m    LOG[39m [38;5;3m[HMS] [39m[32m[integration] Outbound integration request completed {"requestId":2,"integration":"DHA","operation":"SUBMIT_CLAIM","entityId":"1","correlationId":"flow-1","durationMs":1,"retryCount":0}[39m
+[32m[Nest] 14024  - [39m09/12/2026, 7:50:18 PM [32m    LOG[39m [38;5;3m[HMS] [39m[32m[integration] Queued outbound integration request {"requestId":1,"integration":"ETIMS","operation":"SUBMIT_INVOICE","entityType":"ETIMS_INVOICE","entityId":"1"}[39m
+[32m[Nest] 14024  - [39m09/12/2026, 7:50:18 PM [32m    LOG[39m [38;5;3m[HMS] [39m[32m[integration] eTIMS document queued for submission {"etimsInvoiceId":1,"invoiceNumber":"INV-000001","queued":true}[39m
+[32m[Nest] 14024  - [39m09/12/2026, 7:50:18 PM [32m    LOG[39m [38;5;3m[HMS] [39m[32m[integration] Outbound integration request completed {"requestId":1,"integration":"ETIMS","operation":"SUBMIT_INVOICE","entityId":"1","correlationId":null,"durationMs":738,"retryCount":0}[39m
+[32m[Nest] 14024  - [39m09/12/2026, 7:50:18 PM [32m    LOG[39m [38;5;3m[HMS] [39m[32m[integration] Queued outbound integration request {"requestId":1,"integration":"ETIMS","operation":"SUBMIT_INVOICE","entityType":"ETIMS_INVOICE","entityId":"1"}[39m
+[32m[Nest] 14024  - [39m09/12/2026, 7:50:18 PM [32m    LOG[39m [38;5;3m[HMS] [39m[32m[integration] eTIMS document queued for submission {"etimsInvoiceId":1,"invoiceNumber":"INV-000001","queued":true}[39m
+[33m[Nest] 14024  - [39m09/12/2026, 7:50:18 PM [33m   WARN[39m [38;5;3m[HMS] [39m[33m[integration] Outbound integration request will retry {"requestId":1,"integration":"ETIMS","operation":"SUBMIT_INVOICE","attemptCount":1,"maxAttempts":3,"nextRetryInMs":946}[39m
+[32m[Nest] 14024  - [39m09/12/2026, 7:50:19 PM [32m    LOG[39m [38;5;3m[HMS] [39m[32m[integration] Outbound integration request completed {"requestId":1,"integration":"ETIMS","operation":"SUBMIT_INVOICE","entityId":"1","correlationId":null,"durationMs":700,"retryCount":1}[39m
+[32m[Nest] 14024  - [39m09/12/2026, 7:50:19 PM [32m    LOG[39m [38;5;3m[HMS] [39m[32m[integration] Queued outbound integration request {"requestId":1,"integration":"ETIMS","operation":"SUBMIT_INVOICE","entityType":"ETIMS_INVOICE","entityId":"1"}[39m
+[32m[Nest] 14024  - [39m09/12/2026, 7:50:19 PM [32m    LOG[39m [38;5;3m[HMS] [39m[32m[integration] eTIMS document queued for submission {"etimsInvoiceId":1,"invoiceNumber":"INV-000001","queued":true}[39m
+PASS src/integration/billing-flow.integration.spec.ts
+[31m[Nest] 14024  - [39m09/12/2026, 7:50:20 PM [31m  ERROR[39m [38;5;3m[HMS] [39m[31m[integration] Outbound 
+integration request dead-lettered {"requestId":1,"integration":"ETIMS","operation":"SUBMIT_INVOICE","attemptCount":2,"m
+axAttempts":2,"permanent":false,"error":"boom"}[39m
+[31m[Nest] 14024  - [39m09/12/2026, 7:50:20 PM [31m  ERROR[39m [38;5;3m[HMS] [39m[31m[integration] Outbound 
+integration request dead-lettered {"requestId":1,"integration":"ETIMS","operation":"SUBMIT_INVOICE","attemptCount":1,"m
+axAttempts":3,"permanent":true,"error":"validation failed"}[39m
+[31m[Nest] 14024  - [39m09/12/2026, 7:50:20 PM [31m  ERROR[39m [38;5;3m[HMS] [39m[31m[integration] Outbound 
+integration request dead-lettered {"requestId":1,"integration":"ETIMS","operation":"SUBMIT_INVOICE","attemptCount":1,"m
+axAttempts":3,"permanent":true,"error":"fatal"}[39m
+[31m[Nest] 14024  - [39m09/12/2026, 7:50:20 PM [31m  ERROR[39m [38;5;3m[HMS] [39m[31m[integration] Outbound 
+integration request dead-lettered {"requestId":1,"integration":"ETIMS","operation":"SUBMIT_INVOICE","attemptCount":1,"m
+axAttempts":3,"permanent":true,"error":"fatal"}[39m
+[32m[Nest] 14024  - [39m09/12/2026, 7:50:20 PM [32m    LOG[39m [38;5;3m[HMS] [39m[32m[integration] Outbound integration request completed {"requestId":1,"integration":"ETIMS","operation":"SUBMIT_INVOICE","entityId":"1","correlationId":null,"durationMs":714,"retryCount":0}[39m
+[32m[Nest] 14024  - [39m09/12/2026, 7:50:20 PM [32m    LOG[39m [38;5;3m[HMS] [39m[32m[integration] Queued outbound integration request {"requestId":1,"integration":"ETIMS","operation":"SUBMIT_INVOICE","entityType":"ETIMS_INVOICE","entityId":"1","correlationId":"corr-1"}[39m
+[32m[Nest] 14024  - [39m09/12/2026, 7:50:20 PM [32m    LOG[39m [38;5;3m[HMS] [39m[32m[integration] Queued outbound integration request {"requestId":1,"integration":"ETIMS","operation":"SUBMIT_INVOICE","entityType":"ETIMS_INVOICE","entityId":"1","correlationId":"corr-1"}[39m
+[32m[Nest] 14024  - [39m09/12/2026, 7:50:20 PM [32m    LOG[39m [38;5;3m[HMS] [39m[32m[integration] Queued outbound integration request {"requestId":1,"integration":"ETIMS","operation":"SUBMIT_INVOICE","entityType":"ETIMS_INVOICE","entityId":"1","correlationId":"corr-1"}[39m
+[32m[Nest] 14024  - [39m09/12/2026, 7:50:20 PM [32m    LOG[39m [38;5;3m[HMS] [39m[32m[integration] Queued outbound integration request {"requestId":2,"integration":"DHA","operation":"SUBMIT_INVOICE","entityType":"ETIMS_INVOICE","entityId":"1","correlationId":"corr-1"}[39m
+[32m[Nest] 14024  - [39m09/12/2026, 7:50:20 PM [32m    LOG[39m [38;5;3m[HMS] [39m[32m[integration] Queued outbound integration request {"requestId":1,"integration":"ETIMS","operation":"SUBMIT_INVOICE","entityType":"ETIMS_INVOICE","entityId":"1","correlationId":"corr-1"}[39m
+[32m[Nest] 14024  - [39m09/12/2026, 7:50:20 PM [32m    LOG[39m [38;5;3m[HMS] [39m[32m[integration] Queued outbound integration request {"requestId":2,"integration":"ETIMS","operation":"SUBMIT_INVOICE","entityType":"ETIMS_INVOICE","entityId":"1","correlationId":"corr-1"}[39m
+[32m[Nest] 14024  - [39m09/12/2026, 7:50:20 PM [32m    LOG[39m [38;5;3m[HMS] [39m[32m[integration] Queued outbound integration request {"requestId":1,"integration":"ETIMS","operation":"SUBMIT_INVOICE","entityType":"ETIMS_INVOICE","entityId":"1","correlationId":"corr-1"}[39m
+[32m[Nest] 14024  - [39m09/12/2026, 7:50:20 PM [32m    LOG[39m [38;5;3m[HMS] [39m[32m[integration] Queued outbound integration request {"requestId":1,"integration":"ETIMS","operation":"SUBMIT_INVOICE","entityType":"ETIMS_INVOICE","entityId":"1","correlationId":"corr-1"}[39m
+[32m[Nest] 14024  - [39m09/12/2026, 7:50:20 PM [32m    LOG[39m [38;5;3m[HMS] [39m[32m[integration] Queued outbound integration request {"requestId":1,"integration":"ETIMS","operation":"SUBMIT_INVOICE","entityType":"ETIMS_INVOICE","entityId":"1","correlationId":"corr-1"}[39m
+[33m[Nest] 14024  - [39m09/12/2026, 7:50:20 PM [33m   WARN[39m [38;5;3m[HMS] [39m[33m[integration] Outbound integration request will retry {"requestId":1,"integration":"ETIMS","operation":"SUBMIT_INVOICE","attemptCount":1,"maxAttempts":3,"nextRetryInMs":941}[39m
+[32m[Nest] 14024  - [39m09/12/2026, 7:50:20 PM [32m    LOG[39m [38;5;3m[HMS] [39m[32m[integration] Queued outbound integration request {"requestId":1,"integration":"ETIMS","operation":"SUBMIT_INVOICE","entityType":"ETIMS_INVOICE","entityId":"1","correlationId":"corr-1"}[39m
+[33m[Nest] 14024  - [39m09/12/2026, 7:50:20 PM [33m   WARN[39m [38;5;3m[HMS] [39m[33m[integration] Outbound integration request will retry {"requestId":1,"integration":"ETIMS","operation":"SUBMIT_INVOICE","attemptCount":1,"maxAttempts":2,"nextRetryInMs":1031}[39m
+[32m[Nest] 14024  - [39m09/12/2026, 7:50:20 PM [32m    LOG[39m [38;5;3m[HMS] [39m[32m[integration] Queued outbound integration request {"requestId":1,"integration":"ETIMS","operation":"SUBMIT_INVOICE","entityType":"ETIMS_INVOICE","entityId":"1","correlationId":"corr-1"}[39m
+[32m[Nest] 14024  - [39m09/12/2026, 7:50:20 PM [32m    LOG[39m [38;5;3m[HMS] [39m[32m[integration] Queued outbound integration request {"requestId":1,"integration":"ETIMS","operation":"SUBMIT_INVOICE","entityType":"ETIMS_INVOICE","entityId":"1","correlationId":"corr-1"}[39m
+[33m[Nest] 14024  - [39m09/12/2026, 7:50:20 PM [33m   WARN[39m [38;5;3m[HMS] [39m[33m[integration] Recovered stuck integration requests {"count":1}[39m
+[32m[Nest] 14024  - [39m09/12/2026, 7:50:20 PM [32m    LOG[39m [38;5;3m[HMS] [39m[32m[integration] Queued outbound integration request {"requestId":1,"integration":"ETIMS","operation":"SUBMIT_INVOICE","entityType":"ETIMS_INVOICE","entityId":"1","correlationId":"corr-1"}[39m
+[32m[Nest] 14024  - [39m09/12/2026, 7:50:20 PM [32m    LOG[39m [38;5;3m[HMS] [39m[32m[integration] Queued outbound integration request {"requestId":1,"integration":"ETIMS","operation":"SUBMIT_INVOICE","entityType":"ETIMS_INVOICE","entityId":"1","correlationId":"corr-1"}[39m
+[32m[Nest] 14024  - [39m09/12/2026, 7:50:20 PM [32m    LOG[39m [38;5;3m[HMS] [39m[32m[integration] Queued outbound integration request {"requestId":2,"integration":"DHA","operation":"SUBMIT_INVOICE","entityType":"ETIMS_INVOICE","entityId":"1","correlationId":"corr-1"}[39m
+[32m[Nest] 14024  - [39m09/12/2026, 7:50:20 PM [32m    LOG[39m [38;5;3m[HMS] [39m[32m[integration] Queued outbound integration request {"requestId":1,"integration":"ETIMS","operation":"SUBMIT_INVOICE","entityType":"ETIMS_INVOICE","entityId":"1","correlationId":"corr-1"}[39m
+PASS src/integration/queue/integration-queue.service.spec.ts
+PASS src/integration/dha/fhir-mapper.spec.ts
+PASS src/integration/http/integration-http.client.spec.ts
+[32m[Nest] 14024  - [39m09/12/2026, 7:50:21 PM [32m    LOG[39m [38;5;3m[HMS] [39m[32mIntegration API call {"timestamp":"2026-09-12T16:50:21.768Z","integration":"ETIMS","endpoint":"/saveTrnsSalesOsdc","method":"POST","requestId":"5fe1ef2a-e7a7-4613-813d-31cc2d548728","correlationId":"corr-1","responseCode":200,"latencyMs":11,"retryCount":0,"outcome":"SUCCESS"}[39m
+[32m[Nest] 14024  - [39m09/12/2026, 7:50:21 PM [32m    LOG[39m [38;5;3m[HMS] [39m[32mIntegration API call {"timestamp":"2026-09-12T16:50:21.771Z","integration":"ETIMS","endpoint":"/saveTrnsSalesOsdc","method":"POST","requestId":"72f1eff0-7efe-4fc9-aa6d-5a81297976d7","correlationId":"corr-1","responseCode":200,"latencyMs":0,"retryCount":0,"outcome":"SUCCESS"}[39m
+[32m[Nest] 14024  - [39m09/12/2026, 7:50:21 PM [32m    LOG[39m [38;5;3m[HMS] [39m[32mIntegration API call {"timestamp":"2026-09-12T16:50:21.774Z","integration":"ETIMS","endpoint":"/saveTrnsSalesOsdc","method":"POST","requestId":"86ea10a4-df12-4c64-8997-bd3b7f568a3a","correlationId":"corr-1","responseCode":200,"latencyMs":1,"retryCount":0,"outcome":"SUCCESS"}[39m
+[33m[Nest] 14024  - [39m09/12/2026, 7:50:21 PM [33m   WARN[39m [38;5;3m[HMS] [39m[33mIntegration API call failed {"timestamp":"2026-09-12T16:50:21.775Z","integration":"ETIMS","endpoint":"/saveTrnsSalesOsdc","method":"POST","requestId":"51e0a5e5-64f5-4977-bf86-c5d025433478","correlationId":"corr-1","responseCode":503,"latencyMs":0,"retryCount":0,"outcome":"HTTP_ERROR","error":"HTTP 503 from ETIMS"}[39m
+[32m[Nest] 14024  - [39m09/12/2026, 7:50:21 PM [32m    LOG[39m [38;5;3m[HMS] [39m[32mIntegration API call {"timestamp":"2026-09-12T16:50:21.775Z","integration":"ETIMS","endpoint":"/saveTrnsSalesOsdc","method":"POST","requestId":"51e0a5e5-64f5-4977-bf86-c5d025433478","correlationId":"corr-1","responseCode":200,"latencyMs":0,"retryCount":1,"outcome":"SUCCESS"}[39m
+[33m[Nest] 14024  - [39m09/12/2026, 7:50:21 PM [33m   WARN[39m [38;5;3m[HMS] [39m[33mIntegration API call failed {"timestamp":"2026-09-12T16:50:21.777Z","integration":"ETIMS","endpoint":"/saveTrnsSalesOsdc","method":"POST","requestId":"df5054f0-3474-480d-8f1f-2a0daf229665","correlationId":"corr-1","responseCode":400,"latencyMs":0,"retryCount":0,"outcome":"HTTP_ERROR","error":"HTTP 400 from ETIMS"}[39m
+[33m[Nest] 14024  - [39m09/12/2026, 7:50:21 PM [33m   WARN[39m [38;5;3m[HMS] [39m[33mIntegration API call failed {"timestamp":"2026-09-12T16:50:21.779Z","integration":"ETIMS","endpoint":"/saveTrnsSalesOsdc","method":"POST","requestId":"7cab37e4-c81e-4949-bc7c-8556906ed141","correlationId":"corr-1","latencyMs":1,"retryCount":0,"outcome":"TIMEOUT","error":"Request timed out after 1000ms"}[39m
+[33m[Nest] 14024  - [39m09/12/2026, 7:50:21 PM [33m   WARN[39m [38;5;3m[HMS] [39m[33mIntegration API call failed {"timestamp":"2026-09-12T16:50:21.781Z","integration":"ETIMS","endpoint":"/saveTrnsSalesOsdc","method":"POST","requestId":"2f1bf609-2d70-4904-bfca-0d4fd08ac45a","correlationId":"corr-1","latencyMs":1,"retryCount":0,"outcome":"NETWORK_ERROR","error":"socket hang up"}[39m
+[33m[Nest] 14024  - [39m09/12/2026, 7:50:21 PM [33m   WARN[39m [38;5;3m[HMS] [39m[33mIntegration API call failed {"timestamp":"2026-09-12T16:50:21.781Z","integration":"ETIMS","endpoint":"/saveTrnsSalesOsdc","method":"POST","requestId":"2f1bf609-2d70-4904-bfca-0d4fd08ac45a","correlationId":"corr-1","latencyMs":0,"retryCount":1,"outcome":"NETWORK_ERROR","error":"socket hang up"}[39m
+[33m[Nest] 14024  - [39m09/12/2026, 7:50:21 PM [33m   WARN[39m [38;5;3m[HMS] [39m[33mIntegration API call failed {"timestamp":"2026-09-12T16:50:21.782Z","integration":"ETIMS","endpoint":"/saveTrnsSalesOsdc","method":"POST","requestId":"2f1bf609-2d70-4904-bfca-0d4fd08ac45a","correlationId":"corr-1","latencyMs":0,"retryCount":2,"outcome":"NETWORK_ERROR","error":"socket hang up"}[39m
+[32m[Nest] 14024  - [39m09/12/2026, 7:50:21 PM [32m    LOG[39m [38;5;3m[HMS] [39m[32mIntegration API call {"timestamp":"2026-09-12T16:50:21.784Z","integration":"ETIMS","endpoint":"/saveTrnsSalesOsdc","method":"POST","requestId":"4e3c2ada-764f-409b-85e5-d9b8f129539d","correlationId":"corr-1","responseCode":200,"latencyMs":0,"retryCount":0,"outcome":"SUCCESS"}[39m
+[33m[Nest] 14024  - [39m09/12/2026, 7:50:21 PM [33m   WARN[39m [38;5;3m[HMS] [39m[33mIntegration API call failed {"timestamp":"2026-09-12T16:50:21.786Z","integration":"ETIMS","endpoint":"/saveTrnsSalesOsdc","method":"POST","requestId":"386b5df6-99cc-4395-b2db-78638dd51a46","correlationId":"corr-1","responseCode":422,"latencyMs":0,"retryCount":0,"outcome":"HTTP_ERROR","error":"HTTP 422 from ETIMS"}[39m
+PASS src/integration/dha/fhir-validation.service.spec.ts
+PASS src/integration/etims/etims-invoice.builder.spec.ts
+[31m[Nest] 14024  - [39m09/12/2026, 7:50:22 PM [31m  ERROR[39m [38;5;3m[HMS] [39m[31m[integration] Outbound 
+integration request dead-lettered {"requestId":1,"integration":"ETIMS","operation":"UNKNOWN_OPERATION","attemptCount":1
+,"maxAttempts":3,"permanent":true,"error":"No handler registered for ETIMS:UNKNOWN_OPERATION"}[39m
+[31m[Nest] 14024  - [39m09/12/2026, 7:50:22 PM [31m  ERROR[39m [38;5;3m[HMS] [39m[31m[integration] Outbound 
+integration request dead-lettered {"requestId":1,"integration":"ETIMS","operation":"SUBMIT_INVOICE","attemptCount":1,"m
+axAttempts":3,"permanent":true,"error":"duplicate invoice"}[39m
+PASS src/integration/queue/integration-queue.worker.spec.ts
+[32m[Nest] 14024  - [39m09/12/2026, 7:50:22 PM [32m    LOG[39m [38;5;3m[HMS] [39m[32m[integration] Queued outbound integration request {"requestId":1,"integration":"ETIMS","operation":"SUBMIT_INVOICE","entityType":"ETIMS_INVOICE","entityId":"1"}[39m
+[32m[Nest] 14024  - [39m09/12/2026, 7:50:22 PM [32m    LOG[39m [38;5;3m[HMS] [39m[32m[integration] Outbound integration request completed {"requestId":1,"integration":"ETIMS","operation":"SUBMIT_INVOICE","entityId":"1","correlationId":null,"durationMs":0,"retryCount":0}[39m
+[32m[Nest] 14024  - [39m09/12/2026, 7:50:22 PM [32m    LOG[39m [38;5;3m[HMS] [39m[32m[integration] Queued outbound integration request {"requestId":1,"integration":"ETIMS","operation":"UNKNOWN_OPERATION","entityType":"ETIMS_INVOICE","entityId":"1"}[39m
+[32m[Nest] 14024  - [39m09/12/2026, 7:50:22 PM [32m    LOG[39m [38;5;3m[HMS] [39m[32m[integration] Queued outbound integration request {"requestId":1,"integration":"ETIMS","operation":"SUBMIT_INVOICE","entityType":"ETIMS_INVOICE","entityId":"1"}[39m
+[33m[Nest] 14024  - [39m09/12/2026, 7:50:22 PM [33m   WARN[39m [38;5;3m[HMS] [39m[33m[integration] Outbound integration request will retry {"requestId":1,"integration":"ETIMS","operation":"SUBMIT_INVOICE","attemptCount":1,"maxAttempts":3,"nextRetryInMs":909}[39m
+[32m[Nest] 14024  - [39m09/12/2026, 7:50:22 PM [32m    LOG[39m [38;5;3m[HMS] [39m[32m[integration] Queued outbound integration request {"requestId":1,"integration":"ETIMS","operation":"SUBMIT_INVOICE","entityType":"ETIMS_INVOICE","entityId":"1"}[39m
+[32m[Nest] 14024  - [39m09/12/2026, 7:50:22 PM [32m    LOG[39m [38;5;3m[HMS] [39m[32m[integration] Queued outbound integration request {"requestId":1,"integration":"ETIMS","operation":"SUBMIT_INVOICE","entityType":"ETIMS_INVOICE","entityId":"1"}[39m
+[33m[Nest] 14024  - [39m09/12/2026, 7:50:22 PM [33m   WARN[39m [38;5;3m[HMS] [39m[33m[integration] Outbound integration request will retry {"requestId":1,"integration":"ETIMS","operation":"SUBMIT_INVOICE","attemptCount":1,"maxAttempts":3,"nextRetryInMs":1036}[39m
+[32m[Nest] 14024  - [39m09/12/2026, 7:50:22 PM [32m    LOG[39m [38;5;3m[HMS] [39m[32m[integration] Outbound integration request completed {"requestId":1,"integration":"ETIMS","operation":"SUBMIT_INVOICE","entityId":"1","correlationId":null,"durationMs":0,"retryCount":1}[39m
+[32m[Nest] 14024  - [39m09/12/2026, 7:50:22 PM [32m    LOG[39m [38;5;3m[HMS] [39m[32m[integration] Queued outbound integration request {"requestId":1,"integration":"ETIMS","operation":"SUBMIT_INVOICE","entityType":"ETIMS_INVOICE","entityId":"1"}[39m
+[32m[Nest] 14024  - [39m09/12/2026, 7:50:22 PM [32m    LOG[39m [38;5;3m[HMS] [39m[32m[integration] Queued outbound integration request {"requestId":2,"integration":"DHA","operation":"SUBMIT_CLAIM","entityType":"DHA_TRANSACTION","entityId":"9"}[39m
+[32m[Nest] 14024  - [39m09/12/2026, 7:50:22 PM [32m    LOG[39m [38;5;3m[HMS] [39m[32m[integration] Outbound integration request completed {"requestId":1,"integration":"ETIMS","operation":"SUBMIT_INVOICE","entityId":"1","correlationId":null,"durationMs":0,"retryCount":0}[39m
+[32m[Nest] 14024  - [39m09/12/2026, 7:50:22 PM [32m    LOG[39m [38;5;3m[HMS] [39m[32m[integration] Outbound integration request completed {"requestId":2,"integration":"DHA","operation":"SUBMIT_CLAIM","entityId":"9","correlationId":null,"durationMs":0,"retryCount":0}[39m
+[32m[Nest] 14024  - [39m09/12/2026, 7:50:22 PM [32m    LOG[39m [38;5;3m[HMS] [39m[32m[integration] Integration queue worker started {"pollMs":5000,"batchSize":10}[39m
+[32m[Nest] 14024  - [39m09/12/2026, 7:50:22 PM [32m    LOG[39m [38;5;3m[HMS] [39m[32m[integration] Integration queue worker started {"pollMs":5000,"batchSize":10}[39m
+PASS src/billing/payment-integrity.spec.ts
+PASS src/integration/integration-core.spec.ts
+[33m[Nest] 14024  - [39m09/12/2026, 7:50:25 PM [33m   WARN[39m [38;5;3m[HMS] [39m[33m[integration] Failed to persist integration API log {"error":"db down","requestId":"r2"}[39m
+[33m[Nest] 14024  - [39m09/12/2026, 7:50:25 PM [33m   WARN[39m [38;5;3m[HMS] [39m[33m[integration] Failed to persist integration audit event {"error":"down","actionName":"X","entityId":"1"}[39m
+PASS src/integration/etims/adapters/etims-http.client.spec.ts
+PASS src/consultation/consultation.service.spec.ts
+PASS src/pharmacy/pharmacy-dispensing-integrity.spec.ts
+PASS src/consent/consent.service.spec.ts
+PASS src/pharmacy-inventory/pharmacy-inventory.service.spec.ts
+PASS src/integration/dha/dha.controller.spec.ts (6.391 s)
+PASS src/billing/payment-adjustment-integrity.spec.ts
+PASS src/integration/dha/adapters/dha-mock.client.spec.ts
+PASS src/integration/etims/etims.controller.spec.ts
+PASS src/clinical-specialties/clinical-specialties.service.spec.ts
+PASS src/integration/http/retry-policy.spec.ts
+PASS src/integration/etims/etims-tax.util.spec.ts
+PASS src/config/env.validation.spec.ts
+PASS src/ipd-clinical/ipd-clinical.service.spec.ts
+PASS src/integration/token/token-manager.spec.ts
+PASS src/queue/queue.service.spec.ts
+[31m[Nest] 14024  - [39m09/12/2026, 7:50:40 PM [31m  ERROR[39m [38;5;3m[SyncJobsService] [39m[31mFailed to poll 
+claim 1[39m
+[31m[Nest] 14024  - [39m09/12/2026, 7:50:40 PM [31m  ERROR[39m [38;5;3m[SyncJobsService] [39mError: offline
+    at Object.<anonymous> [90m(D:\MarkCare\markcare_hms_core.v1\backend\[39msrc\integration\sync-jobs\sync-jobs.servi
+ce.spec.ts:43:54[90m)[39m
+    at Promise.finally.completed [90m(D:\MarkCare\markcare_hms_core.v1\backend\[39mnode_modules\[4mjest-circus[24m\
+build\jestAdapterInit.js:1557:28[90m)[39m
+    at new Promise (<anonymous>)
+    at callAsyncCircusFn [90m(D:\MarkCare\markcare_hms_core.v1\backend\[39mnode_modules\[4mjest-circus[24m\build\je
+stAdapterInit.js:1497:10[90m)[39m
+    at _callCircusTest [90m(D:\MarkCare\markcare_hms_core.v1\backend\[39mnode_modules\[4mjest-circus[24m\build\jest
+AdapterInit.js:1007:40[90m)[39m
+    at _runTest [90m(D:\MarkCare\markcare_hms_core.v1\backend\[39mnode_modules\[4mjest-circus[24m\build\jestAdapter
+Init.js:947:3[90m)[39m
+    at 
+[90mD:\MarkCare\markcare_hms_core.v1\backend\[39mnode_modules\[4mjest-circus[24m\build\jestAdapterInit.js:849:7
+    at _runTestsForDescribeBlock [90m(D:\MarkCare\markcare_hms_core.v1\backend\[39mnode_modules\[4mjest-circus[24m\
+build\jestAdapterInit.js:862:11[90m)[39m
+    at _runTestsForDescribeBlock [90m(D:\MarkCare\markcare_hms_core.v1\backend\[39mnode_modules\[4mjest-circus[24m\
+build\jestAdapterInit.js:857:11[90m)[39m
+    at run [90m(D:\MarkCare\markcare_hms_core.v1\backend\[39mnode_modules\[4mjest-circus[24m\build\jestAdapterInit.
+js:761:3[90m)[39m
+    at runAndTransformResultsToJestFormat [90m(D:\MarkCare\markcare_hms_core.v1\backend\[39mnode_modules\[4mjest-cir
+cus[24m\build\jestAdapterInit.js:1918:21[90m)[39m
+    at jestAdapter 
+[90m(D:\MarkCare\markcare_hms_core.v1\backend\[39mnode_modules\[4mjest-circus[24m\build\runner.js:101:19[90m)[39m
+    at runTestInternal 
+[90m(D:\MarkCare\markcare_hms_core.v1\backend\[39mnode_modules\[4mjest-runner[24m\build\index.js:275:16[90m)[39m
+    at runTest 
+[90m(D:\MarkCare\markcare_hms_core.v1\backend\[39mnode_modules\[4mjest-runner[24m\build\index.js:343:7[90m)[39m
+[31m[Nest] 14024  - [39m09/12/2026, 7:50:40 PM [31m  ERROR[39m [38;5;3m[SyncJobsService] [39m[31mError during 
+claim polling job[39m
+[31m[Nest] 14024  - [39m09/12/2026, 7:50:40 PM [31m  ERROR[39m [38;5;3m[SyncJobsService] [39mError: db down
+    at Object.<anonymous> [90m(D:\MarkCare\markcare_hms_core.v1\backend\[39msrc\integration\sync-jobs\sync-jobs.servi
+ce.spec.ts:58:56[90m)[39m
+[31m[Nest] 14024  - [39m09/12/2026, 7:50:40 PM [31m  ERROR[39m [38;5;3m[SyncJobsService] [39m[31mError during 
+terminology synchronization job[39m
+[31m[Nest] 14024  - [39m09/12/2026, 7:50:40 PM [31m  ERROR[39m [38;5;3m[SyncJobsService] [39mError: gateway 
+unavailable
+    at Object.<anonymous> 
+[90m(D:\MarkCare\markcare_hms_core.v1\backend\[39msrc\integration\sync-jobs\sync-jobs.service.spec.ts:82:7[90m)[39m
+    at Promise.finally.completed [90m(D:\MarkCare\markcare_hms_core.v1\backend\[39mnode_modules\[4mjest-circus[24m\
+build\jestAdapterInit.js:1557:28[90m)[39m
+    at new Promise (<anonymous>)
+    at callAsyncCircusFn [90m(D:\MarkCare\markcare_hms_core.v1\backend\[39mnode_modules\[4mjest-circus[24m\build\je
+stAdapterInit.js:1497:10[90m)[39m
+    at _callCircusTest [90m(D:\MarkCare\markcare_hms_core.v1\backend\[39mnode_modules\[4mjest-circus[24m\build\jest
+AdapterInit.js:1007:40[90m)[39m
+    at _runTest [90m(D:\MarkCare\markcare_hms_core.v1\backend\[39mnode_modules\[4mjest-circus[24m\build\jestAdapter
+Init.js:947:3[90m)[39m
+    at 
+[90mD:\MarkCare\markcare_hms_core.v1\backend\[39mnode_modules\[4mjest-circus[24m\build\jestAdapterInit.js:849:7
+    at _runTestsForDescribeBlock [90m(D:\MarkCare\markcare_hms_core.v1\backend\[39mnode_modules\[4mjest-circus[24m\
+build\jestAdapterInit.js:862:11[90m)[39m
+    at _runTestsForDescribeBlock [90m(D:\MarkCare\markcare_hms_core.v1\backend\[39mnode_modules\[4mjest-circus[24m\
+build\jestAdapterInit.js:857:11[90m)[39m
+    at run [90m(D:\MarkCare\markcare_hms_core.v1\backend\[39mnode_modules\[4mjest-circus[24m\build\jestAdapterInit.
+js:761:3[90m)[39m
+    at runAndTransformResultsToJestFormat [90m(D:\MarkCare\markcare_hms_core.v1\backend\[39mnode_modules\[4mjest-cir
+cus[24m\build\jestAdapterInit.js:1918:21[90m)[39m
+    at jestAdapter 
+[90m(D:\MarkCare\markcare_hms_core.v1\backend\[39mnode_modules\[4mjest-circus[24m\build\runner.js:101:19[90m)[39m
+    at runTestInternal 
+[90m(D:\MarkCare\markcare_hms_core.v1\backend\[39mnode_modules\[4mjest-runner[24m\build\index.js:275:16[90m)[39m
+    at runTest 
+[90m(D:\MarkCare\markcare_hms_core.v1\backend\[39mnode_modules\[4mjest-runner[24m\build\index.js:343:7[90m)[39m
+PASS src/integration/sync-jobs/sync-jobs.service.spec.ts
+[32m[Nest] 14024  - [39m09/12/2026, 7:50:40 PM [32m    LOG[39m [38;5;3m[SyncJobsService] [39m[32mStarting polling for pending SHA claim responses...[39m
+[32m[Nest] 14024  - [39m09/12/2026, 7:50:40 PM [32m    LOG[39m [38;5;3m[SyncJobsService] [39m[32mFinished polling 2 claims[39m
+[32m[Nest] 14024  - [39m09/12/2026, 7:50:40 PM [32m    LOG[39m [38;5;3m[SyncJobsService] [39m[32mStarting polling for pending SHA claim responses...[39m
+[95m[Nest] 14024  - [39m09/12/2026, 7:50:40 PM [95m  DEBUG[39m [38;5;3m[SyncJobsService] [39m[95mNo pending claims to poll[39m
+[32m[Nest] 14024  - [39m09/12/2026, 7:50:40 PM [32m    LOG[39m [38;5;3m[SyncJobsService] [39m[32mStarting polling for pending SHA claim responses...[39m
+[32m[Nest] 14024  - [39m09/12/2026, 7:50:40 PM [32m    LOG[39m [38;5;3m[SyncJobsService] [39m[32mStarting scheduled Terminology synchronization...[39m
+[32m[Nest] 14024  - [39m09/12/2026, 7:50:40 PM [32m    LOG[39m [38;5;3m[SyncJobsService] [39m[32mTerminology synchronization complete.[39m
+[32m[Nest] 14024  - [39m09/12/2026, 7:50:40 PM [32m    LOG[39m [38;5;3m[SyncJobsService] [39m[32mStarting scheduled Terminology synchronization...[39m
+PASS src/private-insurance/private-insurance.service.spec.ts
+PASS src/integration/etims/adapters/etims-mock.client.spec.ts
+PASS src/lab/external-lab-payment-integrity.spec.ts
+PASS src/communication/communication-scheduler.service.spec.ts
+PASS src/patient-portal/patient-portal.service.spec.ts
+PASS src/integration/integration.module.spec.ts (5.288 s)
+PASS src/pharmacy/otc-sales.service.spec.ts
+PASS src/events/event-publisher.spec.ts
+[32m[Nest] 14024  - [39m09/12/2026, 7:50:48 PM [32m    LOG[39m [38;5;3m[EventPublisher] [39m[32mEventPublisher: Enqueued "PatientRegistered" (634f6052-55b6-4711-b0b4-a931e022cb6e) priority=HIGH patient=1 facility=1[39m
+PASS src/auth/scope.service.spec.ts
+PASS src/integration/integration-status.controller.spec.ts
+PASS src/auth/auth-cookie.spec.ts
+PASS src/integration/dha/dha-api-contract.spec.ts
+PASS src/shr/validation/fhir-bundle-validator.spec.ts
+[95m[Nest] 14024  - [39m09/12/2026, 7:50:50 PM [95m  DEBUG[39m [38;5;3m[FhirProfileRegistry] [39m[95mRegistered FHIR Profile: HMS_Minimum_Patient (v1.0.0)[39m
+[95m[Nest] 14024  - [39m09/12/2026, 7:50:50 PM [95m  DEBUG[39m [38;5;3m[FhirProfileRegistry] [39m[95mRegistered FHIR Profile: HMS_Minimum_Encounter (v1.0.0)[39m
+[32m[Nest] 14024  - [39m09/12/2026, 7:50:50 PM [32m    LOG[39m [38;5;3m[ShrBundleValidator] [39m[32mValidating FHIR Bundle...[39m
+[32m[Nest] 14024  - [39m09/12/2026, 7:50:50 PM [32m    LOG[39m [38;5;3m[ShrBundleValidator] [39m[32mFHIR Bundle validation passed.[39m
+[32m[Nest] 14024  - [39m09/12/2026, 7:50:50 PM [32m    LOG[39m [38;5;3m[ShrBundleValidator] [39m[32mValidating FHIR Bundle...[39m
+[32m[Nest] 14024  - [39m09/12/2026, 7:50:50 PM [32m    LOG[39m [38;5;3m[ShrBundleValidator] [39m[32mValidating FHIR Bundle...[39m
+[32m[Nest] 14024  - [39m09/12/2026, 7:50:50 PM [32m    LOG[39m [38;5;3m[ShrBundleValidator] [39m[32mValidating FHIR Bundle...[39m
+PASS src/terminology/adapters/terminology-http.client.spec.ts
+PASS src/auth/permissions.guard.spec.ts
+PASS src/integration/dha/dha-callback-auth.guard.spec.ts
+PASS src/legal/legal.controller.spec.ts
+PASS src/common/security/sensitive-data-cipher.service.spec.ts
+PASS src/auth/permissions.spec.ts
+PASS src/legal/legal-html-sanitizer.spec.ts
+PASS src/common/storage/compact-payload.spec.ts
+PASS src/terminology/terminology.controller.spec.ts
+PASS src/pharmacy-inventory/pharmacy-inventory.controller.spec.ts
+PASS src/clinical-safety/clinical-safety.service.spec.ts
+PASS src/billing/billing-document.service.spec.ts
+PASS src/auth/password-policy.spec.ts
+PASS src/pharmacy-stock/pharmacy-stock.controller.spec.ts
+PASS src/patient/patient-duplicate.spec.ts
+
+Test Suites: 58 passed, 58 total
+Tests:       329 passed, 329 total
+Snapshots:   0 total
+Time:        70.102 s
+Ran all test suites.

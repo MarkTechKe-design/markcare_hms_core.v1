@@ -4,7 +4,8 @@ import { ArrowRight, CheckCircle2, AlertCircle, Layers, ShieldCheck, Database, C
 import { MarketingHeader } from "@/components/marketing/marketing-header";
 import { MarketingFooter } from "@/components/marketing/marketing-footer";
 import { MarketingContainer } from "@/components/marketing/marketing-container";
-import { MarketingBadge } from "@/components/marketing/marketing-badge";
+import { MarketingBadge } from '@/components/marketing/marketing-badge';
+import { MarketingCtaBanner } from '@/components/marketing/marketing-cta-banner';
 import { Button } from "@/components/ui/button";
 
 export const metadata: Metadata = {
@@ -166,26 +167,24 @@ export default function IntegrationsPage() {
           </MarketingContainer>
         </section>
 
-        {/* CTA */}
-        <section className="py-16 bg-card">
-          <MarketingContainer className="text-center max-w-2xl">
-            <h2 className="text-2xl font-bold text-foreground">Discuss your hospital&apos;s integration requirements.</h2>
-            <p className="text-sm text-muted-foreground mt-2">
-              Our engineering team can evaluate your third-party payment rails, insurance providers, and existing diagnostic hardware.
-            </p>
-            <div className="mt-6 flex justify-center gap-3">
-              <Button asChild>
-                <Link href="/request-demo">Schedule Technical Review</Link>
-              </Button>
-              <Button variant="outline" asChild>
-                <Link href="/platform">Review Platform Topology</Link>
-              </Button>
-            </div>
-          </MarketingContainer>
-        </section>
+        {/* Harmonized CTA Card */}
+          <MarketingCtaBanner
+            headline="Discuss your hospital's integration requirements."
+            description="Our engineering team can evaluate your third-party payment rails, insurance providers, and existing diagnostic hardware."
+            primaryCta={{
+              label: "Schedule Technical Review",
+              href: "/request-demo",
+            }}
+            secondaryCta={{
+              label: "Review Platform Topology",
+              href: "/platform",
+            }}
+          />
       </main>
 
       <MarketingFooter />
     </div>
   );
 }
+
+

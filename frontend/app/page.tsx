@@ -1,286 +1,189 @@
+﻿import React from "react";
+import type { Metadata } from "next";
 import Link from "next/link";
+import { ArrowRight, Stethoscope, Pill, CreditCard } from "lucide-react";
 import {
-  ArrowRight,
-  BedDouble,
-  FlaskConical,
-  HeartHandshake,
-  MessageSquareText,
-  Pill,
-  ReceiptText,
-  ShieldCheck,
-  Stethoscope,
-  Users,
-} from "lucide-react";
-import { AppLogo } from "@/components/shared/app-logo";
+  MarketingHeader,
+  MarketingFooter,
+  MarketingContainer,
+  MarketingBadge,
+  MarketingSection,
+  MarketingSectionHeading,
+  MarketingCard,
+  MarketingScreenshotFrame,
+  MarketingCtaBanner,
+} from "@/components/marketing";
+import { MarketingCapabilityStrip } from "@/components/marketing/marketing-capability-strip";
 import { Button } from "@/components/ui/button";
-import { getWhatsappLink, supportContacts } from "@/lib/creator-contacts";
-import { ThemeToggle } from "@/components/shared/theme-toggle";
+import { marketingContent } from "@/content/marketing-content";
 
-const heroPhotos = [
-  {
-    title: "Clinical desk",
-    image:
-      "https://images.unsplash.com/photo-1551601651-2a8555f1a136?auto=format&fit=crop&w=1000&q=88",
-  },
-  {
-    title: "Ward care",
-    image:
-      "https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&w=1000&q=88",
-  },
-  {
-    title: "Pharmacy",
-    image:
-      "https://images.unsplash.com/photo-1587854692152-cbe660dbde88?auto=format&fit=crop&w=1000&q=88",
-  },
-];
-
-const flow = [
-  { title: "Reception", detail: "Patient visit opens here.", icon: Users },
-  { title: "Doctor", detail: "Notes, diagnosis, tests, medicine.", icon: Stethoscope },
-  { title: "Lab", detail: "Results return to the doctor.", icon: FlaskConical },
-  { title: "Pharmacy", detail: "Stock reduces and billing updates.", icon: Pill },
-  { title: "IPD", detail: "Beds, sheets, summaries.", icon: BedDouble },
-  { title: "Cashier", detail: "Invoice, receipt, reports.", icon: ReceiptText },
-];
-
-const controlLines = [
-  ["Facilities", "Branches, users, roles, locations."],
-  ["Billing", "Invoices, SHA, M-PESA, receipts."],
-  ["Evidence", "Audit logs, location, reports."],
-  ["AI", "Clinical notes and user assistance."],
-];
+export const metadata: Metadata = {
+  title: "Integrated Healthcare Operations Platform",
+  description:
+    "MarkCare HMS connects patient admissions, doctor encounters, diagnostic laboratory orders, pharmacy FEFO dispensing, and hospital billing in one unified workspace.",
+};
 
 export default function HomePage() {
-  return (
-    <main className="min-h-screen bg-background text-foreground">
-      <section
-        className="relative min-h-screen overflow-hidden bg-cover bg-center"
-        style={{
-          backgroundImage:
-            "url('https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&w=2400&q=90')",
-        }}
-      >
-        <div className="absolute inset-0 bg-[#061d35]/82" />
+  const { hero } = marketingContent;
 
-        <div className="relative mx-auto flex min-h-screen max-w-[1540px] flex-col px-5 py-5 md:px-8">
-          <header className="flex items-center justify-between gap-4 border border-border-strong/30 bg-[#06365f]/94 px-4 py-4 shadow-2xl">
-            <AppLogo light />
-            <nav className="hidden items-center gap-7 text-sm font-semibold text-sky-50 lg:flex">
-              <Link href="/workflow" className="hover:text-muted-foreground">
-                Workflow
-              </Link>
-              <Link href="/facilities" className="hover:text-muted-foreground">
-                Facilities
-              </Link>
-              <Link href="/inspiration" className="hover:text-muted-foreground">
-                Inspiration
-              </Link>
-              <Link href="/reviews" className="hover:text-muted-foreground">
-                Reviews
-              </Link>
-              <Link href="/creators" className="hover:text-muted-foreground">
-                Creators
-              </Link>
-            </nav>
-            <div className="flex items-center gap-2">
-              <ThemeToggle className="text-white hover:bg-white/10 hover:text-white" />
-              <Button asChild className="rounded-md bg-sky-400 text-[#06233e] hover:bg-sky-300">
-                <Link href="/login">
-                  Enter system
-                  <ArrowRight className="h-4 w-4" />
+  return (
+    <div className="flex min-h-screen flex-col bg-background text-foreground antialiased selection:bg-primary/20">
+      <MarketingHeader />
+
+      <main className="flex-1">
+        {/* 1. Hero Section */}
+        <section className="relative -mt-16 pt-32 sm:pt-40 pb-24 sm:pb-32 overflow-hidden min-h-[75vh] flex flex-col justify-center">
+          {/* Background Media Layer */}
+          <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+            {hero.media.backgroundVideo ? (
+              <video
+                autoPlay
+                loop
+                muted
+                playsInline
+                preload="metadata"
+                poster={hero.media.backgroundPoster}
+                className="h-full w-full object-cover object-center transition-opacity duration-1000 motion-reduce:hidden"
+              >
+                <source src={hero.media.backgroundVideo} type="video/mp4" />
+              </video>
+            ) : null}
+
+            {/* Poster fallback or ambient background */}
+            <div
+              className={`absolute inset-0 bg-cover bg-center ${
+                hero.media.backgroundVideo ? "hidden motion-reduce:block" : "block"
+              }`}
+              style={{
+                backgroundImage: hero.media.backgroundImage
+                  ? `url(${hero.media.backgroundImage})`
+                  : hero.media.backgroundPoster
+                  ? `url(${hero.media.backgroundPoster})`
+                  : undefined,
+              }}
+            />
+
+            {/* Contrast Overlays protecting text legibility */}
+            <div className="absolute inset-0 bg-slate-950/75 dark:bg-slate-950/85 backdrop-blur-[1px]" />
+            <div className="absolute inset-0 bg-gradient-to-b from-slate-950/70 via-transparent to-background" />
+            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-primary/15 via-transparent to-transparent" />
+          </div>
+
+          <MarketingContainer className="relative z-10 text-center">
+            <MarketingBadge className="mb-4 bg-white/10 text-white border-white/20 backdrop-blur-xs">
+              {hero.badge}
+            </MarketingBadge>
+
+            <h1 className="text-3xl font-extrabold tracking-tight sm:text-5xl lg:text-6xl text-balance max-w-4xl mx-auto leading-tight text-white drop-shadow-xs">
+              {hero.headline}
+            </h1>
+
+            <p className="mt-6 text-base sm:text-lg text-slate-200 max-w-2xl mx-auto text-balance leading-relaxed drop-shadow-xs">
+              {hero.description}
+            </p>
+
+            <div className="mt-8 flex flex-wrap justify-center gap-4">
+              <Button
+                asChild
+                size="lg"
+                className="bg-primary text-primary-foreground font-semibold shadow-md hover:bg-primary/90"
+              >
+                <Link href={hero.primaryCta.href}>
+                  {hero.primaryCta.label}
+                  <ArrowRight className="ml-2 size-4" aria-hidden="true" />
                 </Link>
               </Button>
-            </div>
-          </header>
-
-          <div className="grid flex-1 gap-8 py-8 lg:grid-cols-[0.92fr_1.08fr] lg:items-center">
-            <section className="space-y-7">
-              <div className="inline-flex items-center gap-2 border border-border-strong/35 bg-[#0a4778]/88 px-3 py-2 text-sm font-semibold text-sky-50">
-                <ShieldCheck className="h-4 w-4" />
-                Hospital operating system
-              </div>
-
-              <div>
-                <h1 className="max-w-4xl text-5xl font-bold leading-[1.03] tracking-tight text-white md:text-7xl">
-                  Invinceible Core HMS
-                </h1>
-                <p className="mt-5 max-w-2xl text-lg leading-8 text-sky-50/86">
-                  Patient visits, clinical work, pharmacy, billing, SHA, reports,
-                  and administration in one controlled workspace.
-                </p>
-              </div>
-
-              <div className="grid max-w-3xl gap-3 sm:grid-cols-3">
-                {[
-                  ["30+", "modules"],
-                  ["24/7", "audit trail"],
-                  ["15", "day facility grace"],
-                ].map(([value, label]) => (
-                  <div key={label} className="border border-border-strong/30 bg-[#082b4d]/90 p-4">
-                    <p className="text-3xl font-bold text-muted-foreground">{value}</p>
-                    <p className="mt-1 text-xs font-semibold uppercase text-sky-50/70">
-                      {label}
-                    </p>
-                  </div>
-                ))}
-              </div>
-
-              <div className="flex flex-col gap-3 sm:flex-row">
-                <Button asChild size="lg" className="rounded-md bg-sky-400 text-[#06233e] hover:bg-sky-300">
-                  <Link href="/login">
-                    Open hospital portal
-                    <ArrowRight className="h-4 w-4" />
-                  </Link>
-                </Button>
-                <Button
-                  asChild
-                  size="lg"
-                  variant="outline"
-                  className="rounded-md border-border-strong/45 bg-[#082b4d]/70 text-white hover:bg-sky-400/15"
-                >
-                  <Link href="/workflow">View workflow</Link>
-                </Button>
-              </div>
-            </section>
-
-            <section className="grid gap-4">
-              <div className="grid gap-4 md:grid-cols-3">
-                {heroPhotos.map((photo) => (
-                  <Link
-                    href="/workflow"
-                    key={photo.title}
-                    className="group border border-border-strong/35 bg-[#082b4d]/92 p-2 shadow-2xl"
-                  >
-                    <div
-                      className="h-[310px] bg-cover bg-center transition duration-300 group-hover:scale-[1.01]"
-                      style={{ backgroundImage: `url('${photo.image}')` }}
-                    />
-                    <p className="mt-3 px-1 pb-1 text-sm font-semibold text-white">
-                      {photo.title}
-                    </p>
-                  </Link>
-                ))}
-              </div>
-
-              <div className="grid gap-3 border border-border-strong/30 bg-[#082b4d]/92 p-4 md:grid-cols-4">
-                {controlLines.map(([title, detail]) => (
-                  <div key={title} className="border border-border-strong/20 bg-[#06365f] p-4">
-                    <p className="text-sm font-bold text-white">{title}</p>
-                    <p className="mt-2 text-xs leading-5 text-sky-50/72">
-                      {detail}
-                    </p>
-                  </div>
-                ))}
-              </div>
-            </section>
-          </div>
-        </div>
-      </section>
-
-      <section className="border-b border-border bg-card">
-        <div className="mx-auto grid max-w-[1540px] gap-5 px-5 py-10 md:px-8 lg:grid-cols-6">
-          {flow.map((item) => {
-            const Icon = item.icon;
-            return (
-              <Link
-                href="/workflow"
-                key={item.title}
-                className="border border-border bg-surface-2 p-5 shadow-sm hover:border-border-strong"
+              <Button
+                asChild
+                variant="outline"
+                size="lg"
+                className="border-white/25 bg-white/10 text-white hover:bg-white/20 hover:text-white backdrop-blur-xs"
               >
-                <Icon className="h-6 w-6 text-module" />
-                <p className="mt-5 text-lg font-bold text-foreground">
-                  {item.title}
-                </p>
-                <p className="mt-2 text-sm leading-6 text-muted-foreground">
-                  {item.detail}
-                </p>
-              </Link>
-            );
-          })}
-        </div>
-      </section>
-
-      <section className="bg-surface-2">
-        <div className="mx-auto grid max-w-[1540px] gap-6 px-5 py-12 md:px-8 xl:grid-cols-[1.05fr_0.95fr]">
-          <Link
-            href="/inspiration"
-            className="group grid overflow-hidden border border-border bg-card shadow-xl md:grid-cols-[340px_1fr]"
-          >
-            <div
-              className="min-h-[460px] bg-cover bg-center"
-              style={{ backgroundImage: "url('/inspiration/rev-dr-nelson-mandela.png')" }}
-            />
-            <div className="flex flex-col justify-center p-7">
-              <HeartHandshake className="mb-5 h-9 w-9 text-module" />
-              <p className="text-sm font-semibold uppercase text-module">
-                Inspired by
-              </p>
-              <h2 className="mt-2 text-4xl font-bold leading-tight text-foreground">
-                Rev. Dr Nelson Mandela
-              </h2>
-              <p className="mt-4 max-w-xl text-base leading-8 text-muted-foreground">
-                Director of St Francis Hillside Medicare KSM and sponsor of the
-                system build.
-              </p>
-              <span className="mt-7 inline-flex items-center gap-2 font-semibold text-module group-hover:text-foreground">
-                View page
-                <ArrowRight className="h-4 w-4" />
-              </span>
+                <Link href={hero.secondaryCta.href}>{hero.secondaryCta.label}</Link>
+              </Button>
             </div>
-          </Link>
+          </MarketingContainer>
+        </section>
 
-          <div className="grid gap-6">
-            <Link
-              href="/reviews"
-              className="group border border-border bg-card p-6 shadow-xl"
-            >
-              <MessageSquareText className="mb-4 h-8 w-8 text-module" />
-              <h2 className="text-3xl font-bold text-foreground">
-                Staff reviews
-              </h2>
-              <p className="mt-3 text-sm leading-7 text-muted-foreground">
-                Ratings and comments from system users after real logins.
-              </p>
-              <span className="mt-6 inline-flex items-center gap-2 font-semibold text-module group-hover:text-foreground">
-                Open reviews
-                <ArrowRight className="h-4 w-4" />
-              </span>
-            </Link>
-
-            <Link
-              href="/creators"
-              className="grid overflow-hidden border border-border bg-card shadow-xl md:grid-cols-[240px_1fr]"
-            >
-              <div
-                className="min-h-[280px] bg-cover bg-center"
-                style={{ backgroundImage: "url('/creators/eng-otieno.png')" }}
-              />
-              <div className="p-6">
-                <p className="text-sm font-semibold uppercase text-module">
-                  Creators
-                </p>
-                <h2 className="mt-2 text-3xl font-bold text-foreground">
-                  Built by Eng. Otieno Owino and Eng. Moikoyo Paul
-                </h2>
-                <div className="mt-5 grid gap-3">
-                  {supportContacts.map((creator) => (
-                    <a
-                      key={creator.name}
-                      href={getWhatsappLink(creator.whatsappNumber, creator.message)}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="flex items-center justify-between border border-border bg-surface-2 px-4 py-3 text-sm font-semibold text-foreground"
-                    >
-                      <span>{creator.name}</span>
-                      <span className="text-module">{creator.phone}</span>
-                    </a>
-                  ))}
-                </div>
-              </div>
-            </Link>
-          </div>
+        {/* 2. Floating Capability Strip */}
+        <div className="-mt-12 sm:-mt-14 relative z-20 mb-16">
+          <MarketingCapabilityStrip />
         </div>
-      </section>
-    </main>
+
+        {/* 3. Product Visual Section */}
+        <MarketingSection className="pt-0">
+          <MarketingContainer>
+            <MarketingSectionHeading
+              badge="System Workspace"
+              title="A unified operational window into your hospital"
+              description="Designed to coordinate activity between triage desks, consultation rooms, diagnostic laboratories, the pharmacy counter, and the cashier desk."
+            />
+            <MarketingScreenshotFrame
+              src={hero.media.productScreenshot}
+              caption="MarkCare HMS · Multi-Department Operational Workspace"
+            />
+          </MarketingContainer>
+        </MarketingSection>
+
+        {/* 4. Connected Care Flow */}
+        <MarketingSection variant="muted">
+          <MarketingContainer>
+            <MarketingSectionHeading
+              badge="Connected Care Flow"
+              title="Coordinating the complete patient encounter"
+              description="Structuring records and order movement as care is delivered across hospital stations."
+            />
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              <MarketingCard>
+                <div className="size-11 rounded-xl bg-primary/10 text-primary flex items-center justify-center mb-5">
+                  <Stethoscope className="size-5" aria-hidden="true" />
+                </div>
+                <h3 className="text-lg font-bold text-foreground mb-2">1. Clinical Consultation</h3>
+                <p className="text-sm text-muted-foreground leading-relaxed">
+                  Physicians document encounter notes, record vital signs, and issue diagnostic lab requisitions or prescription orders directly within the patient encounter file.
+                </p>
+              </MarketingCard>
+
+              <MarketingCard>
+                <div className="size-11 rounded-xl bg-primary/10 text-primary flex items-center justify-center mb-5">
+                  <Pill className="size-5" aria-hidden="true" />
+                </div>
+                <h3 className="text-lg font-bold text-foreground mb-2">2. Pharmacy FEFO Dispensing</h3>
+                <p className="text-sm text-muted-foreground leading-relaxed">
+                  Prescription orders appear in the dispensary queue. Dispensers fulfill orders supported by First-Expiry-First-Out stock batch selection.
+                </p>
+              </MarketingCard>
+
+              <MarketingCard>
+                <div className="size-11 rounded-xl bg-primary/10 text-primary flex items-center justify-center mb-5">
+                  <CreditCard className="size-5" aria-hidden="true" />
+                </div>
+                <h3 className="text-lg font-bold text-foreground mb-2">3. Invoicing & Settlement</h3>
+                <p className="text-sm text-muted-foreground leading-relaxed">
+                  Consultation fees, diagnostic investigation costs, and dispensed medications aggregate to the patient encounter invoice for self-pay or insurance settlement.
+                </p>
+              </MarketingCard>
+            </div>
+          </MarketingContainer>
+        </MarketingSection>
+
+        {/* 5. CTA Banner */}
+        <MarketingCtaBanner
+          headline="Experience MarkCare in your healthcare facility"
+          description="Speak with our implementation team to review your hospital's operational workflow requirements or arrange a demonstration."
+          primaryCta={{
+            label: "Request a Demonstration",
+            href: "/request-demo",
+          }}
+          secondaryCta={{
+            label: "Explore Modules",
+            href: "/modules",
+          }}
+        />
+      </main>
+
+      <MarketingFooter />
+    </div>
   );
 }

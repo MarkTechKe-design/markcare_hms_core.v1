@@ -1,0 +1,902 @@
+﻿=================================================================
+               MARKCARE HMS - FRONTEND AUDIT LOG                 
+               Timestamp: 2026-09-12 19:07:26               
+=================================================================
+
+
+=================================================================
+SECTION: 1. REPOSITORY STRUCTURE & DIRECTORY HIERARCHY
+=================================================================
+Directory: app (Total Files: 124)
+  - \app\(dashboard)
+  - \app\(legal)
+  - \app\(platform)
+  - \app\components
+  - \app\creators
+  - \app\facilities
+  - \app\forgot-password
+  - \app\inspiration
+  - \app\invoice-verify
+  - \app\login
+  - \app\patient-access
+  - \app\reset-password
+  - \app\reviews
+  - \app\workflow
+  - \app\(dashboard)\ai-assistant
+  - \app\(dashboard)\ambulance
+  - \app\(dashboard)\appointments
+  - \app\(dashboard)\assets
+  - \app\(dashboard)\billing
+  - \app\(dashboard)\biomedical
+  - \app\(dashboard)\blood-bank
+  - \app\(dashboard)\central-store
+  - \app\(dashboard)\communications
+  - \app\(dashboard)\compliance
+  - \app\(dashboard)\consultation
+  - \app\(dashboard)\cssd
+  - \app\(dashboard)\dashboard
+  - \app\(dashboard)\dental
+  - \app\(dashboard)\dha-eclaims
+  - \app\(dashboard)\doctor-queue
+  - \app\(dashboard)\emergency
+  - \app\(dashboard)\feedback
+  - \app\(dashboard)\hr
+  - \app\(dashboard)\icu
+  - \app\(dashboard)\infection-control
+  - \app\(dashboard)\insurance
+  - \app\(dashboard)\integration
+  - \app\(dashboard)\invoices
+  - \app\(dashboard)\ipd
+  - \app\(dashboard)\kitchen
+  - \app\(dashboard)\lab
+  - \app\(dashboard)\lab-external
+  - \app\(dashboard)\laundry
+  - \app\(dashboard)\maternity
+  - \app\(dashboard)\medical-records
+  - \app\(dashboard)\mental-health
+  - \app\(dashboard)\mortuary
+  - \app\(dashboard)\notifications
+  - \app\(dashboard)\nutrition
+  - \app\(dashboard)\oncology
+  - \app\(dashboard)\opd-clinics
+  - \app\(dashboard)\orthopedics
+  - \app\(dashboard)\patient-portal
+  - \app\(dashboard)\patients
+  - \app\(dashboard)\pharmacy
+  - \app\(dashboard)\pharmacy-inventory
+  - \app\(dashboard)\pharmacy-pricing
+  - \app\(dashboard)\pharmacy-stock
+  - \app\(dashboard)\physiotherapy
+  - \app\(dashboard)\print
+  - \app\(dashboard)\procurement
+  - \app\(dashboard)\quality-assurance
+  - \app\(dashboard)\queue
+  - \app\(dashboard)\radiology
+  - \app\(dashboard)\renal-dialysis
+  - \app\(dashboard)\reports
+  - \app\(dashboard)\revenue-integrity
+  - \app\(dashboard)\security-desk
+  - \app\(dashboard)\settings
+  - \app\(dashboard)\sha-claims
+  - \app\(dashboard)\shr
+  - \app\(dashboard)\telemedicine
+  - \app\(dashboard)\terminology
+  - \app\(dashboard)\theatre
+  - \app\(dashboard)\triage
+  - \app\(dashboard)\vaccination
+  - \app\(dashboard)\appointments\new
+  - \app\(dashboard)\billing\invoices
+  - \app\(dashboard)\billing\tariffs
+  - \app\(dashboard)\billing\[id]
+  - \app\(dashboard)\consultation\[id]
+  - \app\(dashboard)\integration\audit-trail
+  - \app\(dashboard)\integration\components
+  - \app\(dashboard)\ipd\[id]
+  - \app\(dashboard)\patients\new
+  - \app\(dashboard)\pharmacy\otc-sales
+  - \app\(dashboard)\pharmacy\stock
+  - \app\(dashboard)\print\otc-receipt
+  - \app\(legal)\consent
+  - \app\(legal)\privacy
+  - \app\(legal)\terms
+  - \app\(platform)\platform
+  - \app\(platform)\settings
+  - \app\(platform)\platform\admin-control
+  - \app\(platform)\platform\audit
+  - \app\(platform)\platform\branches
+  - \app\(platform)\platform\catalogs
+  - \app\(platform)\platform\clinics
+  - \app\(platform)\platform\departments
+  - \app\(platform)\platform\facilities
+  - \app\(platform)\platform\feedback
+  - \app\(platform)\platform\notifications
+  - \app\(platform)\platform\settings
+  - \app\(platform)\platform\staff
+  - \app\(platform)\platform\subscriptions
+  - \app\(platform)\platform\user-locations
+  - \app\(platform)\platform\users
+  - \app\(platform)\settings\legal
+  - \app\components\shared
+  - \app\patient-access\appointments
+  - \app\patient-access\invoices
+  - \app\patient-access\lab-results
+  - \app\patient-access\prescriptions
+  - \app\patient-access\profile
+Directory: components (Total Files: 95)
+  - \components\ai
+  - \components\appointments
+  - \components\billing
+  - \components\dashboard
+  - \components\integration
+  - \components\layout
+  - \components\legal
+  - \components\modules
+  - \components\notifications
+  - \components\patient-portal
+  - \components\patients
+  - \components\platform
+  - \components\public
+  - \components\queue
+  - \components\settings
+  - \components\shared
+  - \components\ui
+  - \components\platform\branches
+  - \components\platform\clinics
+  - \components\platform\departments
+  - \components\platform\facilities
+  - \components\platform\notifications
+  - \components\platform\shared
+  - \components\platform\staff
+  - \components\platform\users
+  - \components\shared\terminology
+  - \components\ui\consent
+Directory: docs (Total Files: 2)
+Directory: e2e (Total Files: 1)
+Directory: hooks (Total Files: 164)
+Directory: lib (Total Files: 13)
+Directory: providers (Total Files: 5)
+Directory: public (Total Files: 10)
+  - \public\brand
+  - \public\creators
+  - \public\inspiration
+  - \public\templates
+Directory: services (Total Files: 47)
+Directory: tests (Total Files: 1)
+Directory: types (Total Files: 7)
+
+
+=================================================================
+SECTION: 2. ROUTE & PAGE INVENTORY
+=================================================================
+Route File: \app\(dashboard)\ai-assistant\page.tsx
+  Type: Client Component
+  Lines: 121
+Route File: \app\(dashboard)\ambulance\page.tsx
+  Type: Server Component
+  Lines: 5
+Route File: \app\(dashboard)\appointments\new\page.tsx
+  Type: Client Component
+  Lines: 39
+Route File: \app\(dashboard)\appointments\page.tsx
+  Type: Client Component
+  Lines: 66
+Route File: \app\(dashboard)\assets\page.tsx
+  Type: Server Component
+  Lines: 5
+Route File: \app\(dashboard)\billing\invoices\page.tsx
+  Type: Client Component
+  Lines: 174
+Route File: \app\(dashboard)\billing\tariffs\page.tsx
+  Type: Client Component
+  Lines: 654
+Route File: \app\(dashboard)\billing\[id]\page.tsx
+  Type: Client Component
+  Lines: 0
+Route File: \app\(dashboard)\billing\page.tsx
+  Type: Client Component
+  Lines: 489
+Route File: \app\(dashboard)\biomedical\page.tsx
+  Type: Server Component
+  Lines: 5
+Route File: \app\(dashboard)\blood-bank\page.tsx
+  Type: Server Component
+  Lines: 5
+Route File: \app\(dashboard)\central-store\page.tsx
+  Type: Server Component
+  Lines: 5
+Route File: \app\(dashboard)\communications\page.tsx
+  Type: Client Component
+  Lines: 63
+Route File: \app\(dashboard)\compliance\page.tsx
+  Type: Server Component
+  Lines: 5
+Route File: \app\(dashboard)\consultation\[id]\page.tsx
+  Type: Server Component
+  Lines: 0
+Route File: \app\(dashboard)\consultation\page.tsx
+  Type: Client Component
+  Lines: 181
+Route File: \app\(dashboard)\cssd\page.tsx
+  Type: Server Component
+  Lines: 5
+Route File: \app\(dashboard)\dashboard\page.tsx
+  Type: Client Component
+  Lines: 366
+Route File: \app\(dashboard)\dental\page.tsx
+  Type: Client Component
+  Lines: 153
+Route File: \app\(dashboard)\dha-eclaims\page.tsx
+  Type: Client Component
+  Lines: 410
+Route File: \app\(dashboard)\doctor-queue\page.tsx
+  Type: Client Component
+  Lines: 727
+Route File: \app\(dashboard)\emergency\page.tsx
+  Type: Server Component
+  Lines: 5
+Route File: \app\(dashboard)\feedback\page.tsx
+  Type: Client Component
+  Lines: 152
+Route File: \app\(dashboard)\hr\page.tsx
+  Type: Server Component
+  Lines: 5
+Route File: \app\(dashboard)\icu\page.tsx
+  Type: Server Component
+  Lines: 5
+Route File: \app\(dashboard)\infection-control\page.tsx
+  Type: Server Component
+  Lines: 5
+Route File: \app\(dashboard)\insurance\page.tsx
+  Type: Client Component
+  Lines: 172
+Route File: \app\(dashboard)\integration\audit-trail\page.tsx
+  Type: Client Component
+  Lines: 485
+Route File: \app\(dashboard)\integration\page.tsx
+  Type: Client Component
+  Lines: 672
+Route File: \app\(dashboard)\invoices\page.tsx
+  Type: Client Component
+  Lines: 618
+Route File: \app\(dashboard)\ipd\[id]\page.tsx
+  Type: Client Component
+  Lines: 0
+Route File: \app\(dashboard)\ipd\page.tsx
+  Type: Client Component
+  Lines: 1279
+Route File: \app\(dashboard)\kitchen\page.tsx
+  Type: Server Component
+  Lines: 5
+Route File: \app\(dashboard)\lab\page.tsx
+  Type: Client Component
+  Lines: 820
+Route File: \app\(dashboard)\lab-external\page.tsx
+  Type: Client Component
+  Lines: 270
+Route File: \app\(dashboard)\laundry\page.tsx
+  Type: Server Component
+  Lines: 5
+Route File: \app\(dashboard)\maternity\page.tsx
+  Type: Server Component
+  Lines: 5
+Route File: \app\(dashboard)\medical-records\page.tsx
+  Type: Client Component
+  Lines: 460
+Route File: \app\(dashboard)\mental-health\page.tsx
+  Type: Server Component
+  Lines: 5
+Route File: \app\(dashboard)\mortuary\page.tsx
+  Type: Server Component
+  Lines: 5
+Route File: \app\(dashboard)\notifications\page.tsx
+  Type: Client Component
+  Lines: 275
+Route File: \app\(dashboard)\nutrition\page.tsx
+  Type: Server Component
+  Lines: 5
+Route File: \app\(dashboard)\oncology\page.tsx
+  Type: Server Component
+  Lines: 5
+Route File: \app\(dashboard)\opd-clinics\page.tsx
+  Type: Server Component
+  Lines: 5
+Route File: \app\(dashboard)\orthopedics\page.tsx
+  Type: Client Component
+  Lines: 141
+Route File: \app\(dashboard)\patient-portal\page.tsx
+  Type: Server Component
+  Lines: 5
+Route File: \app\(dashboard)\patients\new\page.tsx
+  Type: Client Component
+  Lines: 39
+Route File: \app\(dashboard)\patients\page.tsx
+  Type: Client Component
+  Lines: 1291
+Route File: \app\(dashboard)\pharmacy\otc-sales\page.tsx
+  Type: Client Component
+  Lines: 1144
+Route File: \app\(dashboard)\pharmacy\stock\page.tsx
+  Type: Server Component
+  Lines: 10
+Route File: \app\(dashboard)\pharmacy\page.tsx
+  Type: Client Component
+  Lines: 417
+Route File: \app\(dashboard)\pharmacy-inventory\page.tsx
+  Type: Client Component
+  Lines: 495
+Route File: \app\(dashboard)\pharmacy-pricing\page.tsx
+  Type: Client Component
+  Lines: 1150
+Route File: \app\(dashboard)\pharmacy-stock\page.tsx
+  Type: Client Component
+  Lines: 530
+Route File: \app\(dashboard)\physiotherapy\page.tsx
+  Type: Server Component
+  Lines: 5
+Route File: \app\(dashboard)\print\otc-receipt\[id]\page.tsx
+  Type: Server Component
+  Lines: 0
+Route File: \app\(dashboard)\procurement\page.tsx
+  Type: Server Component
+  Lines: 5
+Route File: \app\(dashboard)\quality-assurance\page.tsx
+  Type: Server Component
+  Lines: 5
+Route File: \app\(dashboard)\queue\page.tsx
+  Type: Client Component
+  Lines: 142
+Route File: \app\(dashboard)\radiology\page.tsx
+  Type: Server Component
+  Lines: 5
+Route File: \app\(dashboard)\renal-dialysis\page.tsx
+  Type: Server Component
+  Lines: 5
+Route File: \app\(dashboard)\reports\page.tsx
+  Type: Client Component
+  Lines: 1199
+Route File: \app\(dashboard)\revenue-integrity\page.tsx
+  Type: Client Component
+  Lines: 326
+Route File: \app\(dashboard)\security-desk\page.tsx
+  Type: Server Component
+  Lines: 5
+Route File: \app\(dashboard)\settings\page.tsx
+  Type: Client Component
+  Lines: 30
+Route File: \app\(dashboard)\sha-claims\page.tsx
+  Type: Client Component
+  Lines: 1477
+Route File: \app\(dashboard)\shr\page.tsx
+  Type: Client Component
+  Lines: 150
+Route File: \app\(dashboard)\telemedicine\page.tsx
+  Type: Server Component
+  Lines: 5
+Route File: \app\(dashboard)\terminology\page.tsx
+  Type: Client Component
+  Lines: 234
+Route File: \app\(dashboard)\theatre\page.tsx
+  Type: Server Component
+  Lines: 5
+Route File: \app\(dashboard)\triage\page.tsx
+  Type: Client Component
+  Lines: 674
+Route File: \app\(dashboard)\vaccination\page.tsx
+  Type: Server Component
+  Lines: 5
+Route File: \app\(legal)\consent\page.tsx
+  Type: Client Component
+  Lines: 192
+Route File: \app\(legal)\privacy\page.tsx
+  Type: Server Component
+  Lines: 97
+Route File: \app\(legal)\terms\page.tsx
+  Type: Server Component
+  Lines: 104
+Route File: \app\(platform)\platform\admin-control\page.tsx
+  Type: Client Component
+  Lines: 168
+Route File: \app\(platform)\platform\audit\page.tsx
+  Type: Client Component
+  Lines: 269
+Route File: \app\(platform)\platform\branches\page.tsx
+  Type: Client Component
+  Lines: 41
+Route File: \app\(platform)\platform\catalogs\page.tsx
+  Type: Client Component
+  Lines: 568
+Route File: \app\(platform)\platform\clinics\page.tsx
+  Type: Client Component
+  Lines: 41
+Route File: \app\(platform)\platform\departments\page.tsx
+  Type: Client Component
+  Lines: 41
+Route File: \app\(platform)\platform\facilities\page.tsx
+  Type: Client Component
+  Lines: 127
+Route File: \app\(platform)\platform\feedback\page.tsx
+  Type: Client Component
+  Lines: 130
+Route File: \app\(platform)\platform\notifications\page.tsx
+  Type: Client Component
+  Lines: 43
+Route File: \app\(platform)\platform\settings\page.tsx
+  Type: Server Component
+  Lines: 7
+Route File: \app\(platform)\platform\staff\page.tsx
+  Type: Client Component
+  Lines: 41
+Route File: \app\(platform)\platform\subscriptions\page.tsx
+  Type: Client Component
+  Lines: 220
+Route File: \app\(platform)\platform\user-locations\page.tsx
+  Type: Client Component
+  Lines: 689
+Route File: \app\(platform)\platform\users\page.tsx
+  Type: Client Component
+  Lines: 41
+Route File: \app\(platform)\platform\page.tsx
+  Type: Server Component
+  Lines: 248
+Route File: \app\(platform)\settings\legal\page.tsx
+  Type: Client Component
+  Lines: 206
+Route File: \app\creators\page.tsx
+  Type: Server Component
+  Lines: 107
+Route File: \app\facilities\page.tsx
+  Type: Server Component
+  Lines: 103
+Route File: \app\forgot-password\page.tsx
+  Type: Server Component
+  Lines: 38
+Route File: \app\inspiration\page.tsx
+  Type: Server Component
+  Lines: 148
+Route File: \app\invoice-verify\page.tsx
+  Type: Client Component
+  Lines: 196
+Route File: \app\login\page.tsx
+  Type: Server Component
+  Lines: 10
+Route File: \app\patient-access\appointments\page.tsx
+  Type: Server Component
+  Lines: 11
+Route File: \app\patient-access\invoices\page.tsx
+  Type: Server Component
+  Lines: 12
+Route File: \app\patient-access\lab-results\page.tsx
+  Type: Client Component
+  Lines: 90
+Route File: \app\patient-access\prescriptions\page.tsx
+  Type: Server Component
+  Lines: 11
+Route File: \app\patient-access\profile\page.tsx
+  Type: Server Component
+  Lines: 11
+Route File: \app\patient-access\page.tsx
+  Type: Server Component
+  Lines: 20
+Route File: \app\reset-password\page.tsx
+  Type: Server Component
+  Lines: 10
+Route File: \app\reviews\page.tsx
+  Type: Client Component
+  Lines: 307
+Route File: \app\workflow\page.tsx
+  Type: Server Component
+  Lines: 82
+Route File: \app\page.tsx
+  Type: Server Component
+  Lines: 287
+
+
+=================================================================
+SECTION: 3. LAYOUTS & NAVIGATION SHELLS
+=================================================================
+Layout File: \app\(dashboard)\layout.tsx
+Layout File: \app\(platform)\platform\layout.tsx
+Layout File: \app\layout.tsx
+
+
+=================================================================
+SECTION: 4. PUBLIC MARKETING FRONTEND & LANDING PAGE
+=================================================================
+
+
+=================================================================
+SECTION: 5. INVINCEIBLE & LEGACY BRANDING AUDIT
+=================================================================
+File: \app\(dashboard)\medical-records\page.tsx
+  Line 451: This report is generated from Invinceible Core HMS and must be
+File: \app\(legal)\consent\page.tsx
+  Line 97: Welcome to Invinceible Core HMS
+File: \app\(legal)\privacy\page.tsx
+  Line 5: title: "Privacy Policy | Invinceible Core HMS",
+  Line 6: description: "Privacy Policy for Invinceible Core Hospital Management System",
+  Line 29: Invinceible Core Software Firm (&ldquo;we&rdquo;, &ldquo;our&rdquo;, or &ldquo;us&rdquo;) is committed to protecting the privacy and security of your personal data and sensitive health data. This Privacy Policy outlines our practices in compliance with the Kenya Data Protection Act, 2019.
+  Line 34: This Privacy Policy applies to all users (hospital staff, administrators, and healthcare professionals) accessing the Invinceible Core HMS (&ldquo;the System&rdquo;). It details how we act as both a Data Controller (for your account information) and a Data Processor (for the patient health records managed by your facility).
+  Line 92: <strong>Email:</strong> dpo@invinceiblecore.com<br/>
+  Line 93: <strong>Address:</strong> Invinceible Core Software Firm, Nairobi, Kenya.
+File: \app\(legal)\terms\page.tsx
+  Line 5: title: "Terms of Use | Invinceible Core HMS",
+  Line 6: description: "Terms of Use for Invinceible Core Hospital Management System",
+  Line 31: Welcome to Invinceible Core HMS (&ldquo;the System&rdquo;). These Terms of Use govern your access to and use of our Hospital Management Information System, tailored for healthcare facilities in the Republic of Kenya.
+  Line 36: By accessing or using Invinceible Core HMS, you (&ldquo;the User&rdquo; or &ldquo;the Facility&rdquo;) agree to be bound by these Terms of Use and our Privacy Policy. If you are accepting these terms on behalf of a hospital, clinic, or other legal entity, you represent that you have the authority to bind such entity to these terms.
+  Line 41: Invinceible Core HMS is a cloud-hosted software-as-a-service (SaaS) platform designed to manage hospital operations including but not limited to patient registration, triage, consultations, pharmacy, laboratory, inpatient departments (IPD), billing, and integration with external platforms such as the Social Health Authority (SHA) and future KRA eTIMS implementations.
+  Line 90: Invinceible Core Software Firm retains all rights, title, and interest in and to the System, including its source code, design, and architecture. The Facility retains all rights to its patient and operational data entered into the System.
+  Line 95: While we strive for 99.9% uptime and clinical safety, Invinceible Core HMS is an administrative tool. It does not replace professional medical judgment. We shall not be liable for any direct or indirect damages, medical malpractice claims, or loss of profits arising from the use or inability to use the System.
+File: \app\creators\page.tsx
+  Line 10: image: "/creators/eng-otieno.png",
+  Line 26: export default function CreatorsPage() {
+  Line 34: System creators
+  Line 73: ? "url('/creators/eng-otieno.png')"
+File: \app\facilities\page.tsx
+  Line 34: Invinceible Core HMS keeps hospitals, branches, departments,
+File: \app\inspiration\page.tsx
+  Line 40: Inspiration behind Invinceible Core HMS
+File: \app\login\login-page-client.tsx
+  Line 142: Invinceible Core
+  Line 187: Invinceible <span className="text-gradient-brand">Core</span>
+  Line 309: By signing in to Invinceible Core HMS, you acknowledge that you have read and agree to our{" "}
+File: \app\globals.css
+  Line 2: Invinceible Core HMS — "Meridian" design language (2026)
+File: \app\layout.tsx
+  Line 9: default: "Invinceible Core HMS",
+  Line 10: template: "%s Â· Invinceible Core HMS",
+File: \app\page.tsx
+  Line 82: Creators
+  Line 105: Invinceible Core HMS
+  Line 251: href="/creators"
+  Line 256: style={{ backgroundImage: "url('/creators/eng-otieno.png')" }}
+  Line 260: Creators
+  Line 263: Built by Eng. Otieno Owino and Eng. Moikoyo Paul
+File: \components\billing\printable-invoice.tsx
+  Line 187: <span>Generated by Invinceible Core HMS</span>
+File: \components\layout\dashboard-sidebar.tsx
+  Line 74: Invinceible <span className="text-gradient-brand">Core</span>
+File: \components\layout\shell-status-footer.tsx
+  Line 51: <span className="opacity-75">&copy; Invinceible Core</span>
+File: \components\platform\facilities\create-facility-form.tsx
+  Line 330: placeholder="Invinceible Core Hospital"
+File: \components\public\public-site-header.tsx
+  Line 11: <Link href="/" aria-label="Invinceible Core HMS home">
+  Line 27: <Link href="/creators" className="hover:text-module">
+  Line 28: Creators
+File: \components\shared\app-logo.tsx
+  Line 34: alt="Invinceible Core HMS"
+  Line 48: Invinceible Core
+File: \components\shared\qr-code-image.tsx
+  Line 22: QRCode.toDataURL(value || "Invinceible Core HMS", {
+File: \components\ui\command-palette.tsx
+  Line 193: <span className="ml-auto">Invinceible Core HMS</span>
+File: \lib\creator-contacts.ts
+  Line 3: name: "Eng. Otieno Owino",
+  Line 9: "Hello Eng. Otieno, I need assistance with Invinceible Core HMS. Kindly help me with setup, support, or system guidance.",
+  Line 18: "Hello Eng. Moikoyo, I need assistance with Invinceible Core HMS. Kindly help me with setup, support, or system guidance.",
+
+
+=================================================================
+SECTION: 6. ASSETS, IMAGES & STATIC MEDIA
+=================================================================
+Asset: \public\file.svg | Size: 0.38 KB | Ext: .svg
+Asset: \public\globe.svg | Size: 1.01 KB | Ext: .svg
+Asset: \public\next.svg | Size: 1.34 KB | Ext: .svg
+Asset: \public\vercel.svg | Size: 0.12 KB | Ext: .svg
+Asset: \public\window.svg | Size: 0.38 KB | Ext: .svg
+Asset: \public\brand\logo-icon.png | Size: 145.37 KB | Ext: .png
+Asset: \public\brand\logo.png | Size: 194.78 KB | Ext: .png
+Asset: \public\creators\eng-otieno.png | Size: 2368.47 KB | Ext: .png
+Asset: \public\inspiration\rev-dr-nelson-mandela.png | Size: 2224.69 KB | Ext: .png
+Asset: \public\templates\claim-form-shif.docx | Size: 155.77 KB | Ext: .docx
+
+
+=================================================================
+SECTION: 7. DESIGN SYSTEM & REUSABLE UI COMPONENTS
+=================================================================
+UI Directory Found: components
+UI Directory Found: components/ui
+  - Component: alert.tsx (2.1 KB)
+  - Component: avatar.tsx (3.1 KB)
+  - Component: badge.tsx (1.8 KB)
+  - Component: breadcrumbs.tsx (1.5 KB)
+  - Component: button.tsx (3.1 KB)
+  - Component: card.tsx (2.7 KB)
+  - Component: checkbox.tsx (0.8 KB)
+  - Component: command-palette.tsx (8 KB)
+  - Component: dialog.tsx (4.3 KB)
+  - Component: dropdown-menu.tsx (9 KB)
+  - Component: empty-state.tsx (1.2 KB)
+  - Component: error-state.tsx (1.5 KB)
+  - Component: filter-bar.tsx (2.2 KB)
+  - Component: form.tsx (3.6 KB)
+  - Component: input.tsx (0.8 KB)
+  - Component: label.tsx (0.6 KB)
+  - Component: loading-skeleton.tsx (4.6 KB)
+  - Component: page-header.tsx (1.7 KB)
+  - Component: popover.tsx (1.3 KB)
+  - Component: print-toolbar.tsx (0.8 KB)
+  - Component: progress.tsx (0.8 KB)
+  - Component: scroll-area.tsx (1.7 KB)
+  - Component: search-input.tsx (1.8 KB)
+  - Component: section-card.tsx (1.6 KB)
+  - Component: select.tsx (6.8 KB)
+  - Component: separator.tsx (0.7 KB)
+  - Component: sheet.tsx (4.6 KB)
+  - Component: sidebar.tsx (21.4 KB)
+  - Component: skeleton.tsx (0.4 KB)
+  - Component: stats-card.tsx (2.6 KB)
+  - Component: status-badge.tsx (1.5 KB)
+  - Component: table.tsx (2.7 KB)
+  - Component: tabs.tsx (3.3 KB)
+  - Component: textarea.tsx (0.7 KB)
+  - Component: timeline.tsx (2.2 KB)
+  - Component: toaster.tsx (0.7 KB)
+  - Component: tooltip.tsx (2.1 KB)
+
+
+=================================================================
+SECTION: 8. RESPONSIVE DESIGN & TAILWIND PATTERNS
+=================================================================
+Token occurrence: 'md:flex' -> Found in 56 files/lines
+Token occurrence: 'lg:grid' -> Found in 33 files/lines
+Token occurrence: 'sm:hidden' -> Found in 0 files/lines
+Token occurrence: 'hidden md:block' -> Found in 0 files/lines
+Token occurrence: 'max-w-' -> Found in 106 files/lines
+Token occurrence: 'overflow-x-auto' -> Found in 15 files/lines
+Token occurrence: '@media' -> Found in 1 files/lines
+
+
+=================================================================
+SECTION: 9. API CLIENTS & BACKEND ENDPOINTS
+=================================================================
+Searching for NEXT_PUBLIC environment variables and API clients:
+  \app\(dashboard)\integration\audit-trail\page.tsx : Line 236 : onClick={() => refetch()}
+  \app\(dashboard)\pharmacy\otc-sales\page.tsx : Line 173 : const medicineQuery = useQuery({
+  \app\(dashboard)\print\otc-receipt\[id]\page.tsx : Line 64 : const saleQuery = useQuery({
+  \app\(dashboard)\queue\page.tsx : Line 130 : onClick={() => void refetch()}
+  \app\(platform)\platform\user-locations\page.tsx : Line 376 : onClick={() => refetch()}
+  \app\reviews\page.tsx : Line 92 : const publicReviewsQuery = useQuery({
+  \app\reviews\page.tsx : Line 97 : const myReviewQuery = useQuery({
+  \app\reviews\page.tsx : Line 110 : const saveReviewMutation = useMutation({
+  \components\platform\code-background.tsx : Line 5 : `export async function createClinic(payload) {\n  return apiFetch("/clinics", {\n    method: "POST",\n    body: JSON.stringify(payload),\n  })\n}`,
+  \components\platform\code-background.tsx : Line 8 : `function resolveNotification(id, payload) {\n  return apiFetch(\`/notifications/\${id}/resolve\`, {\n    method: "PATCH",\n    body: JSON.stringify(payload),\n  })\n}`,
+  \components\shared\sync-status-indicator.tsx : Line 172 : const { data, isLoading, refetch, isFetching } = useQuery({
+  \components\shared\sync-status-indicator.tsx : Line 232 : onClick={() => refetch()}
+  \components\ui\consent\ConsentBarrier.tsx : Line 43 : <Button variant="link" className="px-0 ml-2 text-red-100 h-auto" onClick={() => refetch()}>
+  \lib\api.test.ts : Line 16 : await expect(apiFetch("/health/live")).resolves.toEqual({ ok: true });
+  \lib\api.test.ts : Line 33 : await expect(apiFetch("/auth/login")).rejects.toMatchObject({
+  \lib\api.test.ts : Line 43 : await expect(apiFetch("/auth/me")).rejects.toEqual(
+  \lib\api.ts : Line 2 : process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:3000";
+  \lib\api.ts : Line 36 : "The hospital server URL is not configured for this deployment. Set NEXT_PUBLIC_API_BASE_URL to the deployed backend URL.",
+  \lib\api.ts : Line 52 : response = await fetch(`${API_BASE_URL}${path}`, {
+  \lib\api.ts : Line 74 : "Unable to reach the hospital server. Verify the backend is online and NEXT_PUBLIC_API_BASE_URL points to it.",
+  \lib\api.ts : Line 115 : "The hospital server URL is not configured for this deployment. Set NEXT_PUBLIC_API_BASE_URL to the deployed backend URL.",
+  \lib\api.ts : Line 125 : response = await fetch(`${API_BASE_URL}${path}`, {
+  \lib\api.ts : Line 139 : "Unable to reach the hospital server. Verify the backend is online and NEXT_PUBLIC_API_BASE_URL points to it.",
+
+
+=================================================================
+SECTION: 10. AUTHENTICATION & ROUTE PROTECTION
+=================================================================
+Auth File Found: app/login/page.tsx
+
+
+=================================================================
+SECTION: 11. STATE MANAGEMENT
+=================================================================
+  \lib\auth-storage.test.ts : Line 5 : beforeEach(() => localStorage.clear());
+  \lib\auth-storage.test.ts : Line 8 : localStorage.setItem("hms_access_token", "sensitive-jwt");
+  \lib\auth-storage.test.ts : Line 10 : expect(localStorage.getItem("hms_access_token")).toBeNull();
+  \lib\auth-storage.ts : Line 7 : localStorage.removeItem(LEGACY_TOKEN_KEY);
+  \lib\theme.ts : Line 5 : export const themeInitScript = `try{var k="${THEME_STORAGE_KEY}",p=localStorage.getItem(k),d=p==="dark"||(p!=="light"&&matchMedia("(prefers-color-scheme: dark)").matches),e=document.documentElement;e.classList.toggle("dark",d);e.dataset.theme=d?"dark":"light";e.style.colorScheme=d?"dark":"light"}catch(e){}`;
+
+
+=================================================================
+SECTION: 12. SEO & METADATA
+=================================================================
+  \app\(dashboard)\ai-assistant\page.tsx : Line 14 : title: "SOAP Notes",
+  \app\(dashboard)\ai-assistant\page.tsx : Line 19 : title: "Lab Analysis",
+  \app\(dashboard)\ai-assistant\page.tsx : Line 24 : title: "Pharmacy Scripts",
+  \app\(dashboard)\ai-assistant\page.tsx : Line 29 : title: "Document Polish",
+  \app\(dashboard)\billing\invoices\page.tsx : Line 14 : { description: "", quantity: 1, unitPrice: 0 }
+  \app\(dashboard)\billing\invoices\page.tsx : Line 19 : setItems([...items, { description: "", quantity: 1, unitPrice: 0 }]);
+  \app\(dashboard)\billing\[id]\page.tsx : Line 158 : description: editDescription,
+  \app\(dashboard)\billing\page.tsx : Line 151 : description: editDescription,
+  \app\(dashboard)\dashboard\page.tsx : Line 65 : { title: "Register patient", desc: "Front desk intake", icon: Users, href: "/patients", module: "clinical" },
+  \app\(dashboard)\dashboard\page.tsx : Line 66 : { title: "Consultations", desc: "Active doctor queue", icon: Stethoscope, href: "/consultation", module: "clinical" },
+  \app\(dashboard)\dashboard\page.tsx : Line 67 : { title: "Pharmacy POS", desc: "OTC & prescriptions", icon: Pill, href: "/pharmacy/otc-sales", module: "pharmacy" },
+  \app\(dashboard)\dashboard\page.tsx : Line 68 : { title: "Billing desk", desc: "Invoices & cashier", icon: Wallet, href: "/billing", module: "finance" },
+  \app\(dashboard)\integration\audit-trail\page.tsx : Line 107 : {/* Metadata grid */}
+  \app\(dashboard)\integration\page.tsx : Line 393 : title: "Integration Status",
+  \app\(dashboard)\integration\page.tsx : Line 402 : title: "Success Rate",
+  \app\(dashboard)\integration\page.tsx : Line 411 : title: "Queue / Pending",
+  \app\(dashboard)\integration\page.tsx : Line 420 : title: "Claims Pipeline",
+  \app\(dashboard)\medical-records\page.tsx : Line 104 : title: reportTitle,
+  \app\(dashboard)\notifications\page.tsx : Line 81 : title: string;
+  \app\(dashboard)\queue\page.tsx : Line 17 : title: string;
+  \app\(legal)\privacy\page.tsx : Line 2 : import { Metadata } from "next";
+  \app\(legal)\privacy\page.tsx : Line 4 : export const metadata: Metadata = {
+  \app\(legal)\privacy\page.tsx : Line 5 : title: "Privacy Policy | Invinceible Core HMS",
+  \app\(legal)\privacy\page.tsx : Line 6 : description: "Privacy Policy for Invinceible Core Hospital Management System",
+  \app\(legal)\privacy\page.tsx : Line 10 : { id: "introduction", title: "1. Introduction", level: 2 },
+  \app\(legal)\privacy\page.tsx : Line 11 : { id: "data-collection", title: "2. Information We Collect", level: 2 },
+  \app\(legal)\privacy\page.tsx : Line 12 : { id: "data-usage", title: "3. How We Use Your Data", level: 2 },
+  \app\(legal)\privacy\page.tsx : Line 13 : { id: "data-sharing", title: "4. Data Sharing & Third Parties", level: 2 },
+  \app\(legal)\privacy\page.tsx : Line 14 : { id: "data-security", title: "5. Data Security", level: 2 },
+  \app\(legal)\privacy\page.tsx : Line 15 : { id: "patient-rights", title: "6. Data Subject Rights", level: 2 },
+  \app\(legal)\privacy\page.tsx : Line 16 : { id: "cookies", title: "7. Cookies & Tracking", level: 2 },
+  \app\(legal)\privacy\page.tsx : Line 17 : { id: "contact", title: "8. Contact Information", level: 2 },
+  \app\(legal)\terms\page.tsx : Line 2 : import { Metadata } from "next";
+  \app\(legal)\terms\page.tsx : Line 4 : export const metadata: Metadata = {
+  \app\(legal)\terms\page.tsx : Line 5 : title: "Terms of Use | Invinceible Core HMS",
+  \app\(legal)\terms\page.tsx : Line 6 : description: "Terms of Use for Invinceible Core Hospital Management System",
+  \app\(legal)\terms\page.tsx : Line 10 : { id: "acceptance", title: "1. Acceptance of Terms", level: 2 },
+  \app\(legal)\terms\page.tsx : Line 11 : { id: "description", title: "2. Description of Service", level: 2 },
+  \app\(legal)\terms\page.tsx : Line 12 : { id: "dpa-dha", title: "3. Compliance with Kenyan Law", level: 2 },
+  \app\(legal)\terms\page.tsx : Line 13 : { id: "user-obligations", title: "4. User Obligations & Confidentiality", level: 2 },
+  \app\(legal)\terms\page.tsx : Line 14 : { id: "access-security", title: "5. Access and Security", level: 2 },
+  \app\(legal)\terms\page.tsx : Line 15 : { id: "sha-integration", title: "6. SHA & Third-Party Integrations", level: 2 },
+  \app\(legal)\terms\page.tsx : Line 16 : { id: "data-retention", title: "7. Data Retention & Backups", level: 2 },
+  \app\(legal)\terms\page.tsx : Line 17 : { id: "intellectual-property", title: "8. Intellectual Property", level: 2 },
+  \app\(legal)\terms\page.tsx : Line 18 : { id: "limitation", title: "9. Limitation of Liability", level: 2 },
+  \app\(legal)\terms\page.tsx : Line 19 : { id: "termination", title: "10. Termination", level: 2 },
+  \app\(platform)\platform\admin-control\page.tsx : Line 22 : title: "Access lockdown",
+  \app\(platform)\platform\admin-control\page.tsx : Line 27 : title: "Location evidence",
+  \app\(platform)\platform\admin-control\page.tsx : Line 32 : title: "Revenue guard",
+  \app\(platform)\platform\admin-control\page.tsx : Line 37 : title: "AI navigation",
+  \app\(platform)\platform\catalogs\page.tsx : Line 38 : title: string;
+  \app\(platform)\platform\catalogs\page.tsx : Line 45 : title: "Medicine kernel",
+  \app\(platform)\platform\catalogs\page.tsx : Line 52 : title: "Billing service kernel",
+  \app\(platform)\platform\catalogs\page.tsx : Line 59 : title: "Laboratory test kernel",
+  \app\(platform)\platform\user-locations\page.tsx : Line 157 : title: string;
+  \app\(platform)\platform\page.tsx : Line 26 : title: "Facilities",
+  \app\(platform)\platform\page.tsx : Line 32 : title: "Branches",
+  \app\(platform)\platform\page.tsx : Line 38 : title: "Master Catalogs",
+  \app\(platform)\platform\page.tsx : Line 44 : title: "Users",
+  \app\(platform)\platform\page.tsx : Line 50 : title: "Staff",
+  \app\(platform)\platform\page.tsx : Line 56 : title: "Clinics",
+  \app\(platform)\platform\page.tsx : Line 62 : title: "Notifications",
+  \app\(platform)\platform\page.tsx : Line 68 : title: "Feedback",
+  \app\(platform)\platform\page.tsx : Line 74 : title: "Subscriptions",
+  \app\(platform)\platform\page.tsx : Line 80 : title: "User Locations",
+  \app\(platform)\platform\page.tsx : Line 86 : title: "Audit Trail",
+  \app\(platform)\platform\page.tsx : Line 101 : { title: "Facilities", label: "Structure", icon: Building2 },
+  \app\(platform)\platform\page.tsx : Line 102 : { title: "Roles", label: "Security", icon: KeyRound },
+  \app\(platform)\platform\page.tsx : Line 103 : { title: "Audit", label: "Evidence", icon: ScrollText },
+  \app\(platform)\platform\page.tsx : Line 104 : { title: "Locations", label: "Sessions", icon: MapPin },
+  \app\facilities\page.tsx : Line 14 : { title: "Hospitals", detail: "Main facility records and operating details.", icon: Building2 },
+  \app\facilities\page.tsx : Line 15 : { title: "Branches", detail: "Separate locations with their own workflow.", icon: GitBranch },
+  \app\facilities\page.tsx : Line 16 : { title: "Teams", detail: "Staff access matched to work areas.", icon: Users },
+  \app\facilities\page.tsx : Line 17 : { title: "Locations", detail: "Facility movement tracked by branch.", icon: MapPin },
+  \app\layout.tsx : Line 1 : import type { Metadata } from "next";
+  \app\layout.tsx : Line 7 : export const metadata: Metadata = {
+  \app\layout.tsx : Line 8 : title: {
+  \app\layout.tsx : Line 12 : description:
+  \app\page.tsx : Line 21 : title: "Clinical desk",
+  \app\page.tsx : Line 26 : title: "Ward care",
+  \app\page.tsx : Line 31 : title: "Pharmacy",
+  \app\page.tsx : Line 38 : { title: "Reception", detail: "Patient visit opens here.", icon: Users },
+  \app\page.tsx : Line 39 : { title: "Doctor", detail: "Notes, diagnosis, tests, medicine.", icon: Stethoscope },
+  \app\page.tsx : Line 40 : { title: "Lab", detail: "Results return to the doctor.", icon: FlaskConical },
+  \app\page.tsx : Line 41 : { title: "Pharmacy", detail: "Stock reduces and billing updates.", icon: Pill },
+  \app\page.tsx : Line 42 : { title: "IPD", detail: "Beds, sheets, summaries.", icon: BedDouble },
+  \app\page.tsx : Line 43 : { title: "Cashier", detail: "Invoice, receipt, reports.", icon: ReceiptText },
+
+
+=================================================================
+SECTION: 13. PERFORMANCE RISK DETECTION
+=================================================================
+Total Raw <img> tags found: 17
+Total Next.js <Image /> tags found: 1
+
+
+=================================================================
+SECTION: 14. TEST SUITE INVENTORY
+=================================================================
+Test Asset: \app\(dashboard)\consultation\[id]\consultation-workspace.test.ts
+Test Asset: \app\(dashboard)\ipd\[id]\ipd-workspace.test.ts
+Test Asset: \app\login\login-page-client.test.tsx
+Test Asset: \components\shared\theme-toggle.test.tsx
+Test Asset: \e2e\broadway-workflows.spec.ts
+Test Asset: \lib\api.test.ts
+Test Asset: \lib\auth-storage.test.ts
+Test Asset: \playwright.config.ts
+Test Asset: \vitest.config.ts
+
+
+=================================================================
+SECTION: 15. VERCEL & BUILD CONFIGURATION
+=================================================================
+Config File Present: next.config.ts
+  import type { NextConfig } from "next";
+  
+  const nextConfig: NextConfig = {
+    /* config options here */
+  };
+  
+  export default nextConfig;
+Config File Present: .env.local
+  NEXT_PUBLIC_API_BASE_URL=http://localhost:3000
+  NEXT_PUBLIC_APP_URL=http://localhost:3001
+  
+  # Never place backend secrets, database URLs, JWT secrets, Daraja secrets, or AI API keys here.
+  
+  # Render production examples:
+  # NEXT_PUBLIC_API_BASE_URL=https://your-render-backend.onrender.com
+  # NEXT_PUBLIC_APP_URL=https://your-render-frontend.onrender.com
+Config File Present: .env.example
+  NEXT_PUBLIC_API_BASE_URL=http://localhost:3000
+  NEXT_PUBLIC_APP_URL=http://localhost:3001
+  
+  # Never place backend secrets, database URLs, JWT secrets, Daraja secrets, or AI API keys here.
+  
+  # Render production examples:
+  # NEXT_PUBLIC_API_BASE_URL=https://your-render-backend.onrender.com
+  # NEXT_PUBLIC_APP_URL=https://your-render-frontend.onrender.com
+
+
+=================================================================
+SECTION: 16. PACKAGE MANIFEST & DEPENDENCIES
+=================================================================
+{
+  "name": "frontend",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:e2e": "playwright test"
+  },
+  "dependencies": {
+    "@hookform/resolvers": "^5.2.2",
+    "@radix-ui/react-label": "^2.1.8",
+    "@radix-ui/react-slot": "^1.2.4",
+    "@tanstack/react-query": "^5.99.0",
+    "@tanstack/react-query-devtools": "^5.99.0",
+    "@tanstack/react-table": "^8.21.3",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "lucide-react": "^1.8.0",
+    "next": "^16.2.6",
+    "qrcode": "^1.5.4",
+    "radix-ui": "^1.4.3",
+    "react": "19.2.4",
+    "react-dom": "19.2.4",
+    "react-hook-form": "^7.72.1",
+    "recharts": "^3.8.1",
+    "sonner": "^2.0.7",
+    "tailwind-merge": "^3.5.0",
+    "tw-animate-css": "^1.4.0",
+    "zod": "^4.3.6"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.61.1",
+    "@tailwindcss/postcss": "^4.2.4",
+    "@testing-library/jest-dom": "^6.9.1",
+    "@testing-library/react": "^16.3.2",
+    "@testing-library/user-event": "^14.6.1",
+    "@types/node": "^20",
+    "@types/qrcode": "^1.5.6",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "eslint": "^9",
+    "eslint-config-next": "16.2.4",
+    "jsdom": "^29.1.1",
+    "shadcn": "^4.4.0",
+    "tailwindcss": "^4",
+    "typescript": "^5",
+    "vitest": "^4.1.10"
+  },
+  "overrides": {
+    "postcss": "8.5.10",
+    "hono": "4.12.31",
+    "sharp": "0.35.3",
+    "express-rate-limit": "8.5.1",
+    "ip-address": "10.2.0"
+  }
+}

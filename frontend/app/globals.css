@@ -1,5 +1,5 @@
-/* ============================================================
-   Invinceible Core HMS — "Meridian" design language (2026)
+﻿/* ============================================================
+   MarkCare Hospital Management System — Design Language (2026)
    Token-driven light and dark themes, OKLCH color system.
    No hardcoded values outside this file and print.css.
    ============================================================ */
@@ -47,7 +47,7 @@
   --accent: oklch(0.94 0.02 220);
   --accent-foreground: oklch(0.32 0.06 235);
 
-  /* Status — higher contrast for clinical readability */
+  /* Status â€” higher contrast for clinical readability */
   --success: oklch(0.55 0.16 155);
   --success-soft: oklch(0.95 0.04 155);
   --warning: oklch(0.64 0.16 72);
@@ -177,7 +177,7 @@
 }
 
 /* ---------- Module accent identities ----------
-   Applied via <div data-module="…"> on module pages; every module keeps
+   Applied via <div data-module="â€¦"> on module pages; every module keeps
    its own hue while sharing one system. */
 [data-module="clinical"] {
   --module-accent: oklch(0.55 0.11 235);
@@ -353,7 +353,7 @@ body {
     color var(--motion-base) var(--ease-out);
 }
 
-/* Calm aurora wash behind the app — static, cheap, token-driven. */
+/* Calm aurora wash behind the app â€” static, cheap, token-driven. */
 .app-canvas {
   background-image:
     radial-gradient(

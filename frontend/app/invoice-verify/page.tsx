@@ -1,4 +1,7 @@
-"use client";
+﻿"use client";
+
+import { MarketingHeader } from '@/components/marketing/marketing-header';
+import { MarketingFooter } from '@/components/marketing/marketing-footer';
 
 import { Suspense, useEffect, useMemo, useState } from "react";
 import { Download } from "lucide-react";
@@ -194,3 +197,4 @@ export default function InvoiceVerifyPage() {
     </Suspense>
   );
 }
+

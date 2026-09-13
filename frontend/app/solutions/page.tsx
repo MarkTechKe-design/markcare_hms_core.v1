@@ -1,73 +1,58 @@
-﻿import type { Metadata } from "next";
-import Link from "next/link";
-import { ArrowRight, Stethoscope, Pill, FlaskConical, Receipt, Building, Network } from "lucide-react";
-import { MarketingHeader } from "@/components/marketing/marketing-header";
-import { MarketingFooter } from "@/components/marketing/marketing-footer";
-import { MarketingContainer } from "@/components/marketing/marketing-container";
-import { MarketingBadge } from "@/components/marketing/marketing-badge";
-import { Button } from "@/components/ui/button";
+﻿import React from "react";
+import type { Metadata } from "next";
+import { Stethoscope, Pill, FlaskConical, CreditCard, Building2, CheckCircle2 } from "lucide-react";
+import {
+  MarketingHeader,
+  MarketingFooter,
+  MarketingContainer,
+  MarketingBadge,
+  MarketingSection,
+  MarketingScreenshotFrame,
+  MarketingCtaBanner,
+} from "@/components/marketing";
 
 export const metadata: Metadata = {
-  title: "Hospital Solutions — MarkCare HMS",
+  title: "Hospital Role Solutions & Workflows",
   description:
-    "Explore how MarkCare addresses operational challenges for physicians, pharmacy teams, laboratory technologists, finance officers, and hospital directors.",
+    "Explore how MarkCare HMS addresses operational challenges for hospital directors, clinical doctors, nurses, pharmacists, lab technicians, and cashiers.",
 };
 
 const solutions = [
   {
-    role: "Clinical Teams",
-    title: "Physicians, Medical Officers & Nursing Staff",
-    icon: Stethoscope,
-    problem: "Fragmented patient histories, lost paper triage slips, and disconnected diagnostic reports slow down patient consultations.",
-    solution: "A unified electronic consultation desk displaying vital signs, previous visit summaries, allergy alerts, diagnostic orders, and ICD-10 diagnostic coding in one view.",
-    workflows: ["Doctor Queue Prioritization", "SOAP Clinical Documentation", "Integrated Lab & Medication Ordering", "Inpatient Progress Notes"],
-    link: "/modules/clinical-emr"
+    role: "Hospital Directors & Administrators",
+    icon: Building2,
+    bottleneck: "Fragmented departmental reports make bed census, staffing allocation, and revenue reconciliation difficult to track in real time.",
+    workflow: "MarkCare aggregates outpatient visits, inpatient ward bed occupancy, and cashier transactions into centralized administrative dashboards.",
+    outcome: "Operational clarity across branches with unified clinical and financial governance.",
   },
   {
-    role: "Pharmacy Staff",
-    title: "Chief Pharmacists & Pharmacy Technicians",
+    role: "Medical Officers & Clinicians",
+    icon: Stethoscope,
+    bottleneck: "Searching for physical paper files and deciphering past consultation notes slows patient care and introduces clinical uncertainty.",
+    workflow: "Physicians record structured clinical notes, review vital sign trajectories, and order lab tests directly from the consultation workspace.",
+    outcome: "Focused patient encounters supported by instant visibility into verified diagnostic results and medical history.",
+  },
+  {
+    role: "Pharmacists & Dispensary Teams",
     icon: Pill,
-    problem: "Expired stock losses, unverified dispensing, and manual inventory reconciliations lead to stockouts and medication wastage.",
-    solution: "System-enforced First-Expiry, First-Out (FEFO) dispensing that automatically directs pharmacists to the earliest-expiring batch while maintaining real-time bin balances.",
-    workflows: ["FEFO Batch Allocation", "Prescription Dispense Verification", "Expiry Threshold Tracking", "OTC Direct Cash Sales"],
-    link: "/modules/pharmacy"
+    bottleneck: "Deciphering handwritten prescription slips and manual stock tallying leads to inventory drift and medication expiration waste.",
+    workflow: "Prescription orders flow digitally from clinical notes. Dispensary fulfillment utilizes First-Expiry-First-Out (FEFO) batch allocation.",
+    outcome: "Accurate dispensing verification, reduced medication expiration losses, and real-time inventory tracking.",
   },
   {
     role: "Laboratory Technologists",
-    title: "Diagnostic & Pathology Departments",
     icon: FlaskConical,
-    problem: "Delayed turnaround times, lost specimen slips, and verbal test results compromise clinical accuracy and patient safety.",
-    solution: "A structured order-to-result diagnostic pipeline with accession number barcoding, sample collection verification, and two-tier technologist result review.",
-    workflows: ["Electronic Test Orders", "Specimen Accession Tracking", "Panic Value Alerts", "Verified Result Publishing"],
-    link: "/modules/laboratory"
+    bottleneck: "Misplaced paper requisition forms and frequent status phone calls interrupt testing workflows.",
+    workflow: "Diagnostic requisitions populate directly into the laboratory queue. Technologists record findings, which return to the physician screen immediately.",
+    outcome: "Traceable specimen handling, accelerated turnaround times, and verified electronic result release.",
   },
   {
-    role: "Finance & Cashier Teams",
-    title: "Cashiers, Billing Clerks & Revenue Integrity",
-    icon: Receipt,
-    problem: "Unbilled procedures, manual cash receipts, and tedious insurance claim reconciliations cause major revenue leakage.",
-    solution: "An automated patient ledger that captures doctor fees, laboratory tests, and dispensed medications in real time, supporting M-Pesa STK push and verifiable QR invoices.",
-    workflows: ["Point-of-Sale Settlement", "M-Pesa STK Push Integration", "Itemized PDF & QR Invoices", "SHA & Insurance Split Billing"],
-    link: "/modules/billing"
+    role: "Cashiers & Finance Desks",
+    icon: CreditCard,
+    bottleneck: "Uncoordinated charges from triage, consultation, wards, and laboratories result in unbilled services and discharge delays.",
+    workflow: "Every billable event automatically links to the patient's encounter invoice, applying standardized tariffs for self-pay or insurance settlement.",
+    outcome: "Itemized invoice transparency, fewer unbilled encounters, and faster patient checkout.",
   },
-  {
-    role: "Hospital Executives",
-    title: "Medical Directors & Chief Executives",
-    icon: Building,
-    problem: "Operating in the dark without daily patient census data, departmental revenues, or inventory consumption insights.",
-    solution: "Centralized administrative oversight delivering operational transparency across outpatient attendance, bed occupancy, and department financial performance.",
-    workflows: ["Daily Operational Audits", "Departmental Revenue Summaries", "Bed Occupancy Tracking", "Staff Access Governance"],
-    link: "/request-demo"
-  },
-  {
-    role: "Multi-Facility Operators",
-    title: "Regional Chains & Healthcare Networks",
-    icon: Network,
-    problem: "Managing multiple hospital branches with separate disconnected systems results in inconsistent master catalogs and fragmented reporting.",
-    solution: "Hierarchical facility and branch governance that maintains centralized master drug and diagnostic catalogs while isolating branch-level stock, staff, and cashiers.",
-    workflows: ["Branch Scoped Access", "Master Drug Catalog Sync", "Cross-Branch User Governance", "Centralized System Telemetry"],
-    link: "/platform"
-  }
 ];
 
 export default function SolutionsPage() {
@@ -76,81 +61,83 @@ export default function SolutionsPage() {
       <MarketingHeader />
 
       <main className="flex-1">
-        {/* Header Section */}
-        <section className="border-b border-border/80 bg-muted/20 py-20">
-          <MarketingContainer>
-            <div className="max-w-3xl">
-              <MarketingBadge className="mb-3">Role-Based Solutions</MarketingBadge>
-              <h1 className="text-4xl font-extrabold tracking-tight sm:text-5xl text-foreground">
-                Tailored for every team operating within the hospital.
-              </h1>
-              <p className="mt-4 text-lg text-muted-foreground leading-relaxed">
-                Hospital workflows require tight coordination across clinical, diagnostic, and financial roles. MarkCare provides purpose-built tools for each operational department.
-              </p>
-            </div>
+        {/* Hero */}
+        <section className="border-b border-border/80 bg-gradient-to-b from-card/60 via-background to-background py-20 sm:py-28">
+          <MarketingContainer className="text-center">
+            <MarketingBadge className="mb-4">Role-Based Solutions</MarketingBadge>
+            <h1 className="text-3xl font-extrabold tracking-tight sm:text-5xl lg:text-6xl text-balance max-w-4xl mx-auto">
+              Workflows designed around how hospital staff work.
+            </h1>
+            <p className="mt-6 text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto text-balance leading-relaxed">
+              MarkCare connects hospital directors, clinical physicians, dispensary teams, laboratory technologists, and cashiers into one synchronized operational flow.
+            </p>
           </MarketingContainer>
         </section>
 
-        {/* Solutions Grid */}
-        <section className="py-20">
-          <MarketingContainer>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {solutions.map((item) => {
-                const Icon = item.icon;
-                return (
-                  <div
-                    key={item.role}
-                    className="rounded-xl border border-border bg-card p-6 shadow-xs flex flex-col justify-between hover:border-primary/40 transition-colors"
-                  >
-                    <div>
-                      <div className="flex items-center gap-3 mb-4">
-                        <div className="p-2.5 rounded-lg bg-primary/10 text-primary">
-                          <Icon className="h-5 w-5" />
-                        </div>
-                        <div>
-                          <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">{item.role}</span>
-                          <h2 className="text-base font-bold text-foreground leading-snug">{item.title}</h2>
-                        </div>
-                      </div>
-
-                      <div className="space-y-3 text-sm text-muted-foreground mt-4">
-                        <div>
-                          <span className="font-semibold text-foreground text-xs uppercase tracking-wider block mb-1">Operational Challenge:</span>
-                          <p className="leading-relaxed">{item.problem}</p>
-                        </div>
-                        <div className="pt-2">
-                          <span className="font-semibold text-foreground text-xs uppercase tracking-wider block mb-1">MarkCare Solution:</span>
-                          <p className="leading-relaxed">{item.solution}</p>
-                        </div>
-                      </div>
-
-                      <div className="mt-6 pt-4 border-t border-border">
-                        <span className="text-xs font-semibold text-foreground block mb-2">Key Workflows:</span>
-                        <ul className="space-y-1.5 text-xs text-muted-foreground">
-                          {item.workflows.map((wf) => (
-                            <li key={wf} className="flex items-center gap-1.5">
-                              <span className="h-1 w-1 rounded-full bg-primary" /> {wf}
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
+        {/* Alternating Problem -> Workflow -> Outcome Narrative */}
+        <MarketingSection>
+          <MarketingContainer className="space-y-16">
+            {solutions.map((item) => (
+              <div
+                key={item.role}
+                className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center rounded-3xl border border-border/80 bg-card p-6 sm:p-10 shadow-xs"
+              >
+                <div className="lg:col-span-6 space-y-4">
+                  <div className="flex items-center gap-3">
+                    <div className="size-10 rounded-xl bg-primary/10 text-primary flex items-center justify-center">
+                      <item.icon className="size-5" aria-hidden="true" />
                     </div>
-
-                    <div className="mt-6 pt-4 border-t border-border">
-                      <Link
-                        href={item.link}
-                        className="inline-flex items-center text-xs font-semibold text-primary hover:underline"
-                      >
-                        Explore Relevant Capabilities
-                        <ArrowRight className="ml-1 h-3.5 w-3.5" />
-                      </Link>
-                    </div>
+                    <span className="text-xs font-semibold text-primary uppercase tracking-wider">
+                      Department Workflow
+                    </span>
                   </div>
-                );
-              })}
-            </div>
+
+                  <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-foreground">
+                    {item.role}
+                  </h2>
+
+                  <div className="space-y-3 pt-2 text-sm">
+                    <div className="rounded-xl border border-border/60 bg-background p-3.5">
+                      <strong className="text-foreground block mb-0.5">The Operational Bottleneck:</strong>
+                      <span className="text-muted-foreground">{item.bottleneck}</span>
+                    </div>
+
+                    <div className="rounded-xl border border-primary/20 bg-primary/5 p-3.5">
+                      <strong className="text-primary block mb-0.5">MarkCare Digital Workflow:</strong>
+                      <span className="text-foreground">{item.workflow}</span>
+                    </div>
+
+                    <p className="text-xs text-muted-foreground pt-1 flex items-center gap-2">
+                      <CheckCircle2 className="size-4 text-primary shrink-0" aria-hidden="true" />
+                      <span><strong>Verified Outcome:</strong> {item.outcome}</span>
+                    </p>
+                  </div>
+                </div>
+
+                <div className="lg:col-span-6">
+                  <MarketingScreenshotFrame
+                    caption={`${item.role} · Departmental Workspace View`}
+                    aspectRatio="16/10"
+                  />
+                </div>
+              </div>
+            ))}
           </MarketingContainer>
-        </section>
+        </MarketingSection>
+
+        {/* CTA Banner */}
+        <MarketingCtaBanner
+          headline="See how MarkCare supports your facility staff"
+          description="Schedule a tailored walkthrough focused on your clinical, laboratory, pharmacy, or finance operations."
+          primaryCta={{
+            label: "Schedule a Demonstration",
+            href: "/request-demo",
+          }}
+          secondaryCta={{
+            label: "Contact Inquiries",
+            href: "/contact",
+          }}
+        />
       </main>
 
       <MarketingFooter />

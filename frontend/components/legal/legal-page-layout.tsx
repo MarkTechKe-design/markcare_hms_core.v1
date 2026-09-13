@@ -1,9 +1,12 @@
-"use client";
+﻿"use client";
 
 import { useEffect, useState } from "react";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { cn } from "@/lib/utils";
-import { ThemeToggle } from "@/components/shared/theme-toggle";
+import { MarketingHeader } from "@/components/marketing/marketing-header";
+import { MarketingFooter } from "@/components/marketing/marketing-footer";
+import { MarketingContainer } from "@/components/marketing/marketing-container";
+import { MarketingBadge } from "@/components/marketing/marketing-badge";
 
 interface TocItem {
   id: string;
@@ -31,7 +34,6 @@ export function LegalPageLayout({
 
   useEffect(() => {
     const handleScroll = () => {
-      // Calculate scroll progress
       const totalScroll = document.documentElement.scrollTop;
       const windowHeight =
         document.documentElement.scrollHeight -
@@ -39,14 +41,12 @@ export function LegalPageLayout({
       const scroll = `${totalScroll / windowHeight}`;
       setScrollProgress(Number(scroll));
 
-      // Determine active section
       let currentActiveId = "";
       for (const item of toc) {
         const element = document.getElementById(item.id);
         if (element) {
           const rect = element.getBoundingClientRect();
-          // Adjust threshold based on layout header height
-          if (rect.top <= 120) {
+          if (rect.top <= 140) {
             currentActiveId = item.id;
           }
         }
@@ -71,68 +71,80 @@ export function LegalPageLayout({
   };
 
   return (
-    <div className="relative min-h-screen bg-background">
-      <div className="fixed top-4 right-4 z-40 rounded-lg border border-border bg-card/85 shadow-sm backdrop-blur-sm print:hidden">
-        <ThemeToggle />
-      </div>
+    <div className="flex min-h-screen flex-col bg-background text-foreground antialiased selection:bg-primary/20">
       {/* Scroll Progress Bar */}
       <div className="fixed top-0 left-0 z-50 h-1 w-full bg-muted print:hidden">
         <div
-          className="h-full bg-brand transition-all duration-150 ease-out"
+          className="h-full bg-primary transition-all duration-150 ease-out"
           style={{ width: `${scrollProgress * 100}%` }}
         />
       </div>
 
-      <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
-        <div className="lg:grid lg:grid-cols-12 lg:gap-8">
-          {/* Main Content */}
-          <main className="lg:col-span-8 xl:col-span-9">
-            <header className="mb-12 border-b pb-8">
-              <h1 className="text-4xl font-extrabold tracking-tight text-foreground sm:text-5xl">
+      <MarketingHeader />
+
+      <main className="flex-1">
+        {/* Harmonized Page Intro Banner */}
+        <section className="border-b border-border/80 bg-slate-900 text-white py-14 sm:py-16">
+          <MarketingContainer>
+            <div className="max-w-3xl space-y-3">
+              <MarketingBadge className="text-blue-300 border-blue-800 bg-blue-950/50">
+                Governance & Compliance
+              </MarketingBadge>
+              <h1 className="text-3xl font-extrabold tracking-tight sm:text-4xl text-white">
                 {title}
               </h1>
-              <div className="mt-4 flex flex-wrap gap-4 text-sm text-muted-foreground">
-                <p>Last updated: {lastUpdated}</p>
-                <span className="hidden sm:inline">•</span>
-                <p>Version {version}</p>
+              <div className="flex flex-wrap items-center gap-x-4 gap-y-1 pt-1 text-xs text-slate-400">
+                <span>Last Updated: {lastUpdated}</span>
+                <span>•</span>
+                <span>Version {version}</span>
+                <span>•</span>
+                <span>Operational Standard</span>
               </div>
-            </header>
-
-            <div className="prose prose-slate prose-headings:scroll-mt-28 prose-a:text-brand max-w-none dark:prose-invert print:prose-p:text-black">
-              {children}
             </div>
-          </main>
+          </MarketingContainer>
+        </section>
 
-          {/* Sticky Sidebar */}
-          <aside className="hidden lg:col-span-4 lg:block xl:col-span-3 print:hidden">
-            <div className="sticky top-24 pt-10 lg:pt-0">
-              <h3 className="mb-4 text-sm font-semibold tracking-wide text-foreground uppercase">
-                On this page
-              </h3>
-              <ScrollArea className="h-[calc(100vh-12rem)] pb-10">
-                <nav className="flex flex-col space-y-3">
-                  {toc.map((item) => (
-                    <a
-                      key={item.id}
-                      href={`#${item.id}`}
-                      onClick={(e) => handleNavClick(e, item.id)}
-                      className={cn(
-                        "text-sm transition-colors hover:text-foreground",
-                        activeId === item.id
-                          ? "font-medium text-brand"
-                          : "text-muted-foreground",
-                        item.level === 2 ? "pl-0" : "pl-4",
-                      )}
-                    >
-                      {item.title}
-                    </a>
-                  ))}
-                </nav>
-              </ScrollArea>
-            </div>
-          </aside>
+        {/* Legal Content & Sticky TOC Navigation */}
+        <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
+          <div className="lg:grid lg:grid-cols-12 lg:gap-12">
+            <article className="lg:col-span-8 xl:col-span-9">
+              <div className="prose prose-slate max-w-none dark:prose-invert prose-headings:scroll-mt-28 prose-headings:font-bold prose-headings:text-foreground prose-p:text-sm prose-p:leading-relaxed prose-li:text-sm prose-a:text-primary print:prose-p:text-black">
+                {children}
+              </div>
+            </article>
+
+            <aside className="hidden lg:col-span-4 lg:block xl:col-span-3 print:hidden">
+              <div className="sticky top-28 space-y-3">
+                <h3 className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+                  On this page
+                </h3>
+                <ScrollArea className="h-[calc(100vh-14rem)] pr-2">
+                  <nav className="flex flex-col space-y-2">
+                    {toc.map((item) => (
+                      <a
+                        key={item.id}
+                        href={`#${item.id}`}
+                        onClick={(e) => handleNavClick(e, item.id)}
+                        className={cn(
+                          "block rounded-md px-2 py-1 text-xs transition-colors",
+                          activeId === item.id
+                            ? "bg-primary/10 font-medium text-primary"
+                            : "text-muted-foreground hover:bg-muted hover:text-foreground",
+                          item.level === 2 ? "pl-2" : "pl-4",
+                        )}
+                      >
+                        {item.title}
+                      </a>
+                    ))}
+                  </nav>
+                </ScrollArea>
+              </div>
+            </aside>
+          </div>
         </div>
-      </div>
+      </main>
+
+      <MarketingFooter />
     </div>
   );
 }

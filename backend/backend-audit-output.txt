@@ -1,0 +1,471 @@
+﻿=================================================================
+           MARKCARE HMS — BACKEND EVIDENCE-FIRST AUDIT           
+           Timestamp: 2026-09-12 19:27:30  
+=================================================================
+
+=================================================================
+SECTION: 1. ARCHITECTURAL INVENTORY & COMPONENT COUNTS
+=================================================================
+Controllers Count : 59
+Services Count    : 115
+Modules Count     : 60
+Guards Count      : 8
+Interceptors Count: 4
+Test Suites Count : 58
+Migrations Count  : 31
+
+Modules Detected:
+  - \src\app.module.ts
+  - \src\ai-assistant\ai-assistant.module.ts
+  - \src\appointment\appointment.module.ts
+  - \src\audit-log\audit-log.module.ts
+  - \src\auth\auth.module.ts
+  - \src\billing\billing.module.ts
+  - \src\branch\branch.module.ts
+  - \src\clinic\clinic.module.ts
+  - \src\clinical-safety\clinical-safety.module.ts
+  - \src\clinical-specialties\clinical-specialties.module.ts
+  - \src\communication\communication.module.ts
+  - \src\consent\consent.module.ts
+  - \src\consultation\consultation.module.ts
+  - \src\data-outbox\data-outbox.module.ts
+  - \src\department\department.module.ts
+  - \src\doctor-lab-review\doctor-lab-review.module.ts
+  - \src\enterprise\enterprise.module.ts
+  - \src\events\event-bus.module.ts
+  - \src\facility\facility.module.ts
+  - \src\facility-subscription\facility-subscription.module.ts
+  - \src\feedback\feedback.module.ts
+  - \src\integration\integration.module.spec.ts
+  - \src\integration\integration.module.ts
+  - \src\integration\sync-jobs\sync-jobs.module.ts
+  - \src\integrations\integrations.module.ts
+  - \src\ipd\ipd.module.ts
+  - \src\ipd-clinical\ipd-clinical.module.ts
+  - \src\lab\lab.module.ts
+  - \src\legal\legal.module.ts
+  - \src\master-catalog\master-catalog.module.ts
+  - \src\notification\notification.module.ts
+  - \src\operational-module\operational-module.controller.ts
+  - \src\operational-module\operational-module.module.ts
+  - \src\operational-module\operational-module.service.ts
+  - \src\operational-module\dto\create-operational-module-record.dto.ts
+  - \src\operational-module\dto\operational-module-filter.dto.ts
+  - \src\operational-module\dto\update-operational-module-record.dto.ts
+  - \src\patient\patient.module.ts
+  - \src\patient-portal\patient-portal.module.ts
+  - \src\pharmacy\pharmacy.module.ts
+  - \src\pharmacy-inventory\pharmacy-inventory.module.ts
+  - \src\pharmacy-stock\pharmacy-stock.module.ts
+  - \src\prescription\prescription.module.ts
+  - \src\prescription-item\prescription-item.module.ts
+  - \src\prisma\prisma.module.ts
+  - \src\private-insurance\private-insurance.module.ts
+  - \src\queue\queue.module.ts
+  - \src\reports\reports.module.ts
+  - \src\resilience\resilience.module.ts
+  - \src\role\role.module.ts
+  - \src\settings\settings.module.ts
+  - \src\sha-claims\sha-claims.module.ts
+  - \src\shr\shr.module.ts
+  - \src\staff\staff.module.ts
+  - \src\terminology\terminology.module.ts
+  - \src\triage\triage.module.ts
+  - \src\user\user.module.ts
+  - \src\user-location\user-location.module.ts
+  - \src\user-review\user-review.module.ts
+  - \src\workflows\workflow.module.ts
+
+=================================================================
+SECTION: 2. PRISMA SCHEMA & MODEL TENANCY AUDIT
+=================================================================
+Total Prisma Models: 114
+
+Model Tenancy Field Matrix:
+  Model: Facility                           [FACILITY] [BRANCH]
+  Model: Branch                             [FACILITY]         
+  Model: Department                         [FACILITY] [BRANCH]
+  Model: Role                                                  
+  Model: User                               [FACILITY] [BRANCH]
+  Model: UserBranchAccess                   [FACILITY] [BRANCH]
+  Model: Staff                              [FACILITY] [BRANCH]
+  Model: Patient                            [FACILITY]         
+  Model: Clinic                             [FACILITY] [BRANCH]
+  Model: Appointment                        [FACILITY] [BRANCH]
+  Model: Triage                             [FACILITY] [BRANCH]
+  Model: Consultation                       [FACILITY] [BRANCH]
+  Model: ConsultationProcedure                                 
+  Model: LabTestCatalog                                        
+  Model: LabOrder                           [FACILITY] [BRANCH]
+  Model: LabOrderItem                                          
+  Model: LabResult                                             
+  Model: ExternalLabReferral                [FACILITY] [BRANCH]
+  Model: ExternalLabPayment                                    
+  Model: ExternalLabReportShare                                
+  Model: ExternalLabOrderItem                                  
+  Model: ExternalLabResult                                     
+  Model: DentalEncounter                    [FACILITY] [BRANCH]
+  Model: DentalChartEntry                                      
+  Model: DentalProcedure                                       
+  Model: OrthopedicCase                     [FACILITY] [BRANCH]
+  Model: OrthopedicImplant                                     
+  Model: PhysiotherapyReferral                                 
+  Model: InsurancePayer                     [FACILITY] [BRANCH]
+  Model: PatientInsurancePolicy             [FACILITY] [BRANCH]
+  Model: PrivateInsuranceClaim              [FACILITY] [BRANCH]
+  Model: Medicine                                              
+  Model: Prescription                       [FACILITY] [BRANCH]
+  Model: PrescriptionItem                                      
+  Model: Dispense                           [FACILITY] [BRANCH]
+  Model: DispenseItem                                          
+  Model: Ward                               [FACILITY] [BRANCH]
+  Model: Bed                                [FACILITY] [BRANCH]
+  Model: Admission                          [FACILITY] [BRANCH]
+  Model: IpdProgressNote                                       
+  Model: IpdVitalRecord                                        
+  Model: IpdDoctorReview                                       
+  Model: TreatmentChartEntry                                   
+  Model: IpdDischargeSummary                                   
+  Model: BillingService                                        
+  Model: ServiceTariff                      [FACILITY] [BRANCH]
+  Model: Invoice                            [FACILITY] [BRANCH]
+  Model: InvoiceItem                                           
+  Model: Payment                            [FACILITY] [BRANCH]
+  Model: PaymentAdjustment                  [FACILITY] [BRANCH]
+  Model: UserSession                                           
+  Model: UserReview                                            
+  Model: ShaClaim                           [FACILITY] [BRANCH]
+  Model: UserFeedback                       [FACILITY] [BRANCH]
+  Model: FacilitySubscriptionPayment        [FACILITY]         
+  Model: AuditLog                           [FACILITY] [BRANCH]
+  Model: IpGeolocationCache                                    
+  Model: UserLocationProfile                                   
+  Model: UserLocationEvent                                     
+  Model: SystemSetting                                         
+  Model: Notification                       [FACILITY] [BRANCH]
+  Model: BranchMedicineStock                [FACILITY] [BRANCH]
+  Model: OtcSale                            [FACILITY] [BRANCH]
+  Model: OtcSaleItem                                           
+  Model: OtcSalePayment                     [FACILITY] [BRANCH]
+  Model: PharmacyStockMovement              [FACILITY] [BRANCH]
+  Model: PharmacyLocation                   [FACILITY] [BRANCH]
+  Model: PharmacyLocationStock              [FACILITY] [BRANCH]
+  Model: MedicineBatch                      [FACILITY] [BRANCH]
+  Model: MedicineReturn                     [FACILITY] [BRANCH]
+  Model: MedicineReturnItem                                    
+  Model: PasswordResetToken                                    
+  Model: OperationalModuleRecord            [FACILITY] [BRANCH]
+  Model: DataOutboxEvent                    [FACILITY] [BRANCH]
+  Model: EtimsInvoice                       [FACILITY] [BRANCH]
+  Model: IntegrationOutboundRequest         [FACILITY] [BRANCH]
+  Model: IntegrationApiLog                  [FACILITY]         
+  Model: DhaTransaction                     [FACILITY] [BRANCH]
+  Model: LegalDocument                                         
+  Model: LegalAcceptance                                       
+  Model: ConsentRequest                                        
+  Model: ConsentAuthorization                                  
+  Model: ConsentAuditLog                    [FACILITY]         
+  Model: TerminologySource                                     
+  Model: TerminologyCollection                                 
+  Model: TerminologyVersion                                    
+  Model: TerminologyConcept                                    
+  Model: TerminologyMapping                                    
+  Model: TerminologySyncHistory                                
+  Model: ShrPublication                                        
+  Model: ShrBundleSnapshot                                     
+  Model: ShrPublicationAttempt                                 
+  Model: ShrTransmissionHistory                                
+  Model: ShrAcknowledgement                                    
+  Model: ShrPublicationError                                   
+  Model: ShrPublicationMetrics                                 
+  Model: ShrBundleDependency                                   
+  Model: ClinicalEventOutbox                [FACILITY] [BRANCH]
+  Model: ClinicalEvent                      [FACILITY] [BRANCH]
+  Model: EventSubscriberStatus                                 
+  Model: DeadLetterEvent                    [FACILITY]         
+  Model: EventReplayJob                                        
+  Model: WorkflowDefinition                                    
+  Model: WorkflowVersion                                       
+  Model: WorkflowInstance                   [FACILITY]         
+  Model: WorkflowStep                                          
+  Model: WorkflowTransition                                    
+  Model: WorkflowTask                                          
+  Model: WorkflowAssignment                                    
+  Model: WorkflowTimer                                         
+  Model: WorkflowEscalation                                    
+  Model: WorkflowAudit                                         
+  Model: WorkflowMetric                                        
+  Model: WorkflowSnapshot                                      
+
+=================================================================
+SECTION: 3. AUTHENTICATION & GUARD ENFORCEMENT
+=================================================================
+Inspecting Controllers for Guard Decorators:
+  !! UNGUARDED !!        : \src\app.controller.ts
+  GUARDED        : \src\ai-assistant\ai-assistant.controller.ts
+  GUARDED        : \src\appointment\appointment.controller.ts
+  GUARDED [RBAC] : \src\audit-log\audit-log.controller.ts
+  GUARDED [RBAC] : \src\auth\auth-test.controller.ts
+  GUARDED        : \src\auth\auth.controller.ts
+  GUARDED [RBAC] : \src\billing\billing.controller.ts
+  GUARDED [RBAC] : \src\billing\payhero.controller.ts
+  GUARDED [RBAC] : \src\branch\branch.controller.ts
+  GUARDED [RBAC] : \src\clinic\clinic.controller.ts
+  GUARDED [RBAC] : \src\clinical-safety\clinical-safety.controller.ts
+  GUARDED [RBAC] : \src\clinical-specialties\clinical-specialties.controller.ts
+  GUARDED [RBAC] : \src\communication\communication.controller.ts
+  GUARDED [RBAC] : \src\consent\consent.controller.ts
+  GUARDED [RBAC] : \src\consultation\consultation.controller.ts
+  GUARDED [RBAC] : \src\department\department.controller.ts
+  !! UNGUARDED !!        : \src\doctor-lab-review\doctor-lab-review.controller.ts
+  !! UNGUARDED !!        : \src\enterprise\enterprise.controller.ts
+  GUARDED [RBAC] : \src\events\event-platform.controller.ts
+  GUARDED [RBAC] : \src\facility\facility.controller.ts
+  GUARDED [RBAC] : \src\facility-subscription\facility-subscription.controller.ts
+  GUARDED [RBAC] : \src\feedback\feedback.controller.ts
+  GUARDED        : \src\integration\integration-status.controller.ts
+  GUARDED        : \src\integration\dha\dha-callback.controller.ts
+  GUARDED [RBAC] : \src\integration\dha\dha-eclaims.controller.ts
+  GUARDED [RBAC] : \src\integration\dha\dha.controller.ts
+  GUARDED [RBAC] : \src\integration\etims\etims.controller.ts
+  GUARDED [RBAC] : \src\integration\queue\integration-queue.controller.ts
+  GUARDED [RBAC] : \src\ipd\ipd.controller.ts
+  GUARDED [RBAC] : \src\ipd-clinical\ipd-clinical.controller.ts
+  GUARDED [RBAC] : \src\lab\lab.controller.ts
+  GUARDED [RBAC] : \src\legal\legal.controller.ts
+  GUARDED [RBAC] : \src\master-catalog\master-catalog.controller.ts
+  GUARDED        : \src\notification\notification.controller.ts
+  GUARDED        : \src\operational-module\operational-module.controller.ts
+  GUARDED        : \src\patient\patient.controller.ts
+  GUARDED        : \src\patient-portal\patient-portal.controller.ts
+  GUARDED [RBAC] : \src\pharmacy\otc-sales.controller.ts
+  GUARDED [RBAC] : \src\pharmacy\pharmacy.controller.ts
+  GUARDED [RBAC] : \src\pharmacy-inventory\pharmacy-inventory.controller.ts
+  GUARDED [RBAC] : \src\pharmacy-stock\pharmacy-stock.controller.ts
+  GUARDED [RBAC] : \src\prescription\prescription.controller.ts
+  GUARDED [RBAC] : \src\prescription-item\prescription-item.controller.ts
+  GUARDED [RBAC] : \src\private-insurance\private-insurance.controller.ts
+  GUARDED        : \src\queue\queue.controller.ts
+  GUARDED        : \src\reports\reports.controller.ts
+  !! UNGUARDED !!        : \src\resilience\health.controller.ts
+  GUARDED [RBAC] : \src\role\role.controller.ts
+  GUARDED [RBAC] : \src\settings\settings.controller.ts
+  GUARDED [RBAC] : \src\sha-claims\sha-claims.controller.ts
+  GUARDED        : \src\shr\shr-webhook.controller.ts
+  GUARDED [RBAC] : \src\shr\shr.controller.ts
+  GUARDED [RBAC] : \src\staff\staff.controller.ts
+  GUARDED        : \src\terminology\terminology.controller.ts
+  GUARDED        : \src\triage\triage.controller.ts
+  GUARDED [RBAC] : \src\user\user.controller.ts
+  GUARDED [RBAC] : \src\user-location\user-location.controller.ts
+  GUARDED        : \src\user-review\user-review.controller.ts
+  GUARDED [RBAC] : \src\workflows\integration\workflow.controller.ts
+
+=================================================================
+SECTION: 4. KENYAN INTEGRATION TRACING (M-PESA / SHA / eTIMS)
+=================================================================
+Tracing Daraja M-Pesa Artifacts:
+
+Tracing SHA / SHIF / NHIF Artifacts:
+
+Tracing KRA / eTIMS Fiscalization Artifacts:
+
+=================================================================
+SECTION: 5. CLINICAL WORKFLOW PERSISTENCE AUDIT
+=================================================================
+
+Maternity Modules & Services:
+  File: \src\branch\dto\create-branch.dto.ts (1.7 KB)
+  File: \src\branch\dto\grant-user-branch-access.dto.ts (0.3 KB)
+  File: \src\branch\dto\set-user-home-branch.dto.ts (0.3 KB)
+  File: \src\branch\dto\update-branch.dto.ts (0.2 KB)
+  File: \src\branch\branch.controller.ts (2.5 KB)
+  File: \src\branch\branch.module.ts (0.5 KB)
+  File: \src\branch\branch.service.ts (8.3 KB)
+  File: \src\pharmacy-stock\dto\create-branch-medicine-stock.dto.ts (0.5 KB)
+  File: \src\pharmacy-stock\dto\import-branch-pricing-csv.dto.ts (0.2 KB)
+  File: \src\pharmacy-stock\dto\restock-branch-medicine.dto.ts (0.6 KB)
+  File: \src\pharmacy-stock\dto\update-branch-medicine-stock.dto.ts (0.2 KB)
+  File: \src\private-insurance\dto\private-insurance.dto.ts (1.4 KB)
+  File: \src\private-insurance\private-insurance.controller.ts (2.4 KB)
+  File: \src\private-insurance\private-insurance.module.ts (0.5 KB)
+  File: \src\private-insurance\private-insurance.service.spec.ts (2.8 KB)
+  File: \src\private-insurance\private-insurance.service.ts (13.7 KB)
+  File: \src\reports\sha-performance.service.ts (3.7 KB)
+  File: \src\shr\fhir\builders\provenance.builder.ts (2.3 KB)
+  File: \src\shr\validation\dha-compliance-engine.ts (3.7 KB)
+
+Pharmacy FEFO Implementation Evidence (Expiry Sort & Transaction Locks):
+  \src\pharmacy-inventory\pharmacy-inventory.service.spec.ts:3 -> describe('PharmacyInventoryService FEFO allocation', () => {
+
+IPD & Bed Allocation Concurrency Check:
+
+=================================================================
+SECTION: 6. BILLING, REVENUE & ACCOUNTING AUDIT
+=================================================================
+Checking for Double-Entry / General Ledger / Chart of Accounts:
+
+=================================================================
+SECTION: 7. MULTI-TENANCY & QUERY SCOPING AUDIT
+=================================================================
+Searching for dangerous unscoped findUnique / findFirst calls on sensitive models:
+  POTENTIAL IDOR -> \src\sha-claims\sha-claims.service.ts:155 -> this.prisma.patient.findUnique({ where: { id: dto.patientId } }),
+  POTENTIAL IDOR -> \src\sha-claims\sha-claims.service.ts:157 -> ? this.prisma.invoice.findUnique({ where: { id: dto.invoiceId } })
+
+=================================================================
+SECTION: 8. BACKEND LEGACY BRANDING AUDIT
+=================================================================
+  \src\ai-assistant\ai-assistant.service.ts:268 -> 'Help the staff member find the correct module, page, and next operational steps inside Invinceible Core HMS.',
+  \src\auth\password-policy.ts:11 -> 'invinceible',
+  \src\common\pdf\hospital-pdf.ts:135 -> Producer: 'Invinceible Core HMS',
+  \src\common\pdf\hospital-pdf.ts:971 -> `Generated ${generatedAt} by Invinceible Core HMS`,
+  \src\config\env.validation.ts:48 -> 'invinceible_jwt_secret',
+  \src\enterprise\enterprise.service.ts:10 -> product: 'Invinceible Core HMS',
+  \src\resilience\health.controller.ts:16 -> service: 'invinceible-core-hms-backend',
+  \src\sha-claims\sha-claims.service.ts:231 -> source: 'INVINCEIBLE_CORE_HMS',
+  \src\shr\validation\fhir-bundle-validator.spec.ts:19 -> { system: 'urn:invinceible:hms:patient', value: 'PAT-1' },
+  \src\shr\validation\fhir-profile-registry.ts:22 -> url: 'urn:invinceible:hms:fhir:minimum-patient',
+  \src\shr\validation\fhir-profile-registry.ts:47 -> url: 'urn:invinceible:hms:fhir:minimum-encounter',
+  \src\main.ts:60 -> .setTitle('Invinceible Core HMS API')
+  \src\main.ts:62 -> 'Interactive API documentation for the Invinceible Core Hospital Management System.',
+  \src\main.ts:92 -> customSiteTitle: 'Invinceible Core HMS API',
+
+=================================================================
+SECTION: 9. BACKEND PACKAGE DEPENDENCIES & SCRIPTS
+=================================================================
+{
+  "name": "backend",
+  "version": "0.0.1",
+  "description": "",
+  "author": "",
+  "private": true,
+  "license": "UNLICENSED",
+  "scripts": {
+    "build": "nest build",
+    "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
+    "start": "nest start",
+    "start:worker": "nest start --entryFile worker",
+    "start:dev": "nest start --watch",
+    "start:debug": "nest start --debug --watch",
+    "start:prod": "node dist/main",
+    "start:prod:worker": "node dist/worker",
+    "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:cov": "jest --coverage",
+    "test:unit:ci": "jest --runInBand --testPathIgnorePatterns=integration/",
+    "test:integration": "jest --config test/jest-integration.json --runInBand --testTimeout=15000",
+    "test:integration:cov": "jest --config test/jest-integration.json --runInBand --coverage",
+    "lint:integration": "eslint \"src/integration/**/*.ts\"",
+    "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
+    "test:e2e": "jest --config ./test/jest-e2e.json",
+    "prisma:generate": "node scripts/generate-prisma-client.mjs",
+    "prisma:migrate:deploy": "prisma migrate deploy",
+    "prisma:schema:postgres": "node scripts/create-postgres-prisma-schema.mjs",
+    "prisma:generate:postgres": "npm run prisma:schema:postgres && prisma generate --schema prisma-postgresql/schema.prisma",
+    "prisma:migrate:postgres": "npm run prisma:schema:postgres && prisma migrate deploy --schema prisma-postgresql/schema.prisma",
+    "db:validate": "node scripts/validate-critical-data.mjs",
+    "db:validate:dry-run": "node scripts/validate-critical-data.mjs --dry-run",
+    "db:seed:safe": "node scripts/safe-seed.mjs",
+    "admin:create-super": "node scripts/create-super-admin.mjs",
+    "demo:setup-facility": "node scripts/setup-demo-facility.mjs",
+    "demo:setup-staff": "node scripts/setup-demo-staff.mjs",
+    "demo:setup-terminology": "node scripts/setup-demo-terminology.mjs",
+    "dha:uat": "node scripts/run-dha-uat-checklist.mjs",
+    "dha:uat:validate": "node scripts/run-dha-uat-checklist.mjs --validate-only",
+    "db:backup:notes": "node scripts/render-db-backup-notes.mjs",
+    "db:storage:audit": "node scripts/storage-audit.mjs",
+    "db:cleanup:dry-run": "node scripts/storage-cleanup.mjs --dry-run",
+    "db:cleanup": "node scripts/storage-cleanup.mjs --execute",
+    "db:large-fields:report": "node scripts/large-fields-report.mjs",
+    "db:index:audit": "node scripts/index-audit.mjs",
+    "prestart:dev": "npm run prisma:generate",
+    "prestart:debug": "npm run prisma:generate",
+    "postinstall": "node scripts/generate-prisma-client.mjs"
+  },
+  "dependencies": {
+    "@nestjs/common": "^11.0.1",
+    "@nestjs/config": "^4.0.4",
+    "@nestjs/core": "^11.0.1",
+    "@nestjs/jwt": "^11.0.2",
+    "@nestjs/mapped-types": "^2.1.1",
+    "@nestjs/passport": "^11.0.5",
+    "@nestjs/platform-express": "^11.0.1",
+    "@nestjs/schedule": "^6.1.3",
+    "@nestjs/swagger": "^11.4.6",
+    "@prisma/client": "^6.19.0",
+    "bcrypt": "^6.0.0",
+    "bcryptjs": "^3.0.3",
+    "class-transformer": "^0.5.1",
+    "class-validator": "^0.15.1",
+    "ioredis": "^5.11.1",
+    "passport": "^0.7.0",
+    "passport-jwt": "^4.0.1",
+    "pdfkit": "^0.18.0",
+    "qrcode": "^1.5.4",
+    "reflect-metadata": "^0.2.2",
+    "rxjs": "^7.8.1",
+    "sanitize-html": "2.17.0",
+    "uuid": "^14.0.1"
+  },
+  "devDependencies": {
+    "@eslint/eslintrc": "^3.2.0",
+    "@eslint/js": "^9.18.0",
+    "@nestjs/cli": "^11.0.0",
+    "@nestjs/schematics": "^11.0.0",
+    "@nestjs/testing": "^11.0.1",
+    "@types/bcrypt": "^6.0.0",
+    "@types/bcryptjs": "^2.4.6",
+    "@types/express": "^5.0.0",
+    "@types/ioredis": "^4.28.10",
+    "@types/jest": "^30.0.0",
+    "@types/node": "^24.0.0",
+    "@types/passport-jwt": "^4.0.1",
+    "@types/pdfkit": "^0.17.6",
+    "@types/qrcode": "^1.5.6",
+    "@types/sanitize-html": "^2.16.1",
+    "@types/supertest": "^7.0.0",
+    "@types/uuid": "^10.0.0",
+    "eslint": "^9.18.0",
+    "eslint-config-prettier": "^10.0.1",
+    "eslint-plugin-prettier": "^5.2.2",
+    "globals": "^17.0.0",
+    "jest": "^30.0.0",
+    "prettier": "^3.4.2",
+    "prisma": "^6.19.0",
+    "source-map-support": "^0.5.21",
+    "supertest": "^7.0.0",
+    "ts-jest": "^29.2.5",
+    "ts-loader": "^9.5.2",
+    "ts-node": "^10.9.2",
+    "tsconfig-paths": "^4.2.0",
+    "typescript": "^5.7.3",
+    "typescript-eslint": "^8.20.0"
+  },
+  "jest": {
+    "moduleFileExtensions": [
+      "js",
+      "json",
+      "ts"
+    ],
+    "rootDir": "src",
+    "testRegex": ".*\\.spec\\.ts$",
+    "transform": {
+      "^.+\\.(t|j)s$": "ts-jest"
+    },
+    "moduleNameMapper": {
+      "^uuid$": "<rootDir>/testing/uuid.mock.ts"
+    },
+    "collectCoverageFrom": [
+      "**/*.(t|j)s"
+    ],
+    "coverageDirectory": "../coverage",
+    "testEnvironment": "node"
+  },
+  "prisma": {
+    "seed": "ts-node prisma/seed.ts"
+  },
+  "overrides": {
+    "multer": "2.2.0"
+  }
+}

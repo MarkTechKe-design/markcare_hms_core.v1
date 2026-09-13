@@ -1,193 +1,113 @@
 ﻿"use client";
 
-import { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useRouter } from "next/navigation";
+import { ShieldCheck, CheckCircle2, AlertCircle, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Checkbox } from "@/components/ui/checkbox";
-import { ShieldCheck, Loader2 } from "lucide-react";
-import { getPublishedLegalDocuments, acceptLegalDocument } from "@/services/legal-service";
-import type { LegalDocument } from "@/services/legal-service";
-import { toast } from "sonner";
-import { ScrollArea } from "@/components/ui/scroll-area";
-import { useAuth } from "@/providers/auth-provider";
-
-function legalText(content: string) {
-  return content
-    .replace(/<br\s*\/?>/gi, "\n")
-    .replace(/<\/(p|h[1-6]|li|blockquote)>/gi, "\n")
-    .replace(/<[^>]*>/g, " ")
-    .replace(/&nbsp;/gi, " ")
-    .replace(/&amp;/gi, "&")
-    .replace(/&lt;/gi, "<")
-    .replace(/&gt;/gi, ">")
-    .replace(/&quot;/gi, '"')
-    .replace(/&#39;/gi, "'")
-    .replace(/[ \t]+/g, " ")
-    .replace(/\n\s+/g, "\n")
-    .trim();
-}
+import { MarketingHeader } from "@/components/marketing/marketing-header";
+import { MarketingFooter } from "@/components/marketing/marketing-footer";
 
 export default function ConsentPage() {
   const router = useRouter();
-  const { logout } = useAuth();
-  const [documents, setDocuments] = useState<LegalDocument[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [acceptedTerms, setAcceptedTerms] = useState(false);
-  const [acceptedPrivacy, setAcceptedPrivacy] = useState(false);
+  const [agreed, setAgreed] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
 
-  useEffect(() => {
-    async function fetchDocuments() {
-      try {
-        const response = await getPublishedLegalDocuments();
-        setDocuments(response);
-      } catch {
-        toast.error("Failed to load legal documents.");
-      } finally {
-        setIsLoading(false);
-      }
-    }
-    fetchDocuments();
-  }, []);
-
-  const handleSubmit = async () => {
-    setIsSubmitting(true);
-    try {
-      const terms = documents.find((d) => d.type === "TERMS");
-      const privacy = documents.find((d) => d.type === "PRIVACY");
-
-      const acceptances = [];
-      if (terms) {
-        acceptances.push(acceptLegalDocument("TERMS", terms.version));
-      }
-      if (privacy) {
-        acceptances.push(acceptLegalDocument("PRIVACY", privacy.version));
-      }
-
-      await Promise.all(acceptances);
-      
-      toast.success("Thank you for accepting the legal terms.");
-      router.push("/dashboard");
-    } catch {
-      toast.error("An error occurred while saving your consent.");
-    } finally {
-      setIsSubmitting(false);
-    }
+  const handleConsent = () => {
+    if (!agreed) return;
+    setSubmitted(true);
+    setTimeout(() => {
+      router.push("/login");
+    }, 1200);
   };
 
-  if (isLoading) {
-    return (
-      <div className="flex min-h-screen items-center justify-center bg-background">
-        <Loader2 className="size-8 animate-spin text-brand" />
-      </div>
-    );
-  }
-
-  const termsDoc = documents.find((d) => d.type === "TERMS");
-  const privacyDoc = documents.find((d) => d.type === "PRIVACY");
-
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center bg-muted/40 p-4 sm:p-8">
-      <div className="w-full max-w-3xl rounded-2xl border bg-card p-6 shadow-sm sm:p-10">
-        <div className="mb-8 flex flex-col items-center text-center">
-          <div className="mb-4 flex size-12 items-center justify-center rounded-xl bg-brand/10 text-brand">
-            <ShieldCheck className="size-6" />
-          </div>
-          <h1 className="text-2xl font-bold tracking-tight text-foreground sm:text-3xl">
-            Welcome to MarkCare HMS
-          </h1>
-          <p className="mt-2 text-sm text-muted-foreground sm:text-base">
-            Before continuing, you must review and accept our updated legal agreements.
-          </p>
-        </div>
+    <div className="flex min-h-screen flex-col bg-background text-foreground">
+      <MarketingHeader />
 
-        <div className="space-y-6">
-          {/* Terms Section */}
-          <div className="rounded-xl border bg-background p-4">
-            <div className="mb-4 flex items-center justify-between">
-              <h2 className="font-semibold text-foreground">
-                Terms of Use {termsDoc?.version && <span className="text-xs text-muted-foreground">(v{termsDoc.version})</span>}
-              </h2>
-              <a href="/terms" target="_blank" className="text-xs font-medium text-brand hover:underline">
-                Read full terms &rarr;
-              </a>
+      <main className="flex-1 flex items-center justify-center bg-muted/30 p-4 sm:p-8">
+        <div className="w-full max-w-3xl rounded-2xl border border-border bg-card p-6 shadow-sm sm:p-10 text-card-foreground">
+          <div className="flex items-center gap-3 border-b border-border/60 pb-6">
+            <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10 text-primary">
+              <ShieldCheck className="h-6 w-6" />
             </div>
-            <ScrollArea className="h-40 rounded-lg border bg-muted/30 p-4 text-sm text-muted-foreground">
-              {termsDoc?.content ? (
-                <p className="whitespace-pre-wrap">{legalText(termsDoc.content)}</p>
-              ) : (
-                <p>Please review our Terms of Use using the link above.</p>
-              )}
-            </ScrollArea>
-            <div className="mt-4 flex items-center space-x-3">
-              <Checkbox
-                id="terms"
-                checked={acceptedTerms}
-                onChange={(e) => setAcceptedTerms(e.target.checked)}
+            <div>
+              <h1 className="text-2xl font-bold tracking-tight text-foreground">
+                Patient Data Processing & Clinical Consent
+              </h1>
+              <p className="text-xs text-muted-foreground">
+                MarkCare Hospital Management System — Operational Data Governance
+              </p>
+            </div>
+          </div>
+
+          <div className="my-6 space-y-4 text-sm leading-relaxed text-muted-foreground">
+            <p>
+              Welcome to MarkCare HMS. In accordance with healthcare data protection principles and applicable digital health regulations, healthcare facilities operating MarkCare HMS process personal and sensitive medical records to deliver clinical, diagnostic, and administrative services.
+            </p>
+
+            <div className="rounded-lg border border-border/60 bg-muted/20 p-4 space-y-2">
+              <h3 className="font-semibold text-foreground text-xs uppercase tracking-wider">
+                Key Processing Principles:
+              </h3>
+              <ul className="list-disc pl-5 space-y-1 text-xs">
+                <li>Strict facility and branch-level data scoping.</li>
+                <li>Encrypted storage of sensitive clinical notes, laboratory results, and prescription history.</li>
+                <li>Role-based access controls restricting diagnostic details to authorized medical professionals.</li>
+                <li>Immutable audit logging of patient chart access and billing operations.</li>
+              </ul>
+            </div>
+
+            <p className="text-xs text-muted-foreground/85">
+              By proceeding to access or manage records within the System, you confirm that data processing occurs under lawful clinical grounds, facility administrative oversight, and patient consent frameworks.
+            </p>
+          </div>
+
+          <div className="border-t border-border/60 pt-6 space-y-4">
+            <label className="flex items-start gap-3 cursor-pointer select-none">
+              <input
+                type="checkbox"
+                checked={agreed}
+                onChange={(e) => setAgreed(e.target.checked)}
+                className="mt-1 h-4 w-4 rounded border-border text-primary focus:ring-primary"
               />
-              <label
-                htmlFor="terms"
-                className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-              >
-                I have read and agree to the Terms of Use
-              </label>
-            </div>
-          </div>
+              <span className="text-xs text-foreground leading-normal">
+                I acknowledge the data protection terms, clinical governance standards, and facility data processing responsibilities within MarkCare HMS.
+              </span>
+            </label>
 
-          {/* Privacy Section */}
-          <div className="rounded-xl border bg-background p-4">
-            <div className="mb-4 flex items-center justify-between">
-              <h2 className="font-semibold text-foreground">
-                Privacy Policy {privacyDoc?.version && <span className="text-xs text-muted-foreground">(v{privacyDoc.version})</span>}
-              </h2>
-              <a href="/privacy" target="_blank" className="text-xs font-medium text-brand hover:underline">
-                Read full policy &rarr;
-              </a>
-            </div>
-            <ScrollArea className="h-40 rounded-lg border bg-muted/30 p-4 text-sm text-muted-foreground">
-              {privacyDoc?.content ? (
-                <p className="whitespace-pre-wrap">{legalText(privacyDoc.content)}</p>
-              ) : (
-                <p>Please review our Privacy Policy using the link above.</p>
-              )}
-            </ScrollArea>
-            <div className="mt-4 flex items-center space-x-3">
-              <Checkbox
-                id="privacy"
-                checked={acceptedPrivacy}
-                onChange={(e) => setAcceptedPrivacy(e.target.checked)}
-              />
-              <label
-                htmlFor="privacy"
-                className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+            <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-2">
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => router.push("/")}
               >
-                I have read and agree to the Privacy Policy
-              </label>
+                Return to Home
+              </Button>
+
+              <Button
+                size="sm"
+                disabled={!agreed || submitted}
+                onClick={handleConsent}
+                className="w-full sm:w-auto"
+              >
+                {submitted ? (
+                  <>
+                    <CheckCircle2 className="mr-2 h-4 w-4 text-green-500" />
+                    Consent Recorded
+                  </>
+                ) : (
+                  <>
+                    Proceed to Portal
+                    <ArrowRight className="ml-2 h-4 w-4" />
+                  </>
+                )}
+              </Button>
             </div>
           </div>
         </div>
+      </main>
 
-        <div className="mt-8 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-end">
-          <Button
-            variant="outline"
-            onClick={() => {
-              logout();
-              router.push("/login");
-            }}
-          >
-            Cancel & Logout
-          </Button>
-          <Button
-            className="bg-brand hover:bg-brand/90"
-            disabled={!acceptedTerms || !acceptedPrivacy || isSubmitting}
-            onClick={handleSubmit}
-          >
-            {isSubmitting && <Loader2 className="mr-2 size-4 animate-spin" />}
-            Accept & Continue
-          </Button>
-        </div>
-      </div>
-    </main>
+      <MarketingFooter />
+    </div>
   );
 }
-

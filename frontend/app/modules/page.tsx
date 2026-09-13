@@ -1,100 +1,140 @@
-﻿import type { Metadata } from "next";
+﻿import React from "react";
+import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowRight, Stethoscope, Pill, FlaskConical, Bed, Receipt, Users, Clock, ShieldCheck } from "lucide-react";
-import { MarketingHeader } from "@/components/marketing/marketing-header";
-import { MarketingFooter } from "@/components/marketing/marketing-footer";
-import { MarketingContainer } from "@/components/marketing/marketing-container";
-import { MarketingBadge } from "@/components/marketing/marketing-badge";
-import { Button } from "@/components/ui/button";
+import {
+  Stethoscope,
+  Users,
+  Pill,
+  FlaskConical,
+  CreditCard,
+  Calendar,
+  Building2,
+  Layers,
+  ArrowRight,
+  ShieldCheck,
+  Activity,
+} from "lucide-react";
+import {
+  MarketingHeader,
+  MarketingFooter,
+  MarketingContainer,
+  MarketingBadge,
+  MarketingSection,
+  MarketingScreenshotFrame,
+  MarketingCtaBanner,
+} from "@/components/marketing";
 
 export const metadata: Metadata = {
-  title: "System Modules Directory — MarkCare HMS",
+  title: "MarkCare HMS System Modules",
   description:
-    "Comprehensive directory of MarkCare HMS modules: Outpatient consultation, pharmacy FEFO inventory, laboratory diagnostics, inpatient bed management, and billing cashier desk.",
+    "Explore the verified module ecosystem of MarkCare HMS: Clinical EMR, Inpatient Wards, Pharmacy FEFO, Diagnostic Laboratory, and Billing.",
 };
 
-const moduleGroups = [
+const moduleCategories = [
   {
-    category: "Clinical Operations",
-    description: "Core clinical encounters and patient movement workflows.",
+    category: "Core Clinical Care",
+    badge: "Verified Engine" as const,
     modules: [
       {
-        name: "Doctor Consultation & Clinical EMR",
-        status: "Available",
-        description: "Electronic health record workspace with vitals logging, SOAP clinical notes, allergy tracking, and ICD-10 diagnostic coding.",
-        href: "/modules/clinical-emr",
         icon: Stethoscope,
+        title: "Clinical EMR & Encounter Notes",
+        href: "/modules/clinical-emr",
+        status: "available" as const,
+        ctaLabel: "Explore Module Details",
+        desc: "Structured clinical encounter notes, vital signs monitoring, diagnosis recording, and longitudinal patient medical histories.",
       },
       {
-        name: "Patient Registration & Master Index",
-        status: "Available",
-        description: "Accurate demographic capture, unique hospital number issuance, and central patient record indexing across visits.",
-        href: "/request-demo",
         icon: Users,
-      },
-      {
-        name: "Triage & Vitals Assessment",
-        status: "Available",
-        description: "Standardized nursing triage capture including temperature, blood pressure, pulse, SpO2, and initial urgency prioritization.",
-        href: "/request-demo",
-        icon: Clock,
-      },
-      {
-        name: "Doctor & Clinic Queues",
-        status: "Available",
-        description: "Real-time service point queues directing waiting patients to triage stations, consultation rooms, and specialized clinics.",
-        href: "/request-demo",
-        icon: Users,
-      }
-    ]
-  },
-  {
-    category: "Diagnostics & Pharmacy",
-    description: "Medication management and diagnostic laboratory operations.",
-    modules: [
-      {
-        name: "Pharmacy & FEFO Batch Inventory",
-        status: "Available",
-        description: "First-Expiry, First-Out dispensing engine, bin tracking, stock adjustments, expiry alerts, and OTC point-of-sale receipting.",
-        href: "/modules/pharmacy",
-        icon: Pill,
-      },
-      {
-        name: "Diagnostic Laboratory Workspace",
-        status: "Available",
-        description: "Electronic lab orders from doctors, specimen accessioning, reference range flags, and two-tier technologist verification.",
-        href: "/modules/laboratory",
-        icon: FlaskConical,
-      }
-    ]
-  },
-  {
-    category: "Inpatient & Revenue Operations",
-    description: "Bed capacity management, charge collation, and financial settlement.",
-    modules: [
-      {
-        name: "Inpatient & Bed Management (IPD)",
-        status: "Available",
-        description: "Ward and bed allocation, admission logging, transfer workflows, inpatient medication administration, and discharge summaries.",
+        title: "Inpatient Wards & Bed Census",
         href: "/modules/inpatient",
-        icon: Bed,
+        status: "available" as const,
+        ctaLabel: "Explore Module Details",
+        desc: "Ward bed tracking, admission orders, nursing round notes, and inpatient medication administration tracking.",
       },
       {
-        name: "Billing, Cashier & Settlements",
-        status: "Available",
-        description: "Automated patient ledger capturing consultation, lab, and pharmacy charges. Supports M-Pesa STK push and verifiable QR invoices.",
+        icon: Calendar,
+        title: "Appointments & Triage Queue",
+        href: "/request-demo",
+        status: "available" as const,
+        ctaLabel: "Request Queue Walkthrough",
+        desc: "Vital signs capture, clinical urgency triage categorization, and synchronized department queue sequencing.",
+      },
+    ],
+  },
+  {
+    category: "Ancillary & Diagnostic Services",
+    badge: "Verified Engine" as const,
+    modules: [
+      {
+        icon: Pill,
+        title: "Pharmacy FEFO Dispensing",
+        href: "/modules/pharmacy",
+        status: "available" as const,
+        ctaLabel: "Explore Module Details",
+        desc: "Prescription fulfillment linked directly to doctor encounter notes, expiry-aware FEFO inventory deduction, and batch tracking.",
+      },
+      {
+        icon: FlaskConical,
+        title: "Diagnostic Laboratory",
+        href: "/modules/laboratory",
+        status: "available" as const,
+        ctaLabel: "Explore Module Details",
+        desc: "Specimen tracking, diagnostic investigation queues, and verified electronic result publication into the EMR.",
+      },
+      {
+        icon: Activity,
+        title: "Radiology & Imaging Requisitions",
+        href: "/request-demo",
+        status: "ready" as const,
+        ctaLabel: "Review Roadmap Scope",
+        desc: "Imaging examination requisition workflows and radiological report recording linked to the patient file.",
+      },
+    ],
+  },
+  {
+    category: "Financial & Revenue Operations",
+    badge: "Verified Engine" as const,
+    modules: [
+      {
+        icon: CreditCard,
+        title: "Billing & Cashier Desks",
         href: "/modules/billing",
-        icon: Receipt,
+        status: "available" as const,
+        ctaLabel: "Explore Module Details",
+        desc: "Encounter fee aggregation across triage, consultations, lab, and pharmacy with itemized receipt issuance.",
       },
       {
-        name: "Facility & Branch Governance",
-        status: "Available",
-        description: "Multi-branch scoping, role-based access control, staff department assignments, and system audit trail monitoring.",
+        icon: Layers,
+        title: "Tariffs & Price Catalogs",
+        href: "/request-demo",
+        status: "available" as const,
+        ctaLabel: "Consult on Tariff Setup",
+        desc: "Standardized fee schedules for self-pay patients, corporate insurance schemes, and national health tiers.",
+      },
+    ],
+  },
+  {
+    category: "Governance & Ecosystem Integrations",
+    badge: "Architecture" as const,
+    modules: [
+      {
+        icon: Building2,
+        title: "Multi-Branch Governance",
         href: "/platform",
+        status: "available" as const,
+        ctaLabel: "Review Platform Topology",
+        desc: "Centralized policy coordination across satellite clinics, dispensaries, and regional referral hospitals.",
+      },
+      {
         icon: ShieldCheck,
-      }
-    ]
-  }
+        title: "Role-Based Staff Permissions",
+        href: "/security",
+        status: "available" as const,
+        ctaLabel: "Review Security Architecture",
+        desc: "Department-scoped staff role assignments and comprehensive audit logs of all clinical and billing actions.",
+      },
+    ],
+  },
 ];
 
 export default function ModulesPage() {
@@ -103,73 +143,97 @@ export default function ModulesPage() {
       <MarketingHeader />
 
       <main className="flex-1">
-        {/* Header Section */}
-        <section className="border-b border-border/80 bg-muted/20 py-20">
-          <MarketingContainer>
-            <div className="max-w-3xl">
-              <MarketingBadge className="mb-3">Module Directory</MarketingBadge>
-              <h1 className="text-4xl font-extrabold tracking-tight sm:text-5xl text-foreground">
-                Verified hospital operational modules.
-              </h1>
-              <p className="mt-4 text-lg text-muted-foreground leading-relaxed">
-                Explore the verified capabilities that power MarkCare HMS. Each module operates either standalone or interconnected through the unified patient ledger.
-              </p>
-            </div>
+        {/* Hero */}
+        <section className="border-b border-border/80 bg-gradient-to-b from-card/60 via-background to-background py-20 sm:py-28">
+          <MarketingContainer className="text-center">
+            <MarketingBadge className="mb-4">System Ecosystem</MarketingBadge>
+            <h1 className="text-3xl font-extrabold tracking-tight sm:text-5xl lg:text-6xl text-balance max-w-4xl mx-auto">
+              Integrated modules for every hospital department.
+            </h1>
+            <p className="mt-6 text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto text-balance leading-relaxed">
+              Every module in MarkCare connects to a unified operational core, ensuring that clinical orders, inventory status, and billing balances synchronize without duplicate data entry.
+            </p>
           </MarketingContainer>
         </section>
 
-        {/* Directory Listing */}
-        <section className="py-20">
-          <MarketingContainer className="space-y-16">
-            {moduleGroups.map((group) => (
-              <div key={group.category} className="space-y-6">
-                <div>
-                  <h2 className="text-2xl font-bold tracking-tight text-foreground">{group.category}</h2>
-                  <p className="text-sm text-muted-foreground mt-1">{group.description}</p>
-                </div>
+        {/* Featured Spotlight: Clinical EMR & FEFO Pharmacy */}
+        <MarketingSection>
+          <MarketingContainer>
+            <div className="rounded-3xl border border-primary/30 bg-card p-6 sm:p-10 shadow-xs mb-16">
+              <div className="max-w-3xl mb-8">
+                <MarketingBadge className="mb-3">Core Integrated Flow</MarketingBadge>
+                <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-foreground">
+                  The Clinical-to-Dispense Integration
+                </h2>
+                <p className="mt-3 text-sm sm:text-base text-muted-foreground leading-relaxed">
+                  The primary driver of hospital operational efficiency is the direct link between physician consultation notes and pharmacy fulfillment. MarkCare eliminates manual paper slips and reduces medication stock drift.
+                </p>
+              </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  {group.modules.map((mod) => {
-                    const Icon = mod.icon;
-                    return (
+              <MarketingScreenshotFrame
+                caption="Clinical EMR Consultation & Direct Pharmacy Queue Transmission"
+                aspectRatio="16/10"
+              />
+            </div>
+
+            {/* Categorized Module Grid */}
+            <div className="space-y-16">
+              {moduleCategories.map((group) => (
+                <div key={group.category}>
+                  <div className="border-b border-border pb-3 mb-6 flex items-center justify-between">
+                    <h3 className="text-lg font-bold tracking-tight text-foreground">{group.category}</h3>
+                  </div>
+
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    {group.modules.map((m) => (
                       <div
-                        key={mod.name}
-                        className="rounded-xl border border-border bg-card p-6 shadow-xs flex flex-col justify-between hover:border-primary/40 transition-colors"
+                        key={m.title}
+                        className="rounded-2xl border border-border/80 bg-card p-6 shadow-xs flex flex-col justify-between"
                       >
                         <div>
-                          <div className="flex items-start justify-between gap-4 mb-3">
-                            <div className="flex items-center gap-3">
-                              <div className="p-2.5 rounded-lg bg-primary/10 text-primary">
-                                <Icon className="h-5 w-5" />
-                              </div>
-                              <h3 className="text-base font-bold text-foreground">{mod.name}</h3>
+                          <div className="flex items-center justify-between mb-4">
+                            <div className="size-10 rounded-xl bg-primary/10 text-primary flex items-center justify-center">
+                              <m.icon className="size-5" aria-hidden="true" />
                             </div>
-                            <span className="inline-flex items-center rounded-full bg-emerald-500/10 px-2.5 py-0.5 text-xs font-semibold text-emerald-600 dark:text-emerald-400">
-                              {mod.status}
-                            </span>
+                            <MarketingBadge variant={m.status}>
+                              {m.status === "available" ? "Verified" : "Foundation"}
+                            </MarketingBadge>
                           </div>
-                          <p className="text-sm text-muted-foreground leading-relaxed mt-3">
-                            {mod.description}
-                          </p>
+                          <h4 className="text-base font-bold text-foreground mb-1.5">{m.title}</h4>
+                          <p className="text-xs text-muted-foreground leading-relaxed">{m.desc}</p>
                         </div>
 
-                        <div className="mt-6 pt-4 border-t border-border flex justify-end">
+                        <div className="mt-5 pt-3 border-t border-border/60">
                           <Link
-                            href={mod.href}
+                            href={m.href}
                             className="inline-flex items-center text-xs font-semibold text-primary hover:underline"
                           >
-                            View Module Details
-                            <ArrowRight className="ml-1 h-3.5 w-3.5" />
+                            {m.ctaLabel}
+                            <ArrowRight className="ml-1 size-3.5" aria-hidden="true" />
                           </Link>
                         </div>
                       </div>
-                    );
-                  })}
+                    ))}
+                  </div>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </MarketingContainer>
-        </section>
+        </MarketingSection>
+
+        {/* CTA Banner */}
+        <MarketingCtaBanner
+          headline="Evaluate the complete MarkCare module suite"
+          description="Speak with our implementation team to discuss how each module aligns with your hospital's operational departments."
+          primaryCta={{
+            label: "Request a Demonstration",
+            href: "/request-demo",
+          }}
+          secondaryCta={{
+            label: "Explore Solutions",
+            href: "/solutions",
+          }}
+        />
       </main>
 
       <MarketingFooter />

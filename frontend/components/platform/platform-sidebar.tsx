@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -33,7 +33,7 @@ import { useSidebar } from "@/providers/sidebar-provider";
 import { useAuth } from "@/providers/auth-provider";
 
 const navItems = [
-  { title: "Platform Home",  href: "/platform",                  icon: LayoutDashboard },
+  { title: "Platform Home",  href: "/platform-admin",                  icon: LayoutDashboard },
   { title: "Admin Control",  href: "/platform/admin-control",    icon: LockKeyhole },
   { title: "Facilities",     href: "/platform/facilities",       icon: Building2 },
   { title: "Branches",       href: "/platform/branches",         icon: GitBranch },
@@ -136,7 +136,7 @@ export function PlatformSidebar({ mobile = false }: { mobile?: boolean }) {
           const Icon = item.icon;
           const isActive =
             pathname === item.href ||
-            (item.href !== "/platform" && pathname.startsWith(`${item.href}/`));
+            (item.href !== "/platform-admin" && pathname.startsWith(`${item.href}/`));
 
           const link = (
             <Link

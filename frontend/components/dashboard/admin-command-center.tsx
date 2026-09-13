@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import Link from "next/link";
 import type { LucideIcon } from "lucide-react";
@@ -344,7 +344,7 @@ export const adminCriticalFunctions: AdminCriticalFunction[] = [
   },
   {
     title: "Platform control plane",
-    href: "/platform",
+    href: "/platform-admin",
     category: "Platform",
     owner: "Super admin",
     impact: "Operate the system structure, facilities, users, catalogs, audit, and locations.",

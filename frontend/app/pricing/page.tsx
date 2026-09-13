@@ -1,17 +1,96 @@
-﻿import type { Metadata } from "next";
+﻿import React from "react";
+import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowRight, CheckCircle2, Cloud, Server, HelpCircle, ShieldCheck } from "lucide-react";
-import { MarketingHeader } from "@/components/marketing/marketing-header";
-import { MarketingFooter } from "@/components/marketing/marketing-footer";
-import { MarketingContainer } from "@/components/marketing/marketing-container";
-import { MarketingBadge } from "@/components/marketing/marketing-badge";
+import { Server, Cloud, Network, CheckCircle2, ShieldCheck } from "lucide-react";
+import {
+  MarketingHeader,
+  MarketingFooter,
+  MarketingContainer,
+  MarketingBadge,
+  MarketingSection,
+  MarketingCtaBanner,
+} from "@/components/marketing";
 import { Button } from "@/components/ui/button";
 
 export const metadata: Metadata = {
-  title: "Deployment Models & Commercial Pricing — MarkCare HMS",
+  title: "MarkCare HMS Deployment Models & Procurement",
   description:
-    "Transparent deployment options for hospitals and clinic networks. Choose between fully managed MarkCare Cloud and hospital-hosted MarkCare Enterprise.",
+    "Review MarkCare deployment architectures: Managed Cloud and Private On-Premises configurations tailored for clinics and hospitals.",
 };
+
+const deploymentModels = [
+  {
+    name: "MarkCare Managed Cloud",
+    icon: Cloud,
+    tagline: "Low maintenance for medical clinics and standalone healthcare facilities.",
+    characteristics: [
+      "Dedicated cloud database instance",
+      "System and formulary updates managed centrally",
+      "Standard role-based access governance",
+      "Secure web access across facility workstations",
+      "Off-site encrypted backups",
+    ],
+  },
+  {
+    name: "Private On-Premises",
+    icon: Server,
+    featured: true,
+    tagline: "Dedicated deployment within the hospital's private server infrastructure.",
+    characteristics: [
+      "Direct installation on hospital server hardware",
+      "Local network data custody & residency",
+      "LAN continuity during external broadband outages",
+      "Hospital IT administrative control",
+      "Hardware-level security integration",
+    ],
+  },
+  {
+    name: "Multi-Branch Network",
+    icon: Network,
+    tagline: "Coordinated deployment across hub hospitals and satellite clinic branches.",
+    characteristics: [
+      "Standardized multi-clinic tariffs and formularies",
+      "Branch-scoped patient encounter queues",
+      "Consolidated group-wide leadership reporting",
+      "Centralized staff permissions management",
+      "Configurable facility topologies",
+    ],
+  },
+];
+
+const comparisonMatrix = [
+  {
+    feature: "Primary Infrastructure",
+    cloud: "Dedicated Cloud Instance",
+    onPrem: "Hospital Local Server Hardware",
+    network: "Central Hub + Distributed Workstations",
+  },
+  {
+    feature: "Broadband Dependency",
+    cloud: "Requires Continuous Broadband",
+    onPrem: "Local Area Network (LAN) Continuity",
+    network: "LAN at Branch + Periodic Sync",
+  },
+  {
+    feature: "Data Custody",
+    cloud: "Encrypted Cloud Storage",
+    onPrem: "100% On-Premises Facility Custody",
+    onPremFull: true,
+    network: "Facility Group Sovereignty",
+  },
+  {
+    feature: "Catalog Administration",
+    cloud: "Managed Web Console",
+    onPrem: "Internal System Administrator",
+    network: "Centralized Headquarters Console",
+  },
+  {
+    feature: "Multi-Branch Support",
+    cloud: "Supported",
+    onPrem: "Branch-Specific",
+    network: "Native Multi-Facility Architecture",
+  },
+];
 
 export default function PricingPage() {
   return (
@@ -20,176 +99,115 @@ export default function PricingPage() {
 
       <main className="flex-1">
         {/* Hero */}
-        <section className="border-b border-border/80 bg-muted/20 py-20">
+        <section className="border-b border-border/80 bg-gradient-to-b from-card/60 via-background to-background py-20 sm:py-28">
+          <MarketingContainer className="text-center">
+            <MarketingBadge className="mb-4">Deployment Architectures & Procurement</MarketingBadge>
+            <h1 className="text-3xl font-extrabold tracking-tight sm:text-5xl lg:text-6xl text-balance max-w-4xl mx-auto">
+              Deployment models structured around your facility.
+            </h1>
+            <p className="mt-6 text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto text-balance leading-relaxed">
+              Hospital software procurement requires flexible infrastructure. MarkCare supports cloud-hosted and dedicated on-premises deployments based on your facility&apos;s physical network, bed capacity, and data governance policies.
+            </p>
+          </MarketingContainer>
+        </section>
+
+        {/* Deployment Architectures */}
+        <MarketingSection>
           <MarketingContainer>
-            <div className="max-w-3xl">
-              <MarketingBadge className="mb-3">Deployment & Licensing</MarketingBadge>
-              <h1 className="text-4xl font-extrabold tracking-tight sm:text-5xl text-foreground">
-                Flexible hospital deployment models with customized quotes.
-              </h1>
-              <p className="mt-4 text-lg text-muted-foreground leading-relaxed">
-                Hospital sizes and operational complexities vary significantly. We provide customized commercial terms based on your active branches, bed capacity, and deployment preferences.
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-stretch">
+              {deploymentModels.map((plan) => (
+                <div
+                  key={plan.name}
+                  className={`rounded-2xl border bg-card p-6 sm:p-7 shadow-xs flex flex-col justify-between ${
+                    plan.featured ? "border-primary/40 shadow-md shadow-primary/5" : "border-border/80"
+                  }`}
+                >
+                  <div>
+                    <div className="size-11 rounded-xl bg-primary/10 text-primary flex items-center justify-center mb-4">
+                      <plan.icon className="size-5" aria-hidden="true" />
+                    </div>
+
+                    <h3 className="text-xl font-bold text-foreground mb-1">{plan.name}</h3>
+                    <p className="text-xs text-muted-foreground leading-relaxed mb-6">{plan.tagline}</p>
+
+                    <div className="border-t border-border/60 pt-4 space-y-2.5">
+                      {plan.characteristics.map((item) => (
+                        <div key={item} className="flex items-start gap-2 text-xs text-muted-foreground">
+                          <CheckCircle2 className="size-4 text-primary shrink-0 mt-0.5" aria-hidden="true" />
+                          <span>{item}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div className="mt-8 pt-4 border-t border-border/60">
+                    <Button asChild className="w-full bg-primary text-primary-foreground font-semibold shadow-xs">
+                      <Link href="/request-demo">Request Architecture Assessment</Link>
+                    </Button>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* Architecture Comparison Table */}
+            <div className="mt-20">
+              <div className="mb-6 text-center max-w-2xl mx-auto">
+                <h3 className="text-xl sm:text-2xl font-bold text-foreground">Technical Deployment Comparison</h3>
+                <p className="text-xs sm:text-sm text-muted-foreground mt-1">
+                  Evaluate infrastructure, network continuity, and data custody parameters.
+                </p>
+              </div>
+
+              <div className="overflow-x-auto rounded-2xl border border-border/80 bg-card">
+                <table className="w-full text-left text-xs sm:text-sm">
+                  <thead className="border-b border-border bg-muted/40 text-muted-foreground">
+                    <tr>
+                      <th className="p-4 font-semibold">Technical Parameter</th>
+                      <th className="p-4 font-semibold">Managed Cloud</th>
+                      <th className="p-4 font-semibold">Private On-Premises</th>
+                      <th className="p-4 font-semibold">Multi-Branch Network</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-border/60 text-foreground">
+                    {comparisonMatrix.map((row) => (
+                      <tr key={row.feature} className="hover:bg-muted/20">
+                        <td className="p-4 font-medium">{row.feature}</td>
+                        <td className="p-4 text-muted-foreground">{row.cloud}</td>
+                        <td className="p-4 text-muted-foreground">{row.onPrem}</td>
+                        <td className="p-4 text-muted-foreground">{row.network}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            {/* Procurement Transparency Notice */}
+            <div className="mt-16 rounded-2xl border border-border/80 bg-card p-6 sm:p-8 max-w-3xl mx-auto">
+              <div className="flex items-center gap-2.5 mb-3">
+                <ShieldCheck className="size-5 text-primary" aria-hidden="true" />
+                <h4 className="text-base font-bold text-foreground">Hospital Procurement & Licensing</h4>
+              </div>
+              <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
+                MarkCare commercial agreements are structured transparently based on facility scope: active inpatient bed capacity, outpatient volume tiers, and deployment architecture. We do not assess per-patient transaction fees. Speak with our team to obtain an official facility quotation tailored to your operational requirements.
               </p>
             </div>
           </MarketingContainer>
-        </section>
+        </MarketingSection>
 
-        {/* Pricing Tiers */}
-        <section className="py-20 border-b border-border">
-          <MarketingContainer>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-              {/* Cloud SaaS */}
-              <div className="rounded-2xl border-2 border-primary bg-card p-8 shadow-xs flex flex-col justify-between relative">
-                <div className="absolute -top-3 right-6 rounded-full bg-primary px-3 py-0.5 text-xs font-semibold text-primary-foreground">
-                  Recommended for Clinics & Networks
-                </div>
-                <div>
-                  <div className="inline-flex p-3 rounded-xl bg-primary/10 text-primary mb-4">
-                    <Cloud className="h-6 w-6" />
-                  </div>
-                  <h2 className="text-2xl font-bold text-foreground">MarkCare Cloud</h2>
-                  <p className="text-sm font-medium text-primary mt-1">Managed Cloud Infrastructure</p>
-                  <p className="text-muted-foreground text-sm mt-4 leading-relaxed">
-                    A fully managed deployment hosted on dedicated, isolated cloud resources. We handle system maintenance, database backups, and software updates so your clinical teams can focus entirely on patient care.
-                  </p>
-
-                  <div className="mt-6 pt-6 border-t border-border space-y-3">
-                    <span className="text-xs font-semibold text-foreground uppercase tracking-wider block">Deployment Features:</span>
-                    <ul className="space-y-2 text-xs text-muted-foreground">
-                      <li className="flex items-center gap-2">
-                        <CheckCircle2 className="h-4 w-4 text-primary shrink-0" /> Zero hospital server hardware required
-                      </li>
-                      <li className="flex items-center gap-2">
-                        <CheckCircle2 className="h-4 w-4 text-primary shrink-0" /> Automated daily database backups
-                      </li>
-                      <li className="flex items-center gap-2">
-                        <CheckCircle2 className="h-4 w-4 text-primary shrink-0" /> Rolling software updates and security patches
-                      </li>
-                      <li className="flex items-center gap-2">
-                        <CheckCircle2 className="h-4 w-4 text-primary shrink-0" /> Secure SSL/TLS endpoint encryption
-                      </li>
-                      <li className="flex items-center gap-2">
-                        <CheckCircle2 className="h-4 w-4 text-primary shrink-0" /> Multi-branch centralized administration
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-
-                <div className="mt-8 pt-6 border-t border-border">
-                  <div className="mb-4">
-                    <span className="text-2xl font-bold text-foreground">Custom Quote</span>
-                    <span className="text-xs text-muted-foreground block mt-0.5">Based on active clinics and branches</span>
-                  </div>
-                  <Button className="w-full bg-primary text-primary-foreground" size="lg" asChild>
-                    <Link href="/request-demo">Request Cloud Proposal</Link>
-                  </Button>
-                </div>
-              </div>
-
-              {/* Enterprise On-Premise */}
-              <div className="rounded-2xl border border-border bg-card p-8 shadow-xs flex flex-col justify-between">
-                <div>
-                  <div className="inline-flex p-3 rounded-xl bg-muted text-foreground mb-4">
-                    <Server className="h-6 w-6" />
-                  </div>
-                  <h2 className="text-2xl font-bold text-foreground">MarkCare Enterprise</h2>
-                  <p className="text-sm font-medium text-muted-foreground mt-1">Hospital On-Premise Deployment</p>
-                  <p className="text-muted-foreground text-sm mt-4 leading-relaxed">
-                    Designed for large hospitals, regional referral facilities, or institutions requiring complete control over server hardware, internal network perimeters, and internal data residency.
-                  </p>
-
-                  <div className="mt-6 pt-6 border-t border-border space-y-3">
-                    <span className="text-xs font-semibold text-foreground uppercase tracking-wider block">Deployment Features:</span>
-                    <ul className="space-y-2 text-xs text-muted-foreground">
-                      <li className="flex items-center gap-2">
-                        <CheckCircle2 className="h-4 w-4 text-primary shrink-0" /> Deployed on hospital-owned server hardware
-                      </li>
-                      <li className="flex items-center gap-2">
-                        <CheckCircle2 className="h-4 w-4 text-primary shrink-0" /> Local area network (LAN) operational mode
-                      </li>
-                      <li className="flex items-center gap-2">
-                        <CheckCircle2 className="h-4 w-4 text-primary shrink-0" /> Complete institutional data sovereignty
-                      </li>
-                      <li className="flex items-center gap-2">
-                        <CheckCircle2 className="h-4 w-4 text-primary shrink-0" /> On-site IT team training and handover
-                      </li>
-                      <li className="flex items-center gap-2">
-                        <CheckCircle2 className="h-4 w-4 text-primary shrink-0" /> Dedicated enterprise SLA and technical support
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-
-                <div className="mt-8 pt-6 border-t border-border">
-                  <div className="mb-4">
-                    <span className="text-2xl font-bold text-foreground">Custom Quote</span>
-                    <span className="text-xs text-muted-foreground block mt-0.5">Based on facility scale and support SLA</span>
-                  </div>
-                  <Button variant="outline" className="w-full" size="lg" asChild>
-                    <Link href="/request-demo">Inquire About On-Premise</Link>
-                  </Button>
-                </div>
-              </div>
-            </div>
-          </MarketingContainer>
-        </section>
-
-        {/* Implementation Workflow */}
-        <section className="py-20 bg-muted/30 border-b border-border">
-          <MarketingContainer>
-            <div className="max-w-2xl mb-12">
-              <MarketingBadge>Onboarding Process</MarketingBadge>
-              <h2 className="text-3xl font-bold tracking-tight text-foreground mt-2">
-                Structured deployment: Configure → Train → Go Live.
-              </h2>
-              <p className="text-sm text-muted-foreground mt-3 leading-relaxed">
-                Hospital transitions require careful coordination. Our implementation methodology ensures clinical services continue uninterrupted.
-              </p>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              <div className="p-6 rounded-xl border border-border bg-card">
-                <span className="text-xs font-bold text-primary">PHASE 1</span>
-                <h3 className="text-base font-bold text-foreground mt-1">Configure & Catalog Setup</h3>
-                <p className="text-xs text-muted-foreground mt-2 leading-relaxed">
-                  We configure your hospital branches, clinics, wards, master drug catalogs, diagnostic panels, and service billing tariffs.
-                </p>
-              </div>
-
-              <div className="p-6 rounded-xl border border-border bg-card">
-                <span className="text-xs font-bold text-primary">PHASE 2</span>
-                <h3 className="text-base font-bold text-foreground mt-1">Departmental Training</h3>
-                <p className="text-xs text-muted-foreground mt-2 leading-relaxed">
-                  Clinicians, triage nurses, pharmacy technicians, lab technologists, and cashiers receive hands-on training with their specific desks.
-                </p>
-              </div>
-
-              <div className="p-6 rounded-xl border border-border bg-card">
-                <span className="text-xs font-bold text-primary">PHASE 3</span>
-                <h3 className="text-base font-bold text-foreground mt-1">Supervised Go-Live</h3>
-                <p className="text-xs text-muted-foreground mt-2 leading-relaxed">
-                  Our team provides direct operational floor support on day one of queue migration, ensuring immediate resolution of any bottlenecks.
-                </p>
-              </div>
-            </div>
-          </MarketingContainer>
-        </section>
-
-        {/* FAQ Teaser */}
-        <section className="py-16 bg-card">
-          <MarketingContainer className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-            <div>
-              <h3 className="text-lg font-bold text-foreground">Have questions about licensing and terms?</h3>
-              <p className="text-xs text-muted-foreground mt-1">Explore our detailed answers to common architectural and billing questions.</p>
-            </div>
-            <Button variant="outline" asChild>
-              <Link href="/resources/faq">
-                Read FAQ
-                <ArrowRight className="ml-1.5 h-3.5 w-3.5" />
-              </Link>
-            </Button>
-          </MarketingContainer>
-        </section>
+        {/* CTA Banner */}
+        <MarketingCtaBanner
+          headline="Discuss licensing and deployment for your hospital"
+          description="Speak directly with our implementation architects to evaluate server specifications, network topology, and rollout timelines."
+          primaryCta={{
+            label: "Request a Demonstration",
+            href: "/request-demo",
+          }}
+          secondaryCta={{
+            label: "Contact Inquiries",
+            href: "/contact",
+          }}
+        />
       </main>
 
       <MarketingFooter />
