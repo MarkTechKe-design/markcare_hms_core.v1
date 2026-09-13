@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
-import { Building2, Mail, Phone, User, Calendar, CheckCircle2, AlertCircle, Loader2 } from "lucide-react";
+import { Building2, Mail, Phone, User, CheckCircle2, AlertCircle, Loader2 } from "lucide-react";
 import {
   MarketingHeader,
   MarketingFooter,
@@ -278,3 +278,5 @@ export default function RequestDemoPage() {
     </div>
   );
 }
+
+
