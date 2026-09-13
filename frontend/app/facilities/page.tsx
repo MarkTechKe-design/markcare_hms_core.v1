@@ -1,4 +1,4 @@
-import Link from "next/link";
+﻿import Link from "next/link";
 import { ArrowRight, Building2, GitBranch, MapPin, Users } from "lucide-react";
 import { PublicSiteHeader } from "@/components/public/public-site-header";
 import { Button } from "@/components/ui/button";
@@ -31,7 +31,7 @@ export default function FacilitiesPage() {
               Facility structure for real hospital work.
             </h1>
             <p className="max-w-2xl text-base leading-8 text-muted-foreground md:text-lg">
-              Invinceible Core HMS keeps hospitals, branches, departments,
+              MarkCare HMS keeps hospitals, branches, departments,
               clinics, staff, and service points organized around daily
               operations.
             </p>
@@ -101,3 +101,4 @@ export default function FacilitiesPage() {
     </main>
   );
 }
+

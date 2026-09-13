@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import * as React from "react";
 import {
@@ -448,7 +448,7 @@ export default function MedicalRecordsPage() {
                 <p>{designation || "Designation"}</p>
               </div>
               <small>
-                This report is generated from Invinceible Core HMS and must be
+                This report is generated from MarkCare HMS and must be
                 reviewed and signed by the responsible clinician.
               </small>
             </footer>
@@ -458,3 +458,4 @@ export default function MedicalRecordsPage() {
     </div>
   );
 }
+

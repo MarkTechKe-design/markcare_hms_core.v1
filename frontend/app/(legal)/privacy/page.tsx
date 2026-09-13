@@ -1,9 +1,9 @@
-import { LegalPageLayout } from "@/components/legal/legal-page-layout";
+﻿import { LegalPageLayout } from "@/components/legal/legal-page-layout";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Privacy Policy | Invinceible Core HMS",
-  description: "Privacy Policy for Invinceible Core Hospital Management System",
+  title: "Privacy Policy | MarkCare HMS",
+  description: "Privacy Policy for MarkCare Hospital Management System",
 };
 
 const PRIVACY_TOC = [
@@ -26,12 +26,12 @@ export default function PrivacyPolicyPage() {
       toc={PRIVACY_TOC}
     >
       <p className="lead text-lg text-muted-foreground">
-        Invinceible Core Software Firm (&ldquo;we&rdquo;, &ldquo;our&rdquo;, or &ldquo;us&rdquo;) is committed to protecting the privacy and security of your personal data and sensitive health data. This Privacy Policy outlines our practices in compliance with the Kenya Data Protection Act, 2019.
+        [MarkCare Operating Entity — Subject to Legal Review] (&ldquo;we&rdquo;, &ldquo;our&rdquo;, or &ldquo;us&rdquo;) is committed to protecting the privacy and security of your personal data and sensitive health data. This Privacy Policy outlines our practices in compliance with the Kenya Data Protection Act, 2019.
       </p>
 
       <h2 id="introduction">1. Introduction</h2>
       <p>
-        This Privacy Policy applies to all users (hospital staff, administrators, and healthcare professionals) accessing the Invinceible Core HMS (&ldquo;the System&rdquo;). It details how we act as both a Data Controller (for your account information) and a Data Processor (for the patient health records managed by your facility).
+        This Privacy Policy applies to all users (hospital staff, administrators, and healthcare professionals) accessing the MarkCare Hospital Management System (&ldquo;the System&rdquo;). It details how we act as both a Data Controller (for your account information) and a Data Processor (for the patient health records managed by your facility).
       </p>
 
       <h2 id="data-collection">2. Information We Collect</h2>
@@ -89,9 +89,10 @@ export default function PrivacyPolicyPage() {
         If you have any questions or concerns regarding this Privacy Policy or our data processing practices, please contact our Data Protection Officer at:
       </p>
       <p>
-        <strong>Email:</strong> dpo@invinceiblecore.com<br/>
-        <strong>Address:</strong> Invinceible Core Software Firm, Nairobi, Kenya.
+        <strong>Email:</strong> [privacy-office@markcare.domain — Subject to Legal Review]<br/>
+        <strong>Address:</strong> [MarkCare Operating Entity — Subject to Legal Review], Nairobi, Kenya.
       </p>
     </LegalPageLayout>
   );
 }
+

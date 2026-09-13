@@ -1,9 +1,9 @@
-import { LegalPageLayout } from "@/components/legal/legal-page-layout";
+﻿import { LegalPageLayout } from "@/components/legal/legal-page-layout";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Terms of Use | Invinceible Core HMS",
-  description: "Terms of Use for Invinceible Core Hospital Management System",
+  title: "Terms of Use | MarkCare HMS",
+  description: "Terms of Use for MarkCare Hospital Management System",
 };
 
 const TERMS_TOC = [
@@ -28,17 +28,17 @@ export default function TermsOfUsePage() {
       toc={TERMS_TOC}
     >
       <p className="lead text-lg text-muted-foreground">
-        Welcome to Invinceible Core HMS (&ldquo;the System&rdquo;). These Terms of Use govern your access to and use of our Hospital Management Information System, tailored for healthcare facilities in the Republic of Kenya.
+        Welcome to MarkCare HMS (&ldquo;the System&rdquo;). These Terms of Use govern your access to and use of our Hospital Management Information System, tailored for healthcare facilities in the Republic of Kenya.
       </p>
 
       <h2 id="acceptance">1. Acceptance of Terms</h2>
       <p>
-        By accessing or using Invinceible Core HMS, you (&ldquo;the User&rdquo; or &ldquo;the Facility&rdquo;) agree to be bound by these Terms of Use and our Privacy Policy. If you are accepting these terms on behalf of a hospital, clinic, or other legal entity, you represent that you have the authority to bind such entity to these terms.
+        By accessing or using MarkCare HMS, you (&ldquo;the User&rdquo; or &ldquo;the Facility&rdquo;) agree to be bound by these Terms of Use and our Privacy Policy. If you are accepting these terms on behalf of a hospital, clinic, or other legal entity, you represent that you have the authority to bind such entity to these terms.
       </p>
 
       <h2 id="description">2. Description of Service</h2>
       <p>
-        Invinceible Core HMS is a cloud-hosted software-as-a-service (SaaS) platform designed to manage hospital operations including but not limited to patient registration, triage, consultations, pharmacy, laboratory, inpatient departments (IPD), billing, and integration with external platforms such as the Social Health Authority (SHA) and future KRA eTIMS implementations.
+        MarkCare HMS is a cloud-hosted software-as-a-service (SaaS) platform designed to manage hospital operations including but not limited to patient registration, triage, consultations, pharmacy, laboratory, inpatient departments (IPD), billing, and integration with external platforms such as the Social Health Authority (SHA) and future KRA eTIMS implementations.
       </p>
 
       <h2 id="dpa-dha">3. Compliance with Kenyan Law</h2>
@@ -87,12 +87,12 @@ export default function TermsOfUsePage() {
 
       <h2 id="intellectual-property">8. Intellectual Property</h2>
       <p>
-        Invinceible Core Software Firm retains all rights, title, and interest in and to the System, including its source code, design, and architecture. The Facility retains all rights to its patient and operational data entered into the System.
+        [MarkCare Operating Entity — Subject to Legal Review] retains all rights, title, and interest in and to the System, including its source code, design, and architecture. The Facility retains all rights to its patient and operational data entered into the System.
       </p>
 
       <h2 id="limitation">9. Limitation of Liability</h2>
       <p>
-        While we strive for 99.9% uptime and clinical safety, Invinceible Core HMS is an administrative tool. It does not replace professional medical judgment. We shall not be liable for any direct or indirect damages, medical malpractice claims, or loss of profits arising from the use or inability to use the System.
+        While we strive for 99.9% uptime and clinical safety, MarkCare HMS is an administrative tool. It does not replace professional medical judgment. We shall not be liable for any direct or indirect damages, medical malpractice claims, or loss of profits arising from the use or inability to use the System.
       </p>
 
       <h2 id="termination">10. Termination</h2>
@@ -102,3 +102,4 @@ export default function TermsOfUsePage() {
     </LegalPageLayout>
   );
 }
+

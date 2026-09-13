@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import * as React from "react";
 import Link from "next/link";
@@ -51,7 +51,7 @@ const loginHighlights = [
   {
     icon: Wallet,
     title: "Payment integrity",
-    text: "Cash, M-PESA, SHA coverage — reconciled and fiscal-ready.",
+    text: "Cash, M-PESA, SHA coverage â€” reconciled and fiscal-ready.",
   },
   {
     icon: FlaskConical,
@@ -139,7 +139,7 @@ export default function LoginPageClient() {
             </span>
             <div>
               <p className="text-lg leading-tight font-bold tracking-tight">
-                Invinceible Core
+                MarkCare HMS
               </p>
               <p className="text-xs font-medium tracking-[0.22em] uppercase opacity-80">
                 Hospital OS
@@ -153,7 +153,7 @@ export default function LoginPageClient() {
             Smarter care starts with a connected hospital.
           </h1>
           <p className="mt-4 max-w-md text-base leading-7 opacity-85">
-            Patient flow, billing, pharmacy, laboratory, and admissions —
+            Patient flow, billing, pharmacy, laboratory, and admissions â€”
             one secure, audited workspace for the whole facility.
           </p>
         </div>
@@ -184,7 +184,7 @@ export default function LoginPageClient() {
               </span>
               <div>
                 <p className="leading-tight font-bold tracking-tight">
-                  Invinceible <span className="text-gradient-brand">Core</span>
+                  MarkCare <span className="text-gradient-brand">HMS</span>
                 </p>
                 <p className="text-[0.65rem] font-medium tracking-widest text-muted-foreground uppercase">
                   Hospital OS
@@ -301,12 +301,12 @@ export default function LoginPageClient() {
                   className="h-11 w-full text-[0.95rem] font-semibold"
                   disabled={isLoading}
                 >
-                  {isLoading ? "Signing in…" : "Sign in"}
+                  {isLoading ? "Signing inâ€¦" : "Sign in"}
                   <ArrowRight data-icon="inline-end" aria-hidden />
                 </Button>
                 
                 <p className="mt-6 text-center text-[0.8rem] text-muted-foreground">
-                  By signing in to Invinceible Core HMS, you acknowledge that you have read and agree to our{" "}
+                  By signing in to MarkCare HMS, you acknowledge that you have read and agree to our{" "}
                   <a href="/terms" className="font-medium text-brand hover:underline" target="_blank" rel="noopener noreferrer">
                     Terms of Use
                   </a>{" "}
@@ -369,3 +369,4 @@ export default function LoginPageClient() {
     </main>
   );
 }
+

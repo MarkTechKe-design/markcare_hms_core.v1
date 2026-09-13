@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
@@ -94,7 +94,7 @@ export default function ConsentPage() {
             <ShieldCheck className="size-6" />
           </div>
           <h1 className="text-2xl font-bold tracking-tight text-foreground sm:text-3xl">
-            Welcome to Invinceible Core HMS
+            Welcome to MarkCare HMS
           </h1>
           <p className="mt-2 text-sm text-muted-foreground sm:text-base">
             Before continuing, you must review and accept our updated legal agreements.
@@ -190,3 +190,4 @@ export default function ConsentPage() {
     </main>
   );
 }
+
