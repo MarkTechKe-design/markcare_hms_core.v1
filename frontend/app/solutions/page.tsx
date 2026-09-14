@@ -80,11 +80,11 @@ export default function SolutionsPage() {
             {solutions.map((item) => (
               <div
                 key={item.role}
-                className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center rounded-3xl border border-border/80 bg-card p-6 sm:p-10 shadow-xs"
+                className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center rounded-3xl border border-border/80 bg-card p-6 sm:p-10 shadow-xs mc-card-interactive mc-reveal group"
               >
                 <div className="lg:col-span-6 space-y-4">
                   <div className="flex items-center gap-3">
-                    <div className="size-10 rounded-xl bg-primary/10 text-primary flex items-center justify-center">
+                    <div className="size-10 rounded-xl bg-primary/10 text-primary flex items-center justify-center mc-icon-interactive">
                       <item.icon className="size-5" aria-hidden="true" />
                     </div>
                     <span className="text-xs font-semibold text-primary uppercase tracking-wider">

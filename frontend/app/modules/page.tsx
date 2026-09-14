@@ -188,11 +188,11 @@ export default function ModulesPage() {
                     {group.modules.map((m) => (
                       <div
                         key={m.title}
-                        className="rounded-2xl border border-border/80 bg-card p-6 shadow-xs flex flex-col justify-between"
+                        className="rounded-2xl border border-border/80 bg-card p-6 shadow-xs flex flex-col justify-between mc-card-interactive mc-reveal group"
                       >
                         <div>
                           <div className="flex items-center justify-between mb-4">
-                            <div className="size-10 rounded-xl bg-primary/10 text-primary flex items-center justify-center">
+                            <div className="size-10 rounded-xl bg-primary/10 text-primary flex items-center justify-center mc-icon-interactive">
                               <m.icon className="size-5" aria-hidden="true" />
                             </div>
                             <MarketingBadge variant={m.status}>
@@ -206,7 +206,7 @@ export default function ModulesPage() {
                         <div className="mt-5 pt-3 border-t border-border/60">
                           <Link
                             href={m.href}
-                            className="inline-flex items-center text-xs font-semibold text-primary hover:underline"
+                            className="inline-flex items-center text-xs font-semibold text-primary mc-arrow-interactive hover:underline"
                           >
                             {m.ctaLabel}
                             <ArrowRight className="ml-1 size-3.5" aria-hidden="true" />

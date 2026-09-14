@@ -51,7 +51,7 @@ export default function IntegrationsPage() {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              <div className="rounded-xl border border-border bg-card p-6 shadow-xs flex flex-col justify-between">
+              <div className="rounded-xl border border-border bg-card p-6 shadow-xs flex flex-col justify-between mc-card-interactive mc-reveal group">
                 <div>
                   <div className="flex items-center justify-between mb-4">
                     <div className="p-2.5 rounded-lg bg-emerald-500/10 text-emerald-600">
@@ -71,7 +71,7 @@ export default function IntegrationsPage() {
                 </div>
               </div>
 
-              <div className="rounded-xl border border-border bg-card p-6 shadow-xs flex flex-col justify-between">
+              <div className="rounded-xl border border-border bg-card p-6 shadow-xs flex flex-col justify-between mc-card-interactive mc-reveal group">
                 <div>
                   <div className="flex items-center justify-between mb-4">
                     <div className="p-2.5 rounded-lg bg-blue-500/10 text-blue-600">
@@ -91,7 +91,7 @@ export default function IntegrationsPage() {
                 </div>
               </div>
 
-              <div className="rounded-xl border border-border bg-card p-6 shadow-xs flex flex-col justify-between">
+              <div className="rounded-xl border border-border bg-card p-6 shadow-xs flex flex-col justify-between mc-card-interactive mc-reveal group">
                 <div>
                   <div className="flex items-center justify-between mb-4">
                     <div className="p-2.5 rounded-lg bg-amber-500/10 text-amber-600">
@@ -111,7 +111,7 @@ export default function IntegrationsPage() {
                 </div>
               </div>
 
-              <div className="rounded-xl border border-border bg-card p-6 shadow-xs flex flex-col justify-between">
+              <div className="rounded-xl border border-border bg-card p-6 shadow-xs flex flex-col justify-between mc-card-interactive mc-reveal group">
                 <div>
                   <div className="flex items-center justify-between mb-4">
                     <div className="p-2.5 rounded-lg bg-purple-500/10 text-purple-600">

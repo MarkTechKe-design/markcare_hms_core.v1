@@ -140,7 +140,7 @@ export default function PlatformPage() {
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div className="rounded-2xl border border-border/70 bg-background p-6 space-y-3">
+                <div className="rounded-2xl border border-border/70 bg-card p-6 space-y-3 mc-card-interactive mc-reveal group">
                   <div className="size-10 rounded-xl bg-blue-500/10 text-blue-600 dark:text-blue-400 flex items-center justify-center">
                     <Stethoscope className="size-5" aria-hidden="true" />
                   </div>
@@ -153,7 +153,7 @@ export default function PlatformPage() {
                   </ul>
                 </div>
 
-                <div className="rounded-2xl border border-border/70 bg-background p-6 space-y-3">
+                <div className="rounded-2xl border border-border/70 bg-card p-6 space-y-3 mc-card-interactive mc-reveal group">
                   <div className="size-10 rounded-xl bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 flex items-center justify-center">
                     <Pill className="size-5" aria-hidden="true" />
                   </div>
@@ -166,7 +166,7 @@ export default function PlatformPage() {
                   </ul>
                 </div>
 
-                <div className="rounded-2xl border border-border/70 bg-background p-6 space-y-3">
+                <div className="rounded-2xl border border-border/70 bg-card p-6 space-y-3 mc-card-interactive mc-reveal group">
                   <div className="size-10 rounded-xl bg-amber-500/10 text-amber-600 dark:text-amber-400 flex items-center justify-center">
                     <CreditCard className="size-5" aria-hidden="true" />
                   </div>
@@ -194,7 +194,7 @@ export default function PlatformPage() {
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {patientCarePipeline.map((item) => (
-                <div key={item.step} className="rounded-2xl border border-border/80 bg-card p-6 shadow-xs flex flex-col justify-between">
+                <div key={item.step} className="rounded-2xl border border-border/80 bg-card p-6 shadow-xs flex flex-col justify-between mc-card-interactive mc-reveal group">
                   <div>
                     <span className="text-xs font-mono font-bold text-primary block mb-2">{item.step}</span>
                     <h4 className="text-base font-bold text-foreground mb-1">{item.title}</h4>

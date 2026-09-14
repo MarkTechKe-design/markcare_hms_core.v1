@@ -118,12 +118,12 @@ export default function PricingPage() {
               {deploymentModels.map((plan) => (
                 <div
                   key={plan.name}
-                  className={`rounded-2xl border bg-card p-6 sm:p-7 shadow-xs flex flex-col justify-between ${
+                  className={`rounded-2xl border bg-card p-6 sm:p-7 shadow-xs flex flex-col justify-between mc-card mc-card-interactive mc-reveal group ${
                     plan.featured ? "border-primary/40 shadow-md shadow-primary/5" : "border-border/80"
                   }`}
                 >
                   <div>
-                    <div className="size-11 rounded-xl bg-primary/10 text-primary flex items-center justify-center mb-4">
+                    <div className="size-11 rounded-xl bg-primary/10 text-primary flex items-center justify-center mb-4 mc-icon-interactive">
                       <plan.icon className="size-5" aria-hidden="true" />
                     </div>
 
