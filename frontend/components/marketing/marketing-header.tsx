@@ -1,186 +1,202 @@
-﻿"use client";
+"use client";
 
-import React, { useState, useEffect } from "react";
+import * as React from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { Menu, X, ArrowRight } from "lucide-react";
-import { AppLogo } from "@/components/shared/app-logo";
-import { Button } from "@/components/ui/button";
+import { Menu, X, ChevronRight } from "lucide-react";
 import { ThemeToggle } from "@/components/shared/theme-toggle";
 
-export interface NavItem {
-  label: string;
+interface NavItem {
+  name: string;
   href: string;
 }
 
-const navItems: NavItem[] = [
-  { label: "Platform", href: "/platform" },
-  { label: "Solutions", href: "/solutions" },
-  { label: "Modules", href: "/modules" },
-  { label: "About", href: "/about" },
-  { label: "Blog", href: "/blog" },
-  { label: "Contact", href: "/contact" },
-  { label: "Pricing", href: "/pricing" },
+const NAVIGATION_ITEMS: NavItem[] = [
+  { name: "Platform", href: "/platform" },
+  { name: "Solutions", href: "/solutions" },
+  { name: "Modules", href: "/modules" },
+  { name: "Integrations", href: "/integrations" },
+  { name: "Pricing", href: "/pricing" },
+  { name: "FAQ", href: "/resources/faq" },
+  { name: "About", href: "/about" },
+  { name: "Blog", href: "/blog" },
+  { name: "Contact", href: "/contact" },
 ];
 
 export function MarketingHeader() {
-  const [isOpen, setIsOpen] = useState(false);
-  const [isScrolled, setIsScrolled] = useState(false);
+  const [isScrolled, setIsScrolled] = React.useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false);
   const pathname = usePathname();
+  const menuRef = React.useRef<HTMLDivElement>(null);
+  const triggerRef = React.useRef<HTMLButtonElement>(null);
+
   const isHome = pathname === "/";
 
-  useEffect(() => {
+  React.useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
+      setIsScrolled(window.scrollY > 16);
     };
     handleScroll();
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  useEffect(() => {
+  React.useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Escape" && isOpen) {
-        setIsOpen(false);
+      if (e.key === "Escape" && mobileMenuOpen) {
+        setMobileMenuOpen(false);
+        triggerRef.current?.focus();
       }
     };
-    window.addEventListener("keydown", handleKeyDown);
-    return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [isOpen]);
 
-  const isTransparentHero = isHome && !isScrolled;
+    if (mobileMenuOpen) {
+      document.body.style.overflow = "hidden";
+      window.addEventListener("keydown", handleKeyDown);
+    } else {
+      document.body.style.overflow = "";
+    }
+
+    return () => {
+      document.body.style.overflow = "";
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [mobileMenuOpen]);
+
+  React.useEffect(() => {
+    setMobileMenuOpen(false);
+  }, [pathname]);
+
+  const headerBackgroundClass = isHome
+    ? isScrolled
+      ? "bg-background/90 backdrop-blur-md border-b border-border/80 shadow-xs"
+      : "bg-transparent border-b border-transparent"
+    : "bg-background/95 backdrop-blur-md border-b border-border/80 shadow-xs";
 
   return (
-    <header
-      className={`sticky top-0 z-50 w-full transition-all duration-300 ${
-        isTransparentHero
-          ? "border-b border-white/10 bg-slate-950/60 backdrop-blur-md text-white"
-          : "border-b border-border/80 bg-background/95 backdrop-blur-md text-foreground supports-[backdrop-filter]:bg-background/80"
-      }`}
-    >
-      <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center gap-6 lg:gap-8">
+    <header className={`sticky top-0 inset-x-0 z-50 transition-all duration-200 ${headerBackgroundClass}`}>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between h-16 md:h-18 gap-2">
+          {/* Logo */}
           <Link
             href="/"
-            className="flex items-center gap-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-md p-1"
-            aria-label="MarkCare HMS Home"
+            className="flex items-center gap-2 rounded-md shrink-0 focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
           >
-            <AppLogo iconOnly className="h-9 w-9" />
-            <span
-              className={`text-base font-bold tracking-tight sm:text-lg ${
-                isTransparentHero ? "text-white" : "text-foreground"
-              }`}
-            >
-              MarkCare{" "}
-              <span
-                className={`font-medium text-sm ${
-                  isTransparentHero ? "text-slate-300" : "text-muted-foreground"
-                }`}
-              >
-                HMS
-              </span>
-            </span>
+            <div className="relative hidden sm:block h-8 w-32 lg:w-36">
+              <Image
+                src="/brand/logo.png"
+                alt="MarkCare Hospital Management System"
+                fill
+                priority
+                sizes="(max-width: 1024px) 128px, 144px"
+                className="object-contain object-left dark:brightness-110"
+              />
+            </div>
+            <div className="relative block sm:hidden size-8">
+              <Image
+                src="/brand/logo-icon.png"
+                alt="MarkCare HMS"
+                fill
+                priority
+                sizes="32px"
+                className="object-contain"
+              />
+            </div>
           </Link>
 
-          <nav className="hidden md:flex items-center gap-4 lg:gap-5" aria-label="Main Navigation">
-            {navItems.map((item) => {
-              const isActive = pathname === item.href;
+          {/* Complete 9-Item Desktop Navigation */}
+          <nav className="hidden lg:flex items-center gap-0.5 xl:gap-1" aria-label="Marketing Navigation">
+            {NAVIGATION_ITEMS.map((item) => {
+              const isActive = pathname === item.href || (item.href !== "/" && pathname.startsWith(`${item.href}/`));
               return (
                 <Link
-                  key={item.label}
+                  key={item.href}
                   href={item.href}
-                  className={`text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded px-1.5 py-1 ${
+                  className={`px-2 xl:px-2.5 py-1.5 text-xs xl:text-[13px] font-medium rounded-md transition-colors whitespace-nowrap ${
                     isActive
-                      ? "text-primary font-semibold"
-                      : isTransparentHero
-                      ? "text-slate-200 hover:text-white"
-                      : "text-muted-foreground hover:text-foreground"
-                  }`}
-                  aria-current={isActive ? "page" : undefined}
+                      ? "text-primary bg-primary/10 font-semibold"
+                      : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
+                  } focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-primary`}
                 >
-                  {item.label}
+                  {item.name}
                 </Link>
               );
             })}
           </nav>
-        </div>
 
-        <div className="hidden md:flex items-center gap-3">
-          <ThemeToggle />
-          <Link
-            href="/login"
-            className={`text-sm font-medium transition-colors px-2 py-1 rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary ${
-              isTransparentHero
-                ? "text-slate-200 hover:text-white"
-                : "text-muted-foreground hover:text-foreground"
-            }`}
-          >
-            Staff Login
-          </Link>
-          <Button
-            asChild
-            size="sm"
-            className="bg-primary text-primary-foreground font-semibold shadow-xs hover:bg-primary/90 focus-visible:ring-2 focus-visible:ring-primary"
-          >
-            <Link href="/request-demo">
-              Request Demo
-              <ArrowRight className="ml-1.5 size-3.5" aria-hidden="true" />
+          {/* Desktop Actions */}
+          <div className="hidden sm:flex items-center gap-2 shrink-0">
+            <ThemeToggle />
+            <Link
+              href="/login"
+              className="px-3 py-1.5 text-xs xl:text-sm font-medium text-muted-foreground hover:text-foreground transition-colors rounded-md focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-primary"
+            >
+              Sign In
             </Link>
-          </Button>
-        </div>
+            <Link
+              href="/request-demo"
+              className="inline-flex items-center justify-center px-3.5 py-1.5 text-xs xl:text-sm font-medium text-primary-foreground bg-primary hover:bg-primary/90 rounded-lg shadow-xs transition-all active:scale-[0.98] focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
+            >
+              Request Demo
+            </Link>
+          </div>
 
-        {/* Mobile Menu Button */}
-        <div className="flex items-center gap-2 md:hidden">
-          <ThemeToggle />
-          <button
-            type="button"
-            onClick={() => setIsOpen(!isOpen)}
-            className={`rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-primary ${
-              isTransparentHero
-                ? "text-white hover:bg-white/10"
-                : "text-muted-foreground hover:bg-muted hover:text-foreground"
-            }`}
-            aria-label="Toggle navigation menu"
-            aria-expanded={isOpen}
-            aria-controls="mobile-navigation-menu"
-          >
-            {isOpen ? <X className="size-5" aria-hidden="true" /> : <Menu className="size-5" aria-hidden="true" />}
-          </button>
+          {/* Mobile Actions */}
+          <div className="flex items-center gap-1.5 sm:hidden">
+            <ThemeToggle />
+            <button
+              ref={triggerRef}
+              type="button"
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              className="inline-flex items-center justify-center p-2 rounded-lg text-muted-foreground hover:text-foreground hover:bg-muted focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-primary"
+              aria-controls="mobile-navigation"
+              aria-expanded={mobileMenuOpen}
+              aria-label={mobileMenuOpen ? "Close main menu" : "Open main menu"}
+            >
+              {mobileMenuOpen ? (
+                <X className="size-6" aria-hidden="true" />
+              ) : (
+                <Menu className="size-6" aria-hidden="true" />
+              )}
+            </button>
+          </div>
         </div>
       </div>
 
-      {/* Mobile Menu Drawer */}
-      {isOpen && (
+      {/* Mobile Drawer */}
+      {mobileMenuOpen && (
         <div
-          id="mobile-navigation-menu"
-          className="border-b border-border bg-background px-4 pt-3 pb-6 md:hidden text-foreground"
+          id="mobile-navigation"
+          ref={menuRef}
+          className="fixed inset-x-0 top-16 bottom-0 z-40 bg-background/95 backdrop-blur-lg border-b border-border p-6 overflow-y-auto lg:hidden animate-in fade-in slide-in-from-top-2 duration-200"
         >
-          <nav className="flex flex-col gap-3">
-            {navItems.map((item) => (
+          <nav className="flex flex-col gap-1.5" aria-label="Mobile Menu">
+            {NAVIGATION_ITEMS.map((item) => (
               <Link
-                key={item.label}
+                key={item.href}
                 href={item.href}
-                className="text-base font-medium text-foreground hover:text-primary transition-colors py-1.5"
-                onClick={() => setIsOpen(false)}
+                className="flex items-center justify-between p-3 text-base font-medium rounded-lg text-foreground hover:bg-muted transition-colors"
               >
-                {item.label}
+                <span>{item.name}</span>
+                <ChevronRight className="size-4 text-muted-foreground" aria-hidden="true" />
               </Link>
             ))}
-            <hr className="my-2 border-border" />
+          </nav>
+
+          <div className="mt-6 pt-6 border-t border-border flex flex-col gap-3">
             <Link
               href="/login"
-              className="text-base font-medium text-muted-foreground hover:text-foreground transition-colors py-1.5"
-              onClick={() => setIsOpen(false)}
+              className="w-full text-center py-2.5 text-sm font-medium text-foreground border border-border rounded-lg hover:bg-muted transition-colors"
             >
-              Staff Portal Login
+              Staff Portal Sign In
             </Link>
-            <Button asChild className="w-full bg-primary text-primary-foreground font-semibold mt-2">
-              <Link href="/request-demo" onClick={() => setIsOpen(false)}>
-                Request a Demonstration
-                <ArrowRight className="ml-2 size-4" aria-hidden="true" />
-              </Link>
-            </Button>
-          </nav>
+            <Link
+              href="/request-demo"
+              className="w-full text-center py-2.5 text-sm font-medium text-primary-foreground bg-primary hover:bg-primary/90 rounded-lg shadow-xs transition-colors"
+            >
+              Schedule an Enterprise Walkthrough
+            </Link>
+          </div>
         </div>
       )}
     </header>

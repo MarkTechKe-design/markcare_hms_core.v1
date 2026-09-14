@@ -13,6 +13,7 @@ import {
   MarketingScreenshotFrame,
   MarketingCtaBanner,
 } from "@/components/marketing";
+import { MarketingSystemLoop } from "@/components/marketing/marketing-system-loop";
 import { MarketingCapabilityStrip } from "@/components/marketing/marketing-capability-strip";
 import { Button } from "@/components/ui/button";
 import { marketingContent } from "@/content/marketing-content";
@@ -126,47 +127,8 @@ export default function HomePage() {
         </MarketingSection>
 
         {/* 4. Connected Care Flow */}
-        <MarketingSection variant="muted">
-          <MarketingContainer>
-            <MarketingSectionHeading
-              badge="Connected Care Flow"
-              title="Coordinating the complete patient encounter"
-              description="Structuring records and order movement as care is delivered across hospital stations."
-            />
-
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              <MarketingCard>
-                <div className="size-11 rounded-xl bg-primary/10 text-primary flex items-center justify-center mb-5">
-                  <Stethoscope className="size-5" aria-hidden="true" />
-                </div>
-                <h3 className="text-lg font-bold text-foreground mb-2">1. Clinical Consultation</h3>
-                <p className="text-sm text-muted-foreground leading-relaxed">
-                  Physicians document encounter notes, record vital signs, and issue diagnostic lab requisitions or prescription orders directly within the patient encounter file.
-                </p>
-              </MarketingCard>
-
-              <MarketingCard>
-                <div className="size-11 rounded-xl bg-primary/10 text-primary flex items-center justify-center mb-5">
-                  <Pill className="size-5" aria-hidden="true" />
-                </div>
-                <h3 className="text-lg font-bold text-foreground mb-2">2. Pharmacy FEFO Dispensing</h3>
-                <p className="text-sm text-muted-foreground leading-relaxed">
-                  Prescription orders appear in the dispensary queue. Dispensers fulfill orders supported by First-Expiry-First-Out stock batch selection.
-                </p>
-              </MarketingCard>
-
-              <MarketingCard>
-                <div className="size-11 rounded-xl bg-primary/10 text-primary flex items-center justify-center mb-5">
-                  <CreditCard className="size-5" aria-hidden="true" />
-                </div>
-                <h3 className="text-lg font-bold text-foreground mb-2">3. Invoicing & Settlement</h3>
-                <p className="text-sm text-muted-foreground leading-relaxed">
-                  Consultation fees, diagnostic investigation costs, and dispensed medications aggregate to the patient encounter invoice for self-pay or insurance settlement.
-                </p>
-              </MarketingCard>
-            </div>
-          </MarketingContainer>
-        </MarketingSection>
+        {/* 3. The 60-Second Operational Engine */}
+      <MarketingSystemLoop />
 
         {/* 5. CTA Banner */}
         <MarketingCtaBanner

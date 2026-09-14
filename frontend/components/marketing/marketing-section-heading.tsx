@@ -1,41 +1,49 @@
-﻿import * as React from "react";
-import { cn } from "@/lib/utils";
-import { MarketingBadge } from "./marketing-badge";
+import * as React from "react";
 
-export interface MarketingSectionHeadingProps extends React.HTMLAttributes<HTMLDivElement> {
-  badge?: string;
+export interface MarketingSectionHeadingProps {
   eyebrow?: string;
+  badge?: string;
   title: string;
   description?: string;
-  align?: "center" | "left";
+  align?: "left" | "center";
+  className?: string;
 }
 
 export function MarketingSectionHeading({
-  badge,
   eyebrow,
+  badge,
   title,
   description,
   align = "center",
-  className,
-  ...props
+  className = "",
 }: MarketingSectionHeadingProps) {
-  const displayBadge = badge || eyebrow;
+  const isCentered = align === "center";
+  const tag = badge || eyebrow;
 
   return (
     <div
-      className={cn(
-        "mb-12 sm:mb-16",
-        align === "center" ? "text-center mx-auto max-w-3xl" : "text-left max-w-3xl",
-        className
-      )}
-      {...props}
+      className={`space-y-3 mb-12 md:mb-16 ${
+        isCentered ? "text-center mx-auto" : "text-left"
+      } max-w-3xl ${className}`}
     >
-      {displayBadge && <MarketingBadge className="mb-4">{displayBadge}</MarketingBadge>}
-      <h2 className="text-2xl font-extrabold tracking-tight sm:text-3xl lg:text-4xl text-foreground text-balance">
+      {tag && (
+        <div>
+          <span className="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold uppercase tracking-wider bg-primary/10 text-primary border border-primary/20">
+            {tag}
+          </span>
+        </div>
+      )}
+
+      <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-foreground text-balance">
         {title}
       </h2>
+
       {description && (
-        <p className="mt-4 text-base sm:text-lg text-muted-foreground text-balance leading-relaxed">
+        <p
+          className={`text-base sm:text-lg text-muted-foreground leading-relaxed text-balance ${
+            isCentered ? "mx-auto" : ""
+          }`}
+        >
           {description}
         </p>
       )}
