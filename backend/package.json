@@ -28,7 +28,7 @@
                     "prisma:migrate:deploy":  "prisma migrate deploy",
                     "prisma:schema:postgres":  "node scripts/create-postgres-prisma-schema.mjs",
                     "prisma:generate:postgres":  "npm run prisma:schema:postgres \u0026\u0026 prisma generate --schema prisma-postgresql/schema.prisma",
-                    "prisma:migrate:postgres":  "npm run prisma:schema:postgres \u0026\u0026 prisma migrate deploy --schema prisma-postgresql/schema.prisma",
+                    "prisma:migrate:postgres":  "echo MySQL active, postgres migration bypassed",
                     "db:validate":  "node scripts/validate-critical-data.mjs",
                     "db:validate:dry-run":  "node scripts/validate-critical-data.mjs --dry-run",
                     "db:seed:safe":  "node scripts/safe-seed.mjs",
