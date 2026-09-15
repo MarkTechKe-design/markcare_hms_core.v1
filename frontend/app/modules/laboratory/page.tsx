@@ -77,7 +77,7 @@ export default function LaboratoryPage() {
                 Traceable from doctor order to patient record.
               </h2>
               <p className="text-sm text-muted-foreground mt-3">
-                Laboratory tests require high integrity to protect clinical decision-making. MarkCare guarantees end-to-end accountability.
+                Laboratory tests require high integrity to protect clinical decision-making. MarkCare is engineered for end-to-end accountability.
               </p>
             </div>
 

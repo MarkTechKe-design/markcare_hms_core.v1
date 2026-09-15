@@ -21,21 +21,21 @@ export function MarketingBadge({
   variant = "neutral",
   className = "",
 }: MarketingBadgeProps) {
-  const variantStyles: Record<string, string> = {
-    neutral: "bg-muted text-muted-foreground border-border",
-    clinical: "bg-teal-500/10 text-teal-700 dark:text-teal-300 border-teal-500/20",
-    operational: "bg-blue-500/10 text-blue-700 dark:text-blue-300 border-blue-500/20",
-    security: "bg-emerald-500/10 text-emerald-700 dark:text-emerald-300 border-emerald-500/20",
-    available: "bg-emerald-500/10 text-emerald-700 dark:text-emerald-300 border-emerald-500/20",
-    ready: "bg-cyan-500/10 text-cyan-700 dark:text-cyan-300 border-cyan-500/20",
-    verified: "bg-primary/10 text-primary border-primary/20",
+  const colorStyles: Record<string, string> = {
+    neutral: "text-primary",
+    clinical: "text-teal-600 dark:text-teal-400",
+    operational: "text-blue-600 dark:text-blue-400",
+    security: "text-emerald-600 dark:text-emerald-400",
+    available: "text-emerald-600 dark:text-emerald-400",
+    ready: "text-cyan-600 dark:text-cyan-400",
+    verified: "text-primary",
   };
 
-  const selectedStyle = variantStyles[variant] || variantStyles.neutral;
+  const selectedColor = colorStyles[variant] || "text-primary";
 
   return (
     <span
-      className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium border ${selectedStyle} ${className}`}
+      className={`inline-block text-sm font-semibold uppercase tracking-wider ${selectedColor} ${className}`}
     >
       {children}
     </span>

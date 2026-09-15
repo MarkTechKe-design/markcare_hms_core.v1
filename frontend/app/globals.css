@@ -556,14 +556,14 @@ table th {
   inset: 0;
   border-radius: inherit;
   background: radial-gradient(
-    450px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
-    color-mix(in oklch, var(--primary) 12%, transparent),
-    transparent 70%
+    500px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+    color-mix(in oklch, var(--primary) 6%, transparent),
+    transparent 65%
   );
   opacity: 0;
-  transition: opacity 280ms ease;
+  transition: opacity 250ms ease;
   pointer-events: none;
-  z-index: 1;
+  z-index: 0;
 }
 
 @media (hover: hover) and (pointer: fine) {
@@ -661,3 +661,20 @@ a:has(> .mc-card-interactive):focus-visible {
     transform: none !important;
   }
 }
+
+
+/* Interactive Card Polish: Prevent Milky Wash & Protect Text Contrast */
+.mc-card-interactive {
+  position: relative;
+  isolation: isolate;
+}
+
+.mc-card-interactive > * {
+  position: relative;
+  z-index: 0;
+}
+
+.mc-card-interactive::before {
+  z-index: 0 !important;
+}
+
