@@ -12,12 +12,13 @@ export function CardMotionProvider() {
     const isReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const cards = document.querySelectorAll<HTMLElement>(".mc-card-interactive, .mc-reveal");
 
+    // Immediate reveal if user prefers reduced motion or observer not supported
     if (isReduced || !("IntersectionObserver" in window)) {
       cards.forEach((el: HTMLElement) => el.classList.add("is-revealed"));
       return;
     }
 
-    // A. Viewport Scroll Entrance
+    // High-resilience observer with positive margin to preload reveals before viewport edge
     const observer = new IntersectionObserver(
       (entries: IntersectionObserverEntry[]) => {
         entries.forEach((entry: IntersectionObserverEntry) => {
@@ -36,19 +37,27 @@ export function CardMotionProvider() {
           }
         });
       },
-      { threshold: 0.08, rootMargin: "0px 0px -30px 0px" }
+      { threshold: 0.01, rootMargin: "0px 0px 100px 0px" }
     );
 
     cards.forEach((card: HTMLElement) => {
       const rect = card.getBoundingClientRect();
-      if (rect.top < window.innerHeight && rect.bottom > 0) {
+      // If element is already in viewport or near top, reveal immediately
+      if (rect.top <= window.innerHeight + 80) {
         card.classList.add("is-revealed");
       } else {
         observer.observe(card);
       }
     });
 
-    // B. Cursor Proximity Radial Lighting
+    // Guaranteed fallback: After 600ms, reveal ALL remaining cards so NO section remains empty
+    const fallbackTimer = setTimeout(() => {
+      document.querySelectorAll<HTMLElement>(".mc-reveal:not(.is-revealed)").forEach((el) => {
+        el.classList.add("is-revealed");
+      });
+    }, 600);
+
+    // Hardware-accelerated pointer tracking
     const interactiveCards = document.querySelectorAll<HTMLElement>(".mc-card-interactive");
     const cleanupFns: Array<() => void> = [];
 
@@ -73,6 +82,7 @@ export function CardMotionProvider() {
     });
 
     return () => {
+      clearTimeout(fallbackTimer);
       observer.disconnect();
       cleanupFns.forEach((fn) => fn());
     };

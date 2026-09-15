@@ -2,121 +2,110 @@
 
 import * as React from "react";
 import Link from "next/link";
-import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { Menu, X, ChevronRight } from "lucide-react";
 import { ThemeToggle } from "@/components/shared/theme-toggle";
+import {
+  Menu,
+  X,
+  ChevronRight,
+  ShieldCheck,
+  ArrowRight
+} from "lucide-react";
 
 interface NavItem {
   name: string;
   href: string;
+  badge?: string;
 }
 
 const NAVIGATION_ITEMS: NavItem[] = [
   { name: "Platform", href: "/platform" },
   { name: "Solutions", href: "/solutions" },
   { name: "Modules", href: "/modules" },
+  { name: "Facilities", href: "/facilities" },
   { name: "Integrations", href: "/integrations" },
+  { name: "Security", href: "/security" },
   { name: "Pricing", href: "/pricing" },
   { name: "FAQ", href: "/resources/faq" },
   { name: "About", href: "/about" },
-  { name: "Blog", href: "/blog" },
-  { name: "Contact", href: "/contact" },
 ];
 
 export function MarketingHeader() {
-  const [isScrolled, setIsScrolled] = React.useState(false);
-  const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false);
   const pathname = usePathname();
+  const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false);
+  const [scrolled, setScrolled] = React.useState(false);
+
   const menuRef = React.useRef<HTMLDivElement>(null);
   const triggerRef = React.useRef<HTMLButtonElement>(null);
 
-  const isHome = pathname === "/";
-
   React.useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 16);
+      setScrolled(window.scrollY > 10);
     };
-    handleScroll();
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  React.useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Escape" && mobileMenuOpen) {
-        setMobileMenuOpen(false);
-        triggerRef.current?.focus();
-      }
-    };
-
-    if (mobileMenuOpen) {
-      document.body.style.overflow = "hidden";
-      window.addEventListener("keydown", handleKeyDown);
-    } else {
-      document.body.style.overflow = "";
-    }
-
-    return () => {
-      document.body.style.overflow = "";
-      window.removeEventListener("keydown", handleKeyDown);
-    };
-  }, [mobileMenuOpen]);
-
+  // Close mobile drawer on route transition
   React.useEffect(() => {
     setMobileMenuOpen(false);
   }, [pathname]);
 
-  const headerBackgroundClass = isHome
-    ? isScrolled
-      ? "bg-background/90 backdrop-blur-md border-b border-border/80 shadow-xs"
-      : "bg-transparent border-b border-transparent"
-    : "bg-background/95 backdrop-blur-md border-b border-border/80 shadow-xs";
+  // Lock body scroll when mobile drawer is open
+  React.useEffect(() => {
+    if (mobileMenuOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [mobileMenuOpen]);
 
   return (
-    <header className={`sticky top-0 inset-x-0 z-50 transition-all duration-200 ${headerBackgroundClass}`}>
+    <header
+      className={`sticky top-0 inset-x-0 z-50 isolate transition-all duration-200 ${
+        scrolled || mobileMenuOpen
+          ? "bg-background/95 backdrop-blur-md border-b border-border shadow-xs"
+          : "bg-background/80 backdrop-blur-xs border-b border-border/40"
+      }`}
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16 md:h-18 gap-2">
-          {/* Logo */}
-          <Link
-            href="/"
-            className="flex items-center gap-2 rounded-md shrink-0 focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
-          >
-            <div className="relative hidden sm:block h-8 w-32 lg:w-36">
-              <Image
-                src="/brand/logo.png"
-                alt="MarkCare Hospital Management System"
-                fill
-                priority
-                sizes="(max-width: 1024px) 128px, 144px"
-                className="object-contain object-left dark:brightness-110"
-              />
-            </div>
-            <div className="relative block sm:hidden size-8">
-              <Image
-                src="/brand/logo-icon.png"
-                alt="MarkCare HMS"
-                fill
-                priority
-                sizes="32px"
-                className="object-contain"
-              />
-            </div>
-          </Link>
+        <div className="flex items-center justify-between h-16">
+          {/* Logo & Platform Identifier */}
+          <div className="flex items-center gap-3">
+            <Link
+              href="/"
+              className="flex items-center gap-2.5 focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-primary rounded-lg py-1"
+            >
+              <div className="flex size-9 items-center justify-center rounded-xl bg-primary text-primary-foreground shadow-xs">
+                <ShieldCheck className="size-5" />
+              </div>
+              <div className="flex flex-col">
+                <span className="text-base font-bold tracking-tight text-foreground leading-none">
+                  MarkCare
+                </span>
+                <span className="text-[10px] font-semibold tracking-wider text-muted-foreground uppercase leading-tight">
+                  HMS Enterprise
+                </span>
+              </div>
+            </Link>
+          </div>
 
-          {/* Complete 9-Item Desktop Navigation */}
-          <nav className="hidden lg:flex items-center gap-0.5 xl:gap-1" aria-label="Marketing Navigation">
+          {/* Desktop Navigation Links (Visible on lg screens) */}
+          <nav className="hidden lg:flex items-center gap-1" aria-label="Main Navigation">
             {NAVIGATION_ITEMS.map((item) => {
-              const isActive = pathname === item.href || (item.href !== "/" && pathname.startsWith(`${item.href}/`));
+              const isActive = pathname === item.href;
               return (
                 <Link
                   key={item.href}
                   href={item.href}
-                  className={`px-2 xl:px-2.5 py-1.5 text-xs xl:text-[13px] font-medium rounded-md transition-colors whitespace-nowrap ${
+                  className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-colors ${
                     isActive
                       ? "text-primary bg-primary/10 font-semibold"
-                      : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
-                  } focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-primary`}
+                      : "text-muted-foreground hover:text-foreground hover:bg-muted"
+                  }`}
                 >
                   {item.name}
                 </Link>
@@ -124,26 +113,33 @@ export function MarketingHeader() {
             })}
           </nav>
 
-          {/* Desktop Actions */}
-          <div className="hidden sm:flex items-center gap-2 shrink-0">
+          {/* Desktop Actions (Visible on lg screens) */}
+          <div className="hidden lg:flex items-center gap-2.5">
             <ThemeToggle />
             <Link
               href="/login"
-              className="px-3 py-1.5 text-xs xl:text-sm font-medium text-muted-foreground hover:text-foreground transition-colors rounded-md focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-primary"
+              className="px-3.5 py-1.5 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
             >
               Sign In
             </Link>
             <Link
               href="/request-demo"
-              className="inline-flex items-center justify-center px-3.5 py-1.5 text-xs xl:text-sm font-medium text-primary-foreground bg-primary hover:bg-primary/90 rounded-lg shadow-xs transition-all active:scale-[0.98] focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
+              className="inline-flex items-center gap-1.5 px-4 py-1.5 text-sm font-semibold rounded-lg bg-primary text-primary-foreground hover:bg-primary/90 shadow-xs transition-colors"
             >
               Request Demo
+              <ArrowRight className="size-3.5" />
             </Link>
           </div>
 
-          {/* Mobile Actions */}
-          <div className="flex items-center gap-1.5 sm:hidden">
+          {/* Mobile & Tablet Controls (Visible below lg) */}
+          <div className="flex lg:hidden items-center gap-2">
             <ThemeToggle />
+            <Link
+              href="/request-demo"
+              className="inline-flex items-center text-xs font-semibold px-2.5 py-1.5 rounded-md bg-primary text-primary-foreground hover:bg-primary/90 transition-colors sm:text-sm sm:px-3"
+            >
+              Demo
+            </Link>
             <button
               ref={triggerRef}
               type="button"
@@ -151,51 +147,69 @@ export function MarketingHeader() {
               className="inline-flex items-center justify-center p-2 rounded-lg text-muted-foreground hover:text-foreground hover:bg-muted focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-primary"
               aria-controls="mobile-navigation"
               aria-expanded={mobileMenuOpen}
-              aria-label={mobileMenuOpen ? "Close main menu" : "Open main menu"}
+              aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
             >
               {mobileMenuOpen ? (
-                <X className="size-6" aria-hidden="true" />
+                <X className="size-6 text-foreground" aria-hidden="true" />
               ) : (
-                <Menu className="size-6" aria-hidden="true" />
+                <Menu className="size-6 text-foreground" aria-hidden="true" />
               )}
             </button>
           </div>
         </div>
       </div>
 
-      {/* Mobile Drawer */}
+      {/* Mobile Drawer Overlay */}
       {mobileMenuOpen && (
         <div
           id="mobile-navigation"
           ref={menuRef}
-          className="fixed inset-x-0 top-16 bottom-0 z-40 bg-background/95 backdrop-blur-lg border-b border-border p-6 overflow-y-auto lg:hidden animate-in fade-in slide-in-from-top-2 duration-200"
+          className="fixed inset-x-0 top-16 bottom-0 z-50 bg-background/98 backdrop-blur-xl border-b border-border p-6 overflow-y-auto lg:hidden flex flex-col justify-between"
+          style={{ height: "calc(100dvh - 4rem)" }}
         >
-          <nav className="flex flex-col gap-1.5" aria-label="Mobile Menu">
-            {NAVIGATION_ITEMS.map((item) => (
+          <div>
+            {/* Top Action Buttons inside Drawer */}
+            <div className="grid grid-cols-2 gap-3 mb-6 pb-6 border-b border-border">
               <Link
-                key={item.href}
-                href={item.href}
-                className="flex items-center justify-between p-3 text-base font-medium rounded-lg text-foreground hover:bg-muted transition-colors"
+                href="/login"
+                className="w-full text-center py-2.5 text-sm font-semibold text-foreground bg-muted hover:bg-muted/80 rounded-lg border border-border transition-colors"
               >
-                <span>{item.name}</span>
-                <ChevronRight className="size-4 text-muted-foreground" aria-hidden="true" />
+                Sign In
               </Link>
-            ))}
-          </nav>
+              <Link
+                href="/request-demo"
+                className="w-full text-center py-2.5 text-sm font-semibold text-primary-foreground bg-primary hover:bg-primary/90 rounded-lg shadow-xs transition-colors"
+              >
+                Book Demo
+              </Link>
+            </div>
 
-          <div className="mt-6 pt-6 border-t border-border flex flex-col gap-3">
-            <Link
-              href="/login"
-              className="w-full text-center py-2.5 text-sm font-medium text-foreground border border-border rounded-lg hover:bg-muted transition-colors"
-            >
-              Staff Portal Sign In
-            </Link>
-            <Link
-              href="/request-demo"
-              className="w-full text-center py-2.5 text-sm font-medium text-primary-foreground bg-primary hover:bg-primary/90 rounded-lg shadow-xs transition-colors"
-            >
-              Schedule an Enterprise Walkthrough
-            </Link>
+            {/* Navigation Links */}
+            <nav className="flex flex-col gap-1" aria-label="Mobile Navigation">
+              {NAVIGATION_ITEMS.map((item) => {
+                const isActive = pathname === item.href;
+                return (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    className={`flex items-center justify-between px-3.5 py-2.5 text-base font-medium rounded-lg transition-colors ${
+                      isActive
+                        ? "text-primary bg-primary/10 font-bold"
+                        : "text-foreground hover:bg-muted"
+                    }`}
+                  >
+                    <span>{item.name}</span>
+                    <ChevronRight className="size-4 text-muted-foreground" aria-hidden="true" />
+                  </Link>
+                );
+              })}
+            </nav>
+          </div>
+
+          <div className="pt-6 mt-6 border-t border-border text-center">
+            <p className="text-xs text-muted-foreground">
+              MarkCare Enterprise HMS � Connected Care Platform
+            </p>
           </div>
         </div>
       )}
