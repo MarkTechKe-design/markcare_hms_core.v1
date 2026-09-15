@@ -1,6 +1,7 @@
 ﻿import type { Metadata } from "next";
 import "./globals.css";
 import { AppProvider } from "@/providers/app-provider";
+import { CardMotionProvider } from "@/components/marketing/card-motion-provider";
 import { themeInitScript } from "@/lib/theme";
 
 const appUrl = process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3001";
@@ -53,7 +54,7 @@ export default function RootLayout({
         <script id="theme-init" dangerouslySetInnerHTML={{ __html: themeInitScript }} />
       </head>
       <body suppressHydrationWarning className="app-canvas font-sans">
-        <AppProvider>{children}</AppProvider>
+        <AppProvider><CardMotionProvider />{children}</AppProvider>
       </body>
     </html>
   );

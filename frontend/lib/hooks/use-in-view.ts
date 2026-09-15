@@ -1,33 +1,27 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import * as React from "react";
 
-interface UseInViewOptions {
+export interface UseInViewOptions {
   threshold?: number;
   rootMargin?: string;
-  once?: boolean;
+  triggerOnce?: boolean;
 }
 
-export function useInView<T extends HTMLElement = HTMLDivElement>({
-  threshold = 0.1,
-  rootMargin = "0px 0px -40px 0px",
-  once = true,
-}: UseInViewOptions = {}) {
-  const ref = useRef<T | null>(null);
-  const [isInView, setIsInView] = useState(false);
+export function useInView(options: UseInViewOptions = {}) {
+  const { threshold = 0.05, rootMargin = "100px", triggerOnce = true } = options;
+  const ref = React.useRef<HTMLElement | null>(null);
+  
+  // FAIL-OPEN ARCHITECTURE: Always visible by default (SSR & Client)
+  const [isInView, setIsInView] = React.useState<boolean>(true);
 
-  useEffect(() => {
+  React.useEffect(() => {
     const element = ref.current;
-    if (!element) return;
-
-    // Respect user accessibility preference
-    if (typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      setIsInView(true);
+    if (!element || typeof IntersectionObserver === "undefined") {
       return;
     }
 
-    if (!("IntersectionObserver" in window)) {
-      setIsInView(true);
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
       return;
     }
 
@@ -35,10 +29,10 @@ export function useInView<T extends HTMLElement = HTMLDivElement>({
       ([entry]) => {
         if (entry.isIntersecting) {
           setIsInView(true);
-          if (once) {
+          if (triggerOnce) {
             observer.unobserve(element);
           }
-        } else if (!once) {
+        } else if (!triggerOnce) {
           setIsInView(false);
         }
       },
@@ -50,7 +44,7 @@ export function useInView<T extends HTMLElement = HTMLDivElement>({
     return () => {
       observer.disconnect();
     };
-  }, [threshold, rootMargin, once]);
+  }, [threshold, rootMargin, triggerOnce]);
 
   return { ref, isInView };
 }

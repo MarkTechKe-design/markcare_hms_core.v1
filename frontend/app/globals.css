@@ -526,18 +526,18 @@ table th {
   will-change: transform, box-shadow;
 }
 
+/* FAIL-OPEN ARCHITECTURE: Content is 100% visible by default */
 .mc-reveal {
-  opacity: 0;
-  transform: translateY(16px);
-  transition: opacity 350ms cubic-bezier(0.16, 1, 0.3, 1),
-              transform 350ms cubic-bezier(0.16, 1, 0.3, 1);
-  transition-delay: calc(var(--stagger-idx, 0) * 50ms);
-  will-change: opacity, transform;
+  opacity: 1 !important;
+  transform: none !important;
+  transition: transform 260ms cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 260ms cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 260ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .mc-reveal.is-revealed {
-  opacity: 1;
-  transform: translateY(0) scale(1);
+  opacity: 1 !important;
+  transform: none !important;
 }
 
 .mc-card-interactive {

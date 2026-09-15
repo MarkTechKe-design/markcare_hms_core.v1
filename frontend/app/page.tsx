@@ -1,7 +1,7 @@
 ﻿import React from "react";
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowRight, Stethoscope, Pill, CreditCard } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import {
   MarketingHeader,
   MarketingFooter,
@@ -9,7 +9,6 @@ import {
   MarketingBadge,
   MarketingSection,
   MarketingSectionHeading,
-  MarketingCard,
   MarketingScreenshotFrame,
   MarketingCtaBanner,
 } from "@/components/marketing";
