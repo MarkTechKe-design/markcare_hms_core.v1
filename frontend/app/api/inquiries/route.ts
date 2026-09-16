@@ -1,4 +1,4 @@
-﻿import { NextResponse } from 'next/server';
+import { NextResponse } from 'next/server';
 
 export async function POST(req: Request) {
   try {
@@ -9,7 +9,11 @@ export async function POST(req: Request) {
       return NextResponse.json({ message: 'All required fields must be completed.' }, { status: 400 });
     }
 
-    const backendUrl = process.env.BACKEND_API_URL || process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4000';
+    const backendUrl =
+      process.env.BACKEND_API_URL ||
+      process.env.NEXT_PUBLIC_API_BASE_URL ||
+      process.env.NEXT_PUBLIC_API_URL ||
+      'http://localhost:4000';
 
     try {
       const backendRes = await fetch(`${backendUrl}/inquiries`, {
@@ -18,25 +22,34 @@ export async function POST(req: Request) {
         body: JSON.stringify(body),
       });
 
-      if (backendRes.ok) {
-        const data = await backendRes.json();
-        return NextResponse.json(data, { status: 201 });
-      }
-    } catch {
-      // Backend process offline fallback: generate valid reference to ensure conversion continuity
-    }
+      const data = await backendRes.json().catch(() => null);
 
-    const referenceId = `MC-INQ-${Date.now().toString(36).toUpperCase()}`;
-    return NextResponse.json(
-      {
-        success: true,
-        referenceId,
-        receivedAt: new Date().toISOString(),
-        message: 'Your inquiry has been received. A MarkCare systems representative will contact your facility.',
-      },
-      { status: 201 },
-    );
+      if (backendRes.ok && data?.success) {
+        return NextResponse.json(data, { status: backendRes.status });
+      }
+
+      // Forward truthful failure without exposing database internals or stack traces
+      const safeMessage = data?.message
+        ? Array.isArray(data.message)
+          ? data.message.join(', ')
+          : data.message
+        : 'Failed to record inquiry with MarkCare systems.';
+
+      return NextResponse.json(
+        { success: false, message: safeMessage },
+        { status: backendRes.status || 502 },
+      );
+    } catch {
+      // Backend unreachable or offline: report truthful service unavailable error
+      return NextResponse.json(
+        {
+          success: false,
+          message: 'Unable to connect to the MarkCare inquiry service. Please verify your connection or try again later.',
+        },
+        { status: 503 },
+      );
+    }
   } catch {
-    return NextResponse.json({ message: 'Internal server error processing inquiry.' }, { status: 500 });
+    return NextResponse.json({ success: false, message: 'Invalid inquiry payload received.' }, { status: 400 });
   }
 }

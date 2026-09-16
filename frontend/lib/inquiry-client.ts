@@ -1,4 +1,4 @@
-﻿export interface InquiryPayload {
+export interface InquiryPayload {
   name: string;
   email: string;
   phone: string;
@@ -25,10 +25,12 @@ export async function submitInquiry(payload: InquiryPayload): Promise<InquiryRes
     body: JSON.stringify(payload),
   });
 
-  const data = await res.json();
+  const data = await res.json().catch(() => null);
 
-  if (!res.ok) {
-    const errorMsg = Array.isArray(data.message) ? data.message.join(', ') : data.message || 'Failed to submit inquiry.';
+  if (!res.ok || !data?.success) {
+    const errorMsg = data?.message
+      ? (Array.isArray(data.message) ? data.message.join(', ') : data.message)
+      : 'Failed to submit inquiry.';
     throw new Error(errorMsg);
   }
 
