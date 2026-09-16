@@ -1,11 +1,12 @@
 ﻿import React from "react";
 import type { Metadata } from "next";
-import { Mail, Phone, MapPin, HelpCircle } from "lucide-react";
+import Link from "next/link";
+import { Mail, Phone, MapPin, HelpCircle, ArrowRight } from "lucide-react";
 import { MarketingHeader, MarketingFooter, MarketingContainer, MarketingBadge } from "@/components/marketing";
 import { ContactForm } from "@/components/marketing/contact-form";
 
 export const metadata: Metadata = {
-  title: "Contact MarkCare HMS",
+  title: "Contact & Facility Inquiries",
   description: "Contact MarkCare HMS for healthcare facility inquiries, platform demonstrations, technical architecture reviews, and deployment discussions.",
 };
 
@@ -62,6 +63,25 @@ export default function ContactPage() {
                     </div>
                   </div>
                 </div>
+
+                {/* FAQ Cross-link Card */}
+                <div className="rounded-2xl border border-border bg-card p-5 space-y-3">
+                  <div className="flex items-center gap-2 text-primary">
+                    <HelpCircle className="size-5" />
+                    <h3 className="text-sm font-bold text-foreground">Have Questions Before Inquiring?</h3>
+                  </div>
+                  <p className="text-xs text-muted-foreground leading-relaxed">
+                    Review our comprehensive FAQ covering modules, offline LAN continuity, pricing models, and deployment timelines.
+                  </p>
+                  <Link
+                    href="/resources/faq"
+                    className="inline-flex items-center text-xs font-semibold text-primary hover:underline gap-1 pt-1"
+                  >
+                    <span>Browse Frequently Asked Questions</span>
+                    <ArrowRight className="size-3.5" />
+                  </Link>
+                </div>
+
                 <div className="rounded-2xl border border-border bg-card/60 p-6 space-y-3">
                   <h4 className="text-xs font-bold text-foreground uppercase tracking-wider flex items-center gap-1.5"><HelpCircle className="size-4 text-primary" />Important Notice</h4>
                   <p className="text-xs text-muted-foreground leading-relaxed">
@@ -80,3 +100,4 @@ export default function ContactPage() {
     </div>
   );
 }
+

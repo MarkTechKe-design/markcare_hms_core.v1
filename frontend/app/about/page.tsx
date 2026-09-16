@@ -1,4 +1,4 @@
-import React from "react";
+﻿import React from "react";
 import type { Metadata } from "next";
 import Link from "next/link";
 import {
@@ -32,7 +32,7 @@ import {
 import { Button } from "@/components/ui/button";
 
 export const metadata: Metadata = {
-  title: "Engineering Philosophy & Product Horizon | MarkCare HMS",
+  title: "Engineering Philosophy & Product Horizon",
   description:
     "Explore MarkCare's product philosophy, regional healthcare realities, core engineering principles, verified current capabilities, and transparent product roadmap.",
 };
@@ -653,3 +653,4 @@ export default function AboutPage() {
     </div>
   );
 }
+

@@ -25,7 +25,7 @@ import {
 } from "@/components/marketing";
 
 export const metadata: Metadata = {
-  title: "MarkCare HMS System Modules",
+  title: "Operational Module Catalog",
   description:
     "Explore the verified module ecosystem of MarkCare HMS: Clinical EMR, Inpatient Wards, Pharmacy FEFO, Diagnostic Laboratory, and Billing.",
 };
@@ -240,3 +240,4 @@ export default function ModulesPage() {
     </div>
   );
 }
+

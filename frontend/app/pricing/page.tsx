@@ -30,9 +30,9 @@ import {
 import { Button } from "@/components/ui/button";
 
 export const metadata: Metadata = {
-  title: "Commercial Packaging & Deployment Pricing | MarkCare HMS",
+  title: "Commercial Evaluation & Deployment Profiles",
   description:
-    "Explore MarkCare HMS commercial packaging, deployment scoping, and pricing assessment factors for single clinics, referral hospitals, and multi-branch networks.",
+    "Explore MarkCare HMS commercial evaluation, deployment scoping, and pricing assessment factors for single clinics, referral hospitals, and multi-branch networks.",
 };
 
 // Section 2: Commercial Scope Factors
@@ -59,10 +59,10 @@ const commercialFactors = [
   },
 ];
 
-// Section 3: Deployment-Aware Packaging
-const deploymentPackages = [
+// Section 3: Deployment Profiles (Operational Contexts, Not Contractual Packages)
+const deploymentProfiles = [
   {
-    title: "Single-Facility Deployment",
+    title: "Single-Facility Deployment Profile",
     scope: "Community Clinics & Standalone Medical Centres",
     desc: "Engineered for standalone healthcare providers requiring coordinated clinical, pharmacy, diagnostic, and cashier workflows from a centralized facility console.",
     icon: Cloud,
@@ -75,26 +75,26 @@ const deploymentPackages = [
     ],
   },
   {
-    title: "Multi-Location Network Deployment",
+    title: "Multi-Location Network Deployment Profile",
     scope: "Hospital Groups & Multi-Branch Networks",
-    desc: "Designed for healthcare organizations coordinating multiple physical branches, satellite dispensaries, and centralized executive reporting.",
+    desc: "Designed for healthcare organizations coordinating multiple physical branches, satellite dispensaries, and centralized administrative visibility.",
     icon: Network,
     featured: true,
     highlights: [
       "Branch-scoped operational queues and staff permissions",
       "Standardized multi-branch formularies and price tariffs",
       "Inter-branch pharmaceutical stock transfer tracking",
-      "Consolidated group-wide financial and census reporting",
+      "Consolidated group-wide administrative visibility and census reporting",
     ],
   },
   {
-    title: "Specialized Institutional Deployment",
+    title: "Specialized Institutional Deployment Profile",
     scope: "Referral Hospitals & Acute Inpatient Centres",
     desc: "Structured for high-throughput secondary and tertiary hospitals requiring dedicated server infrastructure, high concurrency, and comprehensive auditability.",
     icon: Server,
     featured: false,
     highlights: [
-      "Dedicated on-premises Local-Area Network (LAN) server topology",
+      "On-premises Local-Area Network (LAN) server topology",
       "Multi-ward bed census and concurrent cashier folios",
       "Tamper-evident audit logging for all clinical transactions",
       "Readiness for regional payer and regulatory integration frameworks",
@@ -194,14 +194,14 @@ export default function PricingPage() {
         <section className="relative border-b border-border/80 bg-gradient-to-b from-card/60 via-background to-background py-20 sm:py-28">
           <MarketingContainer className="text-center">
             <p className="text-sm font-semibold uppercase tracking-wider text-primary mb-4">
-              Commercial Evaluation &middot; Deployment Packaging
+              Commercial Evaluation &middot; Deployment Profiles
             </p>
             <h1 className="text-3xl font-extrabold tracking-tight sm:text-5xl lg:text-6xl text-balance max-w-4xl mx-auto">
               Pricing that reflects the way your healthcare organization operates.
             </h1>
             <p className="mt-6 text-base sm:text-lg text-muted-foreground max-w-3xl mx-auto text-balance leading-relaxed">
               Hospital software procurement requires a realistic understanding of facility scope. Rather than publishing
-              arbitrary flat rates that misrepresent operational needs, MarkCare structures commercial configurations
+              arbitrary flat rates that misrepresent operational needs, MarkCare structures commercial evaluation
               around physical facility scale, branch topology, active workflows, and technical deployment models.
             </p>
             <div className="mt-8 flex flex-wrap justify-center gap-4">
@@ -224,7 +224,7 @@ export default function PricingPage() {
             <MarketingSectionHeading
               eyebrow="Commercial Approach"
               title="Commercial configuration shaped by operational scope."
-              description="Healthcare organizations vary significantly in patient volume, physical location count, and technical infrastructure. MarkCare commercial configurations are determined by deployment requirements rather than per-patient transaction fees."
+              description="Healthcare organizations vary significantly in patient volume, physical location count, and technical infrastructure. MarkCare does not currently publish per-patient transaction pricing; commercial configuration is assessed according to deployment scope and operational requirements."
             />
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -251,22 +251,22 @@ export default function PricingPage() {
           </MarketingContainer>
         </MarketingSection>
 
-        {/* Section 3: Deployment-Aware Packaging */}
+        {/* Section 3: Deployment Profiles */}
         <MarketingSection variant="muted">
           <MarketingContainer>
             <MarketingSectionHeading
-              eyebrow="Deployment Scopes"
-              title="Deployment-aware commercial configurations."
-              description="Three primary operational contexts guide commercial evaluation, designed to match the governance and infrastructure realities of your facility."
+              eyebrow="Deployment Profiles"
+              title="Deployment profile contexts."
+              description="Three primary operational contexts guide commercial evaluation, illustrating how facility scale and infrastructure influence deployment scope."
             />
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-stretch">
-              {deploymentPackages.map((pkg) => {
-                const Icon = pkg.icon;
-                const cardBorder = pkg.featured ? "border-primary/50 shadow-md shadow-primary/5" : "border-border/80";
+              {deploymentProfiles.map((profile) => {
+                const Icon = profile.icon;
+                const cardBorder = profile.featured ? "border-primary/50 shadow-md shadow-primary/5" : "border-border/80";
                 return (
                   <div
-                    key={pkg.title}
+                    key={profile.title}
                     className={"rounded-2xl border bg-card p-6 sm:p-7 shadow-xs flex flex-col justify-between mc-card mc-card-interactive group " + cardBorder}
                   >
                     <div className="space-y-4">
@@ -274,7 +274,7 @@ export default function PricingPage() {
                         <div className="size-11 rounded-xl bg-primary/10 text-primary flex items-center justify-center group-hover:scale-105 transition-transform">
                           <Icon className="size-5" aria-hidden="true" />
                         </div>
-                        {pkg.featured && (
+                        {profile.featured && (
                           <span className="text-[10px] font-mono font-bold uppercase tracking-wider px-2 py-0.5 rounded-full bg-primary/10 text-primary">
                             Multi-Location
                           </span>
@@ -283,18 +283,18 @@ export default function PricingPage() {
 
                       <div>
                         <span className="text-[11px] font-mono font-semibold uppercase tracking-wider text-muted-foreground block mb-1">
-                          {pkg.scope}
+                          {profile.scope}
                         </span>
                         <h3 className="text-xl font-bold text-foreground group-hover:text-primary transition-colors">
-                          {pkg.title}
+                          {profile.title}
                         </h3>
                         <p className="mt-2 text-xs text-muted-foreground leading-relaxed">
-                          {pkg.desc}
+                          {profile.desc}
                         </p>
                       </div>
 
                       <ul className="pt-4 border-t border-border/60 space-y-2.5 text-xs text-muted-foreground">
-                        {pkg.highlights.map((item) => (
+                        {profile.highlights.map((item) => (
                           <li key={item} className="flex items-start gap-2">
                             <CheckCircle2 className="size-3.5 text-primary shrink-0 mt-0.5" aria-hidden="true" />
                             <span>{item}</span>
@@ -305,7 +305,7 @@ export default function PricingPage() {
 
                     <div className="mt-8 pt-4 border-t border-border/60">
                       <Button asChild className="w-full bg-primary text-primary-foreground font-semibold shadow-xs">
-                        <Link href="/request-demo">Request Scope Assessment</Link>
+                        <Link href="/request-demo">Request Profile Assessment</Link>
                       </Button>
                     </div>
                   </div>
@@ -348,7 +348,7 @@ export default function PricingPage() {
             <MarketingSectionHeading
               eyebrow="Operational Directory"
               title="Explore what the platform covers."
-              description="Commercial packaging corresponds to the verified operational modules deployed at your workstations. Review detailed specifications across our core departmental engines."
+              description="Operational modules correspond to the functional workspaces deployed at your workstations. Review detailed specifications across our core departmental engines."
             />
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -469,9 +469,10 @@ export default function PricingPage() {
               </div>
 
               <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
-                Every healthcare facility operates with a unique operational footprint. MarkCare commercial agreements
-                are structured transparently around active bed capacity, workstation terminals, branch topology, and
-                support service requirements. We do not assess per-patient transaction fees or arbitrary usage penalties.
+                Every healthcare facility operates with a unique operational footprint. MarkCare does not currently
+                publish per-patient transaction pricing. Commercial configuration is assessed transparently around
+                active bed capacity, workstation terminals, branch topology, implementation scope, and support service
+                requirements.
               </p>
 
               <div className="pt-2">
@@ -517,7 +518,7 @@ export default function PricingPage() {
         {/* Section 9: Canonical CTA Banner */}
         <MarketingCtaBanner
           headline="Discuss commercial configuration for your facility"
-          description="Speak directly with our implementation architects to evaluate deployment models, station licensing, and rollout planning tailored to your operational requirements."
+          description="Speak directly with our implementation team to evaluate deployment profiles, station requirements, and rollout planning tailored to your operational requirements."
           primaryCta={{
             label: "Request Commercial Proposal",
             href: "/request-demo",
@@ -533,3 +534,4 @@ export default function PricingPage() {
     </div>
   );
 }
+

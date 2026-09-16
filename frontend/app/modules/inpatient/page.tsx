@@ -9,7 +9,7 @@ import { MarketingScreenshotFrame } from "@/components/marketing/marketing-scree
 import { Button } from "@/components/ui/button";
 
 export const metadata: Metadata = {
-  title: "Inpatient & Ward Bed Management — MarkCare HMS",
+  title: "Inpatient & Ward Bed Management",
   description:
     "Ward occupancy tracking, bed allocations, inpatient admission notes, nursing handovers, and discharge billing summaries.",
 };
@@ -131,4 +131,5 @@ export default function InpatientPage() {
     </div>
   );
 }
+
 

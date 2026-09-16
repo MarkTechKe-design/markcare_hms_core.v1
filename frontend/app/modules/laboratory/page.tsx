@@ -9,7 +9,7 @@ import { MarketingScreenshotFrame } from "@/components/marketing/marketing-scree
 import { Button } from "@/components/ui/button";
 
 export const metadata: Metadata = {
-  title: "Diagnostic Laboratory Workspace — MarkCare HMS",
+  title: "Diagnostic Laboratory Workspace",
   description:
     "Electronic test requests, specimen accession numbers, parameter reference ranges, panic alerts, and multi-tier result verification pipelines.",
 };
@@ -142,4 +142,5 @@ export default function LaboratoryPage() {
     </div>
   );
 }
+
 

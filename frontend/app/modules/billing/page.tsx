@@ -9,7 +9,7 @@ import { MarketingScreenshotFrame } from "@/components/marketing/marketing-scree
 import { Button } from "@/components/ui/button";
 
 export const metadata: Metadata = {
-  title: "Billing, Cashier & Revenue Settlements — MarkCare HMS",
+  title: "Billing, Cashier & Revenue Settlements",
   description:
     "Real-time patient ledger, itemized bill generation, M-Pesa STK push integration, SHA insurance split claims, and verifiable QR invoice receipts.",
 };
@@ -155,4 +155,5 @@ export default function BillingPage() {
     </div>
   );
 }
+
 

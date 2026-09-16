@@ -9,7 +9,7 @@ import { MarketingScreenshotFrame } from "@/components/marketing/marketing-scree
 import { Button } from "@/components/ui/button";
 
 export const metadata: Metadata = {
-  title: "Pharmacy & FEFO Inventory Engine — MarkCare HMS",
+  title: "Pharmacy & FEFO Inventory Engine",
   description:
     "First-Expiry, First-Out (FEFO) dispensing, batch tracking, stock movement reconciliations, expiry risk monitors, and point-of-sale OTC sales.",
 };
@@ -155,4 +155,5 @@ export default function PharmacyPage() {
     </div>
   );
 }
+
 

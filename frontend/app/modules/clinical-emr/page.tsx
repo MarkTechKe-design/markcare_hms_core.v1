@@ -9,7 +9,7 @@ import { MarketingScreenshotFrame } from "@/components/marketing/marketing-scree
 import { Button } from "@/components/ui/button";
 
 export const metadata: Metadata = {
-  title: "Clinical EMR & Consultation Workspace — MarkCare HMS",
+  title: "Clinical EMR & Consultation Workspace",
   description:
     "Structured electronic health records, nursing triage capture, doctor consultation queue, and integrated order entry for diagnostic and pharmaceutical workflows.",
 };
@@ -198,4 +198,5 @@ export default function ClinicalEmrPage() {
     </div>
   );
 }
+
 

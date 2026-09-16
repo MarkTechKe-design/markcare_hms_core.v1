@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import * as React from "react";
 import Link from "next/link";
@@ -9,7 +9,10 @@ import {
   Menu,
   X,
   ChevronRight,
-  ArrowRight
+  ChevronDown,
+  ArrowRight,
+  BookOpen,
+  HelpCircle,
 } from "lucide-react";
 
 interface NavItem {
@@ -27,21 +30,39 @@ const PRIMARY_NAV_ITEMS: NavItem[] = [
   { name: "Contact", href: "/contact" },
 ];
 
-// Secondary ecosystem routes accessible via mobile menu drawer and footer
+// Secondary ecosystem & resource routes
 const SECONDARY_NAV_ITEMS: NavItem[] = [
   { name: "Facilities Directory", href: "/facilities" },
   { name: "Integrations Ecosystem", href: "/integrations" },
   { name: "Security & Governance", href: "/security" },
+  { name: "Healthcare Insights & Blog", href: "/blog" },
   { name: "Frequently Asked Questions", href: "/resources/faq" },
+];
+
+const RESOURCE_ITEMS = [
+  {
+    name: "Healthcare Insights & Blog",
+    href: "/blog",
+    description: "Operational analyses and perspectives on digital healthcare workflows.",
+    icon: BookOpen,
+  },
+  {
+    name: "Frequently Asked Questions",
+    href: "/resources/faq",
+    description: "Detailed answers regarding deployment, modules, and institutional procurement.",
+    icon: HelpCircle,
+  },
 ];
 
 export function MarketingHeader() {
   const pathname = usePathname();
   const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false);
+  const [resourcesOpen, setResourcesOpen] = React.useState(false);
   const [scrolled, setScrolled] = React.useState(false);
 
   const menuRef = React.useRef<HTMLDivElement>(null);
   const triggerRef = React.useRef<HTMLButtonElement>(null);
+  const resourcesRef = React.useRef<HTMLDivElement>(null);
 
   React.useEffect(() => {
     const handleScroll = () => {
@@ -54,7 +75,19 @@ export function MarketingHeader() {
   // Close mobile drawer on route transition
   React.useEffect(() => {
     setMobileMenuOpen(false);
+    setResourcesOpen(false);
   }, [pathname]);
+
+  // Close resources dropdown on outside click
+  React.useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (resourcesRef.current && !resourcesRef.current.contains(event.target as Node)) {
+        setResourcesOpen(false);
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
 
   // Lock body scroll when mobile drawer is open
   React.useEffect(() => {
@@ -67,6 +100,8 @@ export function MarketingHeader() {
       document.body.style.overflow = "";
     };
   }, [mobileMenuOpen]);
+
+  const isResourcesActive = pathname.startsWith("/blog") || pathname.startsWith("/resources/faq");
 
   return (
     <header
@@ -101,6 +136,64 @@ export function MarketingHeader() {
                 </Link>
               );
             })}
+
+            {/* Resources Secondary Dropdown */}
+            <div className="relative" ref={resourcesRef}>
+              <button
+                type="button"
+                onClick={() => setResourcesOpen((prev) => !prev)}
+                onKeyDown={(e) => {
+                  if (e.key === "Escape") setResourcesOpen(false);
+                }}
+                aria-expanded={resourcesOpen}
+                aria-haspopup="true"
+                className={`inline-flex items-center gap-1 px-3 py-1.5 rounded-lg text-sm font-medium transition-colors ${
+                  isResourcesActive || resourcesOpen
+                    ? "text-primary bg-primary/10 font-semibold"
+                    : "text-muted-foreground hover:text-foreground hover:bg-muted"
+                }`}
+              >
+                <span>Resources</span>
+                <ChevronDown
+                  className={`size-3.5 transition-transform duration-200 ${resourcesOpen ? "rotate-180" : ""}`}
+                  aria-hidden="true"
+                />
+              </button>
+
+              {resourcesOpen && (
+                <div className="absolute left-0 mt-2 w-72 rounded-2xl border border-border bg-card p-2 shadow-lg ring-1 ring-black/5 dark:ring-white/10 animate-in fade-in slide-in-from-top-2 duration-150 z-50">
+                  <div className="space-y-1">
+                    {RESOURCE_ITEMS.map((res) => {
+                      const Icon = res.icon;
+                      const isItemActive =
+                        res.href === "/blog" ? pathname.startsWith("/blog") : pathname === res.href;
+                      return (
+                        <Link
+                          key={res.href}
+                          href={res.href}
+                          onClick={() => setResourcesOpen(false)}
+                          className={`flex items-start gap-3 p-2.5 rounded-xl transition-colors ${
+                            isItemActive
+                              ? "bg-primary/10 text-primary"
+                              : "hover:bg-muted text-foreground"
+                          }`}
+                        >
+                          <div className="size-8 rounded-lg bg-primary/10 text-primary flex items-center justify-center shrink-0 mt-0.5">
+                            <Icon className="size-4" aria-hidden="true" />
+                          </div>
+                          <div>
+                            <span className="text-xs font-bold block">{res.name}</span>
+                            <span className="text-[11px] text-muted-foreground leading-tight block mt-0.5">
+                              {res.description}
+                            </span>
+                          </div>
+                        </Link>
+                      );
+                    })}
+                  </div>
+                </div>
+              )}
+            </div>
           </nav>
 
           {/* Desktop Actions */}
@@ -198,29 +291,37 @@ export function MarketingHeader() {
               })}
             </nav>
 
-            {/* Secondary Ecosystem Links */}
+            {/* Secondary Ecosystem & Resource Links */}
             <div className="pt-4 border-t border-border/60">
               <span className="text-xs font-mono font-bold uppercase tracking-wider text-muted-foreground px-3 mb-2 block">
-                Platform & Trust
+                Platform & Resources
               </span>
               <div className="flex flex-col gap-1">
-                {SECONDARY_NAV_ITEMS.map((item) => (
-                  <Link
-                    key={item.href}
-                    href={item.href}
-                    className="flex items-center justify-between px-3.5 py-2 text-sm text-muted-foreground hover:text-foreground hover:bg-muted rounded-lg transition-colors"
-                  >
-                    <span>{item.name}</span>
-                    <ChevronRight className="size-3.5 text-muted-foreground" aria-hidden="true" />
-                  </Link>
-                ))}
+                {SECONDARY_NAV_ITEMS.map((item) => {
+                  const isActive =
+                    item.href === "/blog" ? pathname.startsWith("/blog") : pathname === item.href;
+                  return (
+                    <Link
+                      key={item.href}
+                      href={item.href}
+                      className={`flex items-center justify-between px-3.5 py-2 text-sm rounded-lg transition-colors ${
+                        isActive
+                          ? "text-primary bg-primary/10 font-semibold"
+                          : "text-muted-foreground hover:text-foreground hover:bg-muted"
+                      }`}
+                    >
+                      <span>{item.name}</span>
+                      <ChevronRight className="size-3.5 text-muted-foreground" aria-hidden="true" />
+                    </Link>
+                  );
+                })}
               </div>
             </div>
           </div>
 
           <div className="pt-6 mt-6 border-t border-border text-center">
             <p className="text-xs text-muted-foreground">
-              MarkCare Enterprise HMS � Connected Care Platform
+              MarkCare Enterprise HMS &middot; Connected Care Platform
             </p>
           </div>
         </div>

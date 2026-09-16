@@ -2,12 +2,12 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowLeft, Clock, BookOpen, Share2 } from "lucide-react";
+import { ArrowLeft, Clock } from "lucide-react";
 import {
   MarketingHeader,
   MarketingFooter,
   MarketingContainer,
-  MarketingBadge,
+  
   MarketingCtaBanner,
 } from "@/components/marketing";
 import { blogPosts } from "@/content/blog-posts";
@@ -27,12 +27,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const post = blogPosts.find((p) => p.slug === slug);
   if (!post) {
     return {
-      title: "Article Not Found · MarkCare HMS",
+      title: "Article Not Found",
     };
   }
 
   return {
-    title: `${post.title} · MarkCare Insights`,
+    title: post.title,
     description: post.excerpt,
     openGraph: {
       title: post.title,

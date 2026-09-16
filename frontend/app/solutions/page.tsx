@@ -1,4 +1,4 @@
-import React from "react";
+﻿import React from "react";
 import type { Metadata } from "next";
 import Link from "next/link";
 import {
@@ -27,7 +27,7 @@ import {
 import { Button } from "@/components/ui/button";
 
 export const metadata: Metadata = {
-  title: "Hospital Solutions by Role & Department | MarkCare HMS",
+  title: "Hospital Solutions by Role & Department",
   description:
     "Explore how MarkCare HMS addresses the operational challenges of medical directors, chief pharmacists, finance officers, laboratory managers, and hospital administrators.",
 };
@@ -465,3 +465,4 @@ export default function SolutionsPage() {
     </div>
   );
 }
+

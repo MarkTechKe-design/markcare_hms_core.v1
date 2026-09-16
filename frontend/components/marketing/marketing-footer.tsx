@@ -1,4 +1,4 @@
-import React from "react";
+﻿import React from "react";
 import Link from "next/link";
 import { AppLogo } from "@/components/shared/app-logo";
 import { MarketingContainer } from "@/components/marketing/marketing-container";
@@ -45,13 +45,14 @@ export function MarketingFooter() {
 
           {/* Col 3: Architecture & Ecosystem */}
           <div className="space-y-3">
-            <h4 className="text-xs font-semibold uppercase tracking-wider text-foreground">Platform & Trust</h4>
+            <h4 className="text-xs font-semibold uppercase tracking-wider text-foreground">Platform & Resources</h4>
             <ul className="space-y-2 text-xs text-muted-foreground">
               <li><Link href="/platform" className="hover:text-foreground transition-colors">Platform Architecture</Link></li>
               <li><Link href="/solutions" className="hover:text-foreground transition-colors">Role-Based Solutions</Link></li>
               <li><Link href="/integrations" className="hover:text-foreground transition-colors">Integrations Ecosystem</Link></li>
               <li><Link href="/security" className="hover:text-foreground transition-colors">Security & Controls</Link></li>
               <li><Link href="/pricing" className="hover:text-foreground transition-colors">Deployment Models & Pricing</Link></li>
+              <li><Link href="/blog" className="hover:text-foreground transition-colors">Healthcare Insights & Blog</Link></li>
               <li><Link href="/resources/faq" className="hover:text-foreground transition-colors">Frequently Asked Questions</Link></li>
             </ul>
           </div>

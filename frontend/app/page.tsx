@@ -18,7 +18,7 @@ import { Button } from "@/components/ui/button";
 import { marketingContent } from "@/content/marketing-content";
 
 export const metadata: Metadata = {
-  title: "Integrated Healthcare Operations Platform",
+  title: "Integrated Healthcare Operations Platform · MarkCare HMS",
   description:
     "MarkCare HMS connects patient admissions, doctor encounters, diagnostic laboratory orders, pharmacy FEFO dispensing, and hospital billing in one unified workspace.",
 };

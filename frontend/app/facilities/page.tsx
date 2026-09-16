@@ -1,4 +1,4 @@
-import React from "react";
+﻿import React from "react";
 import type { Metadata } from "next";
 import Link from "next/link";
 import {
@@ -30,7 +30,7 @@ import {
 import { Button } from "@/components/ui/button";
 
 export const metadata: Metadata = {
-  title: "Facility Scale, Deployment & Multi-Branch Governance | MarkCare HMS",
+  title: "Facility Scale, Deployment & Multi-Branch Governance",
   description:
     "Explore how MarkCare HMS scales across physical healthcare facilities: single community clinics, referral hospitals, and distributed multi-branch healthcare networks.",
 };
@@ -554,3 +554,4 @@ export default function FacilitiesPage() {
     </div>
   );
 }
+

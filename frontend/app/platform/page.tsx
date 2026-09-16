@@ -1,4 +1,4 @@
-import React from "react";
+﻿import React from "react";
 import type { Metadata } from "next";
 import Link from "next/link";
 import {
@@ -32,7 +32,7 @@ import {
 import { Button } from "@/components/ui/button";
 
 export const metadata: Metadata = {
-  title: "System Architecture & Technical Governance | MarkCare HMS",
+  title: "System Architecture & Technical Governance",
   description:
     "Explore the technical architecture behind MarkCare HMS: shared application data layer, role-based access controls, branch data scoping, audit logging, and LAN deployment options.",
 };
@@ -681,3 +681,4 @@ export default function PlatformPage() {
     </div>
   );
 }
+
