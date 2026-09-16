@@ -1,4 +1,4 @@
-﻿import {
+import {
   Activity,
   Ambulance,
   Baby,
@@ -269,7 +269,7 @@ export const navSections: NavSection[] = [
       { title: "Settings", href: "/settings", icon: Settings, adminOnly: true },
       {
         title: "Platform Control",
-        href: "/platform",
+        href: "/platform-admin",
         icon: ShieldCheck,
         superAdminOnly: true,
       },
