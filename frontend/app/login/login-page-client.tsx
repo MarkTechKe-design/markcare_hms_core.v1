@@ -332,7 +332,7 @@ export default function LoginPageClient() {
             </Form>
           </div>
 
-          <details className="group mt-5 rounded-xl border border-border bg-card px-4 py-3">
+          <details suppressHydrationWarning className="group mt-5 rounded-xl border border-border bg-card px-4 py-3">
             <summary className="cursor-pointer list-none text-xs font-semibold tracking-wider text-muted-foreground uppercase select-none">
               Need assistance?
             </summary>
