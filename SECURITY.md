@@ -1,6 +1,6 @@
 # Security Policy
 
-Invinceible Core HMS handles sensitive hospital, patient, staff, billing, and payment workflows. Report security issues privately.
+MarkCare HMS handles sensitive hospital, patient, staff, billing, and payment workflows. Report security issues privately.
 
 ## Report A Vulnerability
 
