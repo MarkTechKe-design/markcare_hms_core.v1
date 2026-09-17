@@ -114,3 +114,43 @@ require their credentials at boot.
    behavior (features off, mock adapters, memory fallbacks).
 3. **No secrets in code or logs** — enforced by validation + redacting
    logger + CI secret scan.
+
+
+## Commercial Inquiries & Notification Dispatch (Added 2026-09-17)
+
+| Variable | Type | Default | Description |
+| :--- | :--- | :--- | :--- |
+| `MAIL_DISPATCH_ENABLED` | Boolean | `false` | Activates automated background email alerts when new facility leads arrive. |
+| `ADMIN_NOTIFICATION_EMAIL` | String | `admin@markcare.ke` | Destination inbox receiving commercial facility leads and demo requests. |
+| `MAIL_PROVIDER` | Enum | `smtp` | `resend` or `smtp`. |
+| `RESEND_API_KEY` | String | - | API key when using Resend email delivery. |
+| `SMTP_HOST` | String | - | Outbound SMTP host. |
+| `SMTP_PORT` | Number | `587` | Outbound SMTP port. |
+| `SMTP_USER` | String | - | SMTP authentication user. |
+| `SMTP_PASS` | String | - | SMTP authentication password/token. |
+| `MAIL_FROM` | String | `MarkCare <notifications@markcare.ke>` | From address header on outbound emails. |
+
+## Dynamic CMS Marketing Settings (`PUBLIC_MARKETING` Category)
+
+Managed via `SystemSetting` table with `isPublic: true`:
+- `BRAND_LOGO_URL`: Institutional SVG/PNG/WebP logo URL distributed dynamically across navigation headers, footers, login auth portals, and dashboard shells.
+- `BRAND_FAVICON_URL`: Browser tab icon (ICO, PNG, SVG) dynamically synchronized in real-time across the client application.
+- `CONTACT_PRIMARY_EMAIL`: Lead contact email.
+- `CONTACT_PRIMARY_PHONE`: Public telephony support line.
+- `CONTACT_WHATSAPP_NUMBER`: International format WhatsApp phone for click-to-chat.
+- `CONTACT_OFFICE_LOCATION`: Physical regional operations display text.
+- `HERO_BACKGROUND_VIDEO`: Background looping video URL behind hero banner.
+- `HERO_PRODUCT_PREVIEW`: Main hero showcase workspace screenshot URL.
+- `SCREENSHOT_CLINICAL`: Consultation & Clinical EMR workspace screenshot.
+- `SCREENSHOT_PHARMACY`: Pharmacy FEFO inventory & dispensing screenshot.
+- `SCREENSHOT_LABORATORY`: Laboratory specimen & diagnostic queue screenshot.
+- `SCREENSHOT_INPATIENT`: Inpatient ward bed management board screenshot.
+- `SCREENSHOT_BILLING`: Cashier invoice & billing folio screenshot.
+
+
+## Media Storage & CDN Configuration (Cloudinary)
+
+| Variable | Environment | Description |
+| :--- | :--- | :--- |
+| `NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME` | Frontend (`.env.local`) | Active Cloudinary cloud account name (e.g. `speglp6u`). |
+| `NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET` | Frontend (`.env.local`) | Unsigned upload preset token (e.g. `markcare_cms`). |

@@ -1,5 +1,23 @@
 # Changelog
 
+## [Unreleased] - 2026-09-17
+
+### Added
+- **Commercial Inquiry Management Desk**:
+  - Super Admin API endpoints (`GET /inquiries`, `PATCH /inquiries/:id/status`) with role guards, pagination, and multi-field keyword search.
+  - Dedicated Platform Control inbox page (`/platform/inquiries`) with status badges, collapsible message details, and direct one-click WhatsApp client routing.
+  - Asynchronous background email dispatch service (`InquiryMailerService`) supporting Resend and SMTP with automated client tracking receipts.
+- **Dynamic Marketing CMS & Public Settings**:
+  - Unauthenticated `GET /settings/public` endpoint providing safe client-facing key-value configurations.
+  - Fallback-First React hook (`usePublicSettings`) ensuring zero-downtime client hydration with static safety fallbacks.
+  - Dynamic contact channels on `/contact` wired to database-backed telephone, email, and WhatsApp endpoints.
+  - Dynamic institutional brand logo (`BRAND_LOGO_URL`) and browser tab favicon (`BRAND_FAVICON_URL`) resolution with automated fallback defaults
+  - Dynamic screenshot resolution across all department showcases
+  - Glassmorphic hero video header with scroll-aware contrast transitions
+  - Cloudinary CDN Dropzone integration with unsigned asset uploads (zero local file renaming) via `MarketingScreenshotFrame`.
+  - Platform Admin Marketing CMS editor component (`marketing-cms-editor.tsx`).
+
+
 ## [v0.3.0] - 2026-07-12
 ### Added
 - **Phase 3: Shared Health Record (SHR) Publisher**

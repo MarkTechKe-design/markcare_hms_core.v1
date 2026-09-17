@@ -28,7 +28,7 @@ export function PlatformHeader() {
     <header className="bg-surface-1 border-b border-border sticky top-0 z-40 shrink-0 border-b border-[#2db6ff] border-t-4 border-t-red-600 text-white shadow-[0_12px_28px_rgba(3,76,126,0.22)]">
       <div className="flex min-h-20 items-center gap-4 px-4 py-3 md:px-6">
         <div className="hidden min-w-[260px] shrink-0 items-center lg:flex">
-          <AppLogo light />
+          <AppLogo />
         </div>
 
         <Button

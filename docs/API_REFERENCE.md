@@ -874,3 +874,16 @@ sequenceDiagram
     K-->>W: CU invoice number + receipt signature
     W->>E: store CU data + QR, status ACCEPTED
 ```
+
+
+## Commercial Inquiries & CMS Settings Endpoints (Added 2026-09-17)
+
+### Public Endpoints
+- `POST /inquiries`: Submit commercial facility onboarding or demo inquiry.
+- `GET /settings/public`: Retrieve all public key-value settings (`isPublic: true`) without authentication.
+
+### Platform Super Admin Endpoints
+- `GET /inquiries`: List inquiries with query filters (`page`, `limit`, `status`, `search`, `type`). Requires `SUPER_ADMIN`.
+- `GET /inquiries/:id`: Retrieve single inquiry detail. Requires `SUPER_ADMIN`.
+- `PATCH /inquiries/:id/status`: Update inquiry lifecycle status (`NEW`, `IN_REVIEW`, `CONTACTED`, `QUALIFIED`, `CLOSED`). Requires `SUPER_ADMIN`.
+- `PATCH /settings/key/:settingKey/value`: Update any system setting value. Requires `SUPER_ADMIN`.

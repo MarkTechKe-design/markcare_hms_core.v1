@@ -23,6 +23,12 @@ import { Button } from "@/components/ui/button";
 
 const platformItems = [
   {
+    title: "Commercial Inquiries",
+    href: "/platform/inquiries",
+    icon: MessageSquareText,
+    text: "Review demo requests, pricing inquiries, and facility lead triage.",
+  },
+  {
     title: "Facilities",
     href: "/platform/facilities",
     icon: Building2,

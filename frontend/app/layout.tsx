@@ -1,10 +1,12 @@
-﻿import type { Metadata } from "next";
+import type { Metadata } from "next";
+import Script from "next/script";
 import "./globals.css";
 import { AppProvider } from "@/providers/app-provider";
 import { CardMotionProvider } from "@/components/marketing/card-motion-provider";
+import { DynamicFavicon } from "@/components/shared/dynamic-favicon";
 import { themeInitScript } from "@/lib/theme";
 
-const appUrl = process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3001";
+const appUrl = process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000";
 
 export const metadata: Metadata = {
   metadataBase: new URL(appUrl),
@@ -51,10 +53,18 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
-        <script id="theme-init" dangerouslySetInnerHTML={{ __html: themeInitScript }} />
+        <Script
+          id="theme-init"
+          strategy="beforeInteractive"
+          dangerouslySetInnerHTML={{ __html: themeInitScript }}
+        />
       </head>
       <body suppressHydrationWarning className="app-canvas font-sans">
-        <AppProvider><CardMotionProvider />{children}</AppProvider>
+        <AppProvider>
+          <DynamicFavicon />
+          <CardMotionProvider />
+          {children}
+        </AppProvider>
       </body>
     </html>
   );

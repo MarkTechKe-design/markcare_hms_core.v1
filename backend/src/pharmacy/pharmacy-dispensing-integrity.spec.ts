@@ -105,10 +105,10 @@ describe('PharmacyService partial dispensing integrity', () => {
       .mockResolvedValue(prescription as never);
     jest
       .spyOn(service as never, 'notifyLowOrOutOfStock')
-      .mockResolvedValue(undefined);
+      .mockResolvedValue(undefined as any);
 
     await service.dispensePrescription(10, user, {
-      items: [{ prescriptionItemId: 11, quantityDispensed: 4 }],
+      items: [{ prescriptionItemId: 11, medicineId: 1, quantityDispensed: 4 }],
     });
 
     expect(scopeService.assertBranchAccess).toHaveBeenCalledWith(user, 1, 2);

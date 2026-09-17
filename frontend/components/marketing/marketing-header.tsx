@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import * as React from "react";
 import Link from "next/link";
@@ -20,7 +20,6 @@ interface NavItem {
   href: string;
 }
 
-// Streamlined, prioritized desktop navigation (6 core items)
 const PRIMARY_NAV_ITEMS: NavItem[] = [
   { name: "Platform", href: "/platform" },
   { name: "Solutions", href: "/solutions" },
@@ -30,7 +29,6 @@ const PRIMARY_NAV_ITEMS: NavItem[] = [
   { name: "Contact", href: "/contact" },
 ];
 
-// Secondary ecosystem & resource routes
 const SECONDARY_NAV_ITEMS: NavItem[] = [
   { name: "Facilities Directory", href: "/facilities" },
   { name: "Integrations Ecosystem", href: "/integrations" },
@@ -66,19 +64,17 @@ export function MarketingHeader() {
 
   React.useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 10);
+      setScrolled(window.scrollY > 20);
     };
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Close mobile drawer on route transition
   React.useEffect(() => {
     setMobileMenuOpen(false);
     setResourcesOpen(false);
   }, [pathname]);
 
-  // Close resources dropdown on outside click
   React.useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
       if (resourcesRef.current && !resourcesRef.current.contains(event.target as Node)) {
@@ -89,7 +85,6 @@ export function MarketingHeader() {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  // Lock body scroll when mobile drawer is open
   React.useEffect(() => {
     if (mobileMenuOpen) {
       document.body.style.overflow = "hidden";
@@ -101,24 +96,26 @@ export function MarketingHeader() {
     };
   }, [mobileMenuOpen]);
 
+  const isHome = pathname === "/";
+  const isTransparent = isHome && !scrolled && !mobileMenuOpen;
   const isResourcesActive = pathname.startsWith("/blog") || pathname.startsWith("/resources/faq");
 
   return (
     <header
-      className={`sticky top-0 inset-x-0 z-50 isolate transition-all duration-200 ${
-        scrolled || mobileMenuOpen
-          ? "bg-background/95 backdrop-blur-md border-b border-border shadow-xs"
-          : "bg-background/80 backdrop-blur-xs border-b border-border/40"
+      className={`sticky top-0 inset-x-0 z-50 transition-all duration-300 ${
+        isTransparent
+          ? "bg-gradient-to-b from-black/80 via-black/40 to-transparent border-transparent"
+          : "bg-background/95 backdrop-blur-md border-b border-border shadow-xs"
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
-          {/* Unified CMS-Ready Brand Identity */}
+        <div className="flex items-center justify-between h-16 sm:h-20 transition-all duration-300">
+          {/* Dynamic Brand Identity */}
           <div className="flex items-center gap-3">
-            <AppLogo variant="header" href="/" />
+            <AppLogo variant="header" href="/" light={isTransparent} />
           </div>
 
-          {/* Streamlined Desktop Navigation Links */}
+          {/* Desktop Navigation */}
           <nav className="hidden lg:flex items-center gap-1" aria-label="Main Navigation">
             {PRIMARY_NAV_ITEMS.map((item) => {
               const isActive = pathname === item.href;
@@ -126,10 +123,14 @@ export function MarketingHeader() {
                 <Link
                   key={item.href}
                   href={item.href}
-                  className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-colors ${
-                    isActive
-                      ? "text-primary bg-primary/10 font-semibold"
-                      : "text-muted-foreground hover:text-foreground hover:bg-muted"
+                  className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-all ${
+                    isTransparent
+                      ? isActive
+                        ? "text-white bg-white/20 font-bold drop-shadow-xs"
+                        : "text-white/85 hover:text-white hover:bg-white/10 drop-shadow-xs"
+                      : isActive
+                        ? "text-primary bg-primary/10 font-semibold"
+                        : "text-muted-foreground hover:text-foreground hover:bg-muted"
                   }`}
                 >
                   {item.name}
@@ -137,7 +138,7 @@ export function MarketingHeader() {
               );
             })}
 
-            {/* Resources Secondary Dropdown */}
+            {/* Resources Dropdown */}
             <div className="relative" ref={resourcesRef}>
               <button
                 type="button"
@@ -147,10 +148,14 @@ export function MarketingHeader() {
                 }}
                 aria-expanded={resourcesOpen}
                 aria-haspopup="true"
-                className={`inline-flex items-center gap-1 px-3 py-1.5 rounded-lg text-sm font-medium transition-colors ${
-                  isResourcesActive || resourcesOpen
-                    ? "text-primary bg-primary/10 font-semibold"
-                    : "text-muted-foreground hover:text-foreground hover:bg-muted"
+                className={`inline-flex items-center gap-1 px-3 py-1.5 rounded-lg text-sm font-medium transition-all ${
+                  isTransparent
+                    ? isResourcesActive || resourcesOpen
+                      ? "text-white bg-white/20 font-bold drop-shadow-xs"
+                      : "text-white/85 hover:text-white hover:bg-white/10 drop-shadow-xs"
+                    : isResourcesActive || resourcesOpen
+                      ? "text-primary bg-primary/10 font-semibold"
+                      : "text-muted-foreground hover:text-foreground hover:bg-muted"
                 }`}
               >
                 <span>Resources</span>
@@ -161,7 +166,7 @@ export function MarketingHeader() {
               </button>
 
               {resourcesOpen && (
-                <div className="absolute left-0 mt-2 w-72 rounded-2xl border border-border bg-card p-2 shadow-lg ring-1 ring-black/5 dark:ring-white/10 animate-in fade-in slide-in-from-top-2 duration-150 z-50">
+                <div className="absolute left-0 mt-2 w-72 rounded-2xl border border-border bg-card p-2 shadow-xl ring-1 ring-black/5 dark:ring-white/10 animate-in fade-in slide-in-from-top-2 duration-150 z-50">
                   <div className="space-y-1">
                     {RESOURCE_ITEMS.map((res) => {
                       const Icon = res.icon;
@@ -197,29 +202,31 @@ export function MarketingHeader() {
           </nav>
 
           {/* Desktop Actions */}
-          <div className="hidden lg:flex items-center gap-2.5">
+          <div className="hidden lg:flex items-center gap-3">
             <ThemeToggle />
             <Link
               href="/login"
-              className="px-3.5 py-1.5 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
+              className={`px-3.5 py-1.5 text-sm font-medium transition-colors ${
+                isTransparent ? "text-white/90 hover:text-white drop-shadow-xs" : "text-muted-foreground hover:text-foreground"
+              }`}
             >
               Sign In
             </Link>
             <Link
               href="/request-demo"
-              className="inline-flex items-center gap-1.5 px-4 py-1.5 text-sm font-semibold rounded-lg bg-primary text-primary-foreground hover:bg-primary/90 shadow-xs transition-all active:scale-[0.98]"
+              className="inline-flex items-center gap-1.5 px-4 py-2 text-sm font-semibold rounded-xl bg-primary text-primary-foreground hover:bg-primary/90 shadow-md transition-all active:scale-[0.98]"
             >
               Request Demo
               <ArrowRight className="size-3.5" aria-hidden="true" />
             </Link>
           </div>
 
-          {/* Mobile & Tablet Controls */}
+          {/* Mobile Controls */}
           <div className="flex lg:hidden items-center gap-2">
             <ThemeToggle />
             <Link
               href="/request-demo"
-              className="inline-flex items-center text-xs font-semibold px-2.5 py-1.5 rounded-md bg-primary text-primary-foreground hover:bg-primary/90 transition-colors sm:text-sm sm:px-3"
+              className="inline-flex items-center text-xs font-semibold px-3 py-1.5 rounded-lg bg-primary text-primary-foreground hover:bg-primary/90 transition-colors"
             >
               Demo
             </Link>
@@ -227,7 +234,9 @@ export function MarketingHeader() {
               ref={triggerRef}
               type="button"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="inline-flex items-center justify-center p-2 rounded-lg text-muted-foreground hover:text-foreground hover:bg-muted focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-primary"
+              className={`inline-flex items-center justify-center p-2 rounded-lg transition-colors ${
+                isTransparent ? "text-white hover:bg-white/10" : "text-muted-foreground hover:text-foreground hover:bg-muted"
+              }`}
               aria-controls="mobile-navigation"
               aria-expanded={mobileMenuOpen}
               aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
@@ -235,14 +244,14 @@ export function MarketingHeader() {
               {mobileMenuOpen ? (
                 <X className="size-6 text-foreground" aria-hidden="true" />
               ) : (
-                <Menu className="size-6 text-foreground" aria-hidden="true" />
+                <Menu className="size-6" aria-hidden="true" />
               )}
             </button>
           </div>
         </div>
       </div>
 
-      {/* Mobile Drawer Overlay */}
+      {/* Mobile Drawer */}
       {mobileMenuOpen && (
         <div
           id="mobile-navigation"
@@ -251,7 +260,6 @@ export function MarketingHeader() {
           style={{ height: "calc(100dvh - 4rem)" }}
         >
           <div className="space-y-6">
-            {/* Action Buttons inside Drawer */}
             <div className="grid grid-cols-2 gap-3 pb-6 border-b border-border/80">
               <Link
                 href="/login"
@@ -267,7 +275,6 @@ export function MarketingHeader() {
               </Link>
             </div>
 
-            {/* Primary Navigation Links */}
             <nav className="flex flex-col gap-1" aria-label="Mobile Primary Navigation">
               <span className="text-xs font-mono font-bold uppercase tracking-wider text-muted-foreground px-3 mb-1">
                 Main Menu
@@ -291,7 +298,6 @@ export function MarketingHeader() {
               })}
             </nav>
 
-            {/* Secondary Ecosystem & Resource Links */}
             <div className="pt-4 border-t border-border/60">
               <span className="text-xs font-mono font-bold uppercase tracking-wider text-muted-foreground px-3 mb-2 block">
                 Platform & Resources

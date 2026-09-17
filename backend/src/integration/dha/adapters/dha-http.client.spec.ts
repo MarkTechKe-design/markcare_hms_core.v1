@@ -231,7 +231,7 @@ describe('DhaHttpClient', () => {
     await expect(client.verifyPractitioner({})).rejects.toBeInstanceOf(
       DhaApiError,
     );
-    await expect(client.verifyFacility({})).rejects.toBeInstanceOf(DhaApiError);
+    await expect(client.verifyFacility({ facilityCode: '' } as any)).rejects.toBeInstanceOf(DhaApiError);
     await expect(client.checkEligibility({})).rejects.toBeInstanceOf(
       DhaApiError,
     );

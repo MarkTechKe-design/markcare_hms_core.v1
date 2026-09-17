@@ -1,4 +1,6 @@
-﻿import * as React from "react";
+﻿"use client";
+
+import * as React from "react";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -35,15 +37,16 @@ export function MarketingCtaBanner({
   return (
     <div className={`py-16 sm:py-24 ${className}`} id="request-demo">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        {/* Brand Medical Blue Container - Invariant in both Dark and Light modes */}
         <div className="rounded-3xl bg-[#0284c7] px-6 py-16 sm:px-12 sm:py-20 text-center text-white shadow-2xl relative overflow-hidden">
-          {/* Subtle Grid Pattern Overlay */}
+          {/* Subtle Dot Grid Pattern Overlay */}
           <div
             className="absolute inset-0 opacity-10 bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:16px_16px]"
             aria-hidden="true"
           />
 
           <div className="relative z-10 mx-auto max-w-3xl">
-            <h2 className="text-3xl font-extrabold tracking-tight sm:text-4xl lg:text-5xl mb-4 text-balance">
+            <h2 className="text-3xl font-extrabold tracking-tight sm:text-4xl lg:text-5xl mb-4 text-balance text-white drop-shadow-xs">
               {currentHeadline}
             </h2>
             <p className="text-base sm:text-lg text-sky-100 leading-relaxed mb-8 text-balance">
@@ -54,7 +57,7 @@ export function MarketingCtaBanner({
               <Button
                 asChild
                 size="lg"
-                className="group bg-white text-sky-900 font-bold px-7 shadow-lg hover:bg-slate-100 active:scale-[0.98] transition-all"
+                className="group bg-white text-sky-900 hover:text-sky-950 font-bold px-7 shadow-lg hover:bg-slate-100 active:scale-[0.98] transition-all"
               >
                 <Link href={currentPrimary.href}>
                   {currentPrimary.label}
@@ -67,7 +70,7 @@ export function MarketingCtaBanner({
                   variant="outline"
                   asChild
                   size="lg"
-                  className="border-white/40 bg-sky-800/40 text-white backdrop-blur-xs hover:bg-sky-800/80 active:scale-[0.98] transition-all"
+                  className="border-white/40 bg-sky-800/40 text-white backdrop-blur-xs hover:bg-sky-800/70 hover:text-white active:scale-[0.98] transition-all"
                 >
                   <Link href={currentSecondary.href}>{currentSecondary.label}</Link>
                 </Button>

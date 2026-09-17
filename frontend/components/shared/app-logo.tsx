@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ShieldCheck } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { usePublicSettings } from "@/hooks/use-public-settings";
 
 export interface AppLogoProps {
   className?: string;
@@ -23,53 +24,74 @@ export function AppLogo({
   iconOnly = false,
   light = false,
 }: AppLogoProps) {
-  const isFooter = variant === "footer";
-  const showText = !iconOnly && variant !== "compact";
+  const { getSetting } = usePublicSettings();
+  
+  // Resolves dark-specific logo if available, or falls back to primary logo
+  const defaultLogo = getSetting("BRAND_LOGO_URL") || null;
+  const darkLogo = getSetting("BRAND_LOGO_DARK_URL") || defaultLogo;
+  const effectiveLogoUrl = customLogoUrl || (light ? darkLogo : defaultLogo);
 
-  const textMainClass = light ? "text-white" : "text-foreground";
-  const textSubClass = light ? "text-white/70" : "text-muted-foreground";
+  const isFooter = variant === "footer";
+  const isAuth = variant === "auth";
+
+  // Hide the adjacent HTML text if a full brand logo image is uploaded
+  const showText = !iconOnly && variant !== "compact" && !effectiveLogoUrl;
+
+  const textMainClass = light ? "text-white drop-shadow-xs" : "text-foreground font-bold";
+  const textSubClass = light ? "text-white/80 drop-shadow-xs" : "text-muted-foreground font-semibold";
 
   const logoContent = (
     <div className={cn("flex items-center gap-3 select-none", className)}>
-      {/* Brand Icon or CMS-Uploaded Image */}
-      {customLogoUrl ? (
+      {/* 1. Custom Brand Logo Image */}
+      {effectiveLogoUrl ? (
         <div
           className={cn(
-            "relative overflow-hidden rounded-xl border border-border/80 bg-card flex items-center justify-center shrink-0",
-            iconOnly ? "size-9" : isFooter ? "size-10" : "size-9"
+            "relative shrink-0 flex items-center transition-transform duration-200 group-hover:scale-[1.02]",
+            isFooter
+              ? "h-11 sm:h-12 w-48 sm:w-60"
+              : isAuth
+              ? "h-9 sm:h-10 w-44 sm:w-52"
+              : "h-8 sm:h-9 md:h-10 w-40 sm:w-52"
           )}
         >
           <Image
-            src={customLogoUrl}
-            alt="MarkCare HMS"
+            src={effectiveLogoUrl}
+            alt="MarkCare HMS Enterprise"
             fill
-            className="object-contain p-1"
+            sizes="(max-width: 640px) 180px, 240px"
+            className={cn(
+              "object-contain object-left transition-all duration-200",
+              // If on dark hero overlay or in dark mode, invert dark text to white while preserving blue accents
+              (light || isFooter) && "brightness-100 contrast-100 [filter:invert(1)_hue-rotate(180deg)]",
+              !light && !isFooter && "dark:[filter:invert(1)_hue-rotate(180deg)]"
+            )}
             priority
           />
         </div>
       ) : (
+        /* 2. Fallback: ShieldCheck Icon */
         <div
           className={cn(
             "flex items-center justify-center rounded-xl shadow-xs shrink-0 transition-transform duration-200 group-hover:scale-105",
-            iconOnly ? "size-9" : isFooter ? "size-10" : "size-9",
+            iconOnly ? "size-10" : isFooter ? "size-12" : "size-11",
             light
-              ? "bg-white/10 text-white border border-white/20"
+              ? "bg-white/15 text-white border border-white/25 backdrop-blur-xs"
               : "bg-primary text-primary-foreground"
           )}
           aria-hidden="true"
         >
-          <ShieldCheck className="size-5" />
+          <ShieldCheck className="size-6" />
         </div>
       )}
 
-      {/* Brand Typography */}
+      {/* 3. HTML Brand Typography (Only rendered if no logo image is set) */}
       {showText && (
         <div className="flex flex-col min-w-0">
           <div className="flex items-center gap-1.5 leading-none">
             <span
               className={cn(
-                "font-bold tracking-tight transition-colors",
-                isFooter ? "text-lg" : "text-base",
+                "tracking-tight transition-colors",
+                isFooter ? "text-xl font-bold" : "text-base font-extrabold",
                 textMainClass
               )}
             >
@@ -78,8 +100,8 @@ export function AppLogo({
           </div>
           <span
             className={cn(
-              "font-semibold tracking-wider uppercase leading-tight mt-0.5",
-              isFooter ? "text-[11px]" : "text-[10px]",
+              "tracking-wider uppercase leading-tight mt-1",
+              isFooter ? "text-xs font-semibold" : "text-[10.5px] font-bold",
               textSubClass
             )}
           >

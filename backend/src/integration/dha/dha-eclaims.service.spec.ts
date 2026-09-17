@@ -320,7 +320,7 @@ describe('DhaEclaimsService claim orchestration', () => {
           serviceName: 'Consultation',
           serviceIdentifier: 'SVC-1',
         } as never,
-        { ...user, homeFacilityId: undefined } as never,
+        { ...(user as object), homeFacilityId: undefined } as never,
       ),
     ).toThrow(BadRequestException);
   });
