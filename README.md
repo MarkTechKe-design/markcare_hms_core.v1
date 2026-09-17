@@ -1,4 +1,4 @@
-# Invinceible Core HMS
+# MarkCare HMS
 
 MarkCare HMS is a multi-facility hospital management system for real clinical, billing, pharmacy, laboratory, inpatient, reporting, and platform administration workflows.
 
