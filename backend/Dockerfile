@@ -1,4 +1,4 @@
-﻿FROM node:20-bullseye-slim
+﻿FROM node:20-bookworm-slim
 RUN apt-get update -y && apt-get install -y openssl
 WORKDIR /app
 
