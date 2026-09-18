@@ -17,6 +17,14 @@ export const metadata: Metadata = {
   description:
     "Integrated healthcare operations platform connecting patient care, clinical workflows, laboratory, pharmacy, inpatient care, and hospital billing in one workspace.",
   applicationName: "MarkCare HMS",
+  icons: {
+    icon: [
+      { url: "/icon.png", type: "image/png" },
+      { url: "/favicon.ico" },
+    ],
+    shortcut: "/favicon.ico",
+    apple: "/icon.png",
+  },
   keywords: [
     "MarkCare",
     "HMS",

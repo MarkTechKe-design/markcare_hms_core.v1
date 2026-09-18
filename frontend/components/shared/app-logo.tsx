@@ -27,9 +27,9 @@ export function AppLogo({
   const { getSetting } = usePublicSettings();
   
   // Resolves dark-specific logo if available, or falls back to primary logo
-  const defaultLogo = getSetting("BRAND_LOGO_URL") || null;
+  const defaultLogo = getSetting("BRAND_LOGO_URL") || "/brand/logo.png";
   const darkLogo = getSetting("BRAND_LOGO_DARK_URL") || defaultLogo;
-  const effectiveLogoUrl = customLogoUrl || (light ? darkLogo : defaultLogo);
+  const effectiveLogoUrl = customLogoUrl || (light && darkLogo ? darkLogo : defaultLogo);
 
   const isFooter = variant === "footer";
   const isAuth = variant === "auth";

@@ -36,7 +36,7 @@ const DEFAULT_SETTINGS: PublicSettingsMap = {
   FACILITY_PHONE: "+254 718 178 521",
   FACILITY_EMAIL: "oduor.markochieng@gmail.com",
   BRAND_LOGO_URL: "/brand/logo.png",
-  BRAND_LOGO_DARK_URL: "/brand/logo.png",
+  BRAND_LOGO_DARK_URL: "",
   BRAND_FAVICON_URL: "/favicon.ico",
   HERO_HEADLINE: "Connected healthcare management, built around clinical workflows.",
   HERO_DESCRIPTION: "MarkCare unites patient registration, doctor encounters, diagnostic laboratory orders, pharmacy FEFO dispensing, and cashier billing into one coordinated healthcare workspace.",
