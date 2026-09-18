@@ -1,6 +1,6 @@
-import Image from "next/image";
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Activity, PanelLeftClose, PanelLeftOpen } from "lucide-react";
@@ -65,7 +65,7 @@ export function DashboardSidebar({ mobile = false }: { mobile?: boolean }) {
             aria-hidden
             className="flex size-9 shrink-0 items-center justify-center rounded-xl bg-linear-120 from-brand to-pulse text-primary-foreground shadow-sm"
           >
-            <Activity className="size-5" />
+            <Image src={brandLogo} alt="MarkCare HMS" width={24} height={24} className="size-6 object-contain" priority />
           </span>
           {/* Text label fades out in compact mode without collapsing immediately */}
           <span
@@ -75,7 +75,7 @@ export function DashboardSidebar({ mobile = false }: { mobile?: boolean }) {
             )}
           >
             <span className="block truncate text-[0.95rem] leading-tight font-bold tracking-tight text-foreground">
-              Invinceible <span className="text-gradient-brand">Core</span>
+              MarkCare <span className="text-gradient-brand">HMS</span>
             </span>
             <span className="block text-[0.65rem] font-medium tracking-widest text-muted-foreground uppercase">
               Hospital OS

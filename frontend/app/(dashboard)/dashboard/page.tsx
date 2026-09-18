@@ -68,6 +68,45 @@ const quickActions = [
   { title: "Billing desk", desc: "Invoices & cashier", icon: Wallet, href: "/billing", module: "finance" },
 ] as const;
 
+
+const MODULE_ROUTE_MAP: Record<string, string> = {
+  "maternity-obstetrics": "/maternity",
+  "maternity": "/maternity",
+  "mortuary-pathology": "/mortuary",
+  "mortuary": "/mortuary",
+  "dental-clinic": "/dental",
+  "dental": "/dental",
+  "clinical-emr": "/consultation",
+  "doctor-queue": "/doctor-queue",
+  "consultations": "/consultation",
+  "pharmacy-pos": "/pharmacy",
+  "pharmacy-dispensing": "/pharmacy",
+  "pharmacy": "/pharmacy",
+  "billing-desk": "/billing",
+  "billing-cashier": "/billing",
+  "billing": "/billing",
+  "inpatient-ipd": "/ipd",
+  "admissions": "/ipd",
+  "ipd": "/ipd",
+  "laboratory": "/lab",
+  "lab": "/lab",
+  "triage-vitals": "/triage",
+  "triage": "/triage",
+  "emergency": "/emergency",
+  "theatre": "/theatre",
+  "radiology": "/radiology",
+  "oncology": "/oncology",
+  "renal-dialysis": "/renal-dialysis",
+  "physiotherapy": "/physiotherapy",
+  "mental-health": "/mental-health",
+};
+
+function resolveModuleRoute(slug?: string): string {
+  if (!slug) return "/dashboard";
+  const normalized = slug.toLowerCase().trim();
+  return MODULE_ROUTE_MAP[normalized] || `/${normalized}`;
+}
+
 export default function DashboardPage() {
   const { user } = useAuth();
   const { facilityId, facilityName, selectedBranchId, selectedBranchName } =
@@ -290,7 +329,7 @@ export default function DashboardPage() {
                 {recentModuleRecords.slice(0, 6).map((record) => (
                   <li key={record.id}>
                     <Link
-                      href={`/${record.moduleSlug}`}
+                      href={resolveModuleRoute(record.moduleSlug)}
                       className="group flex flex-col justify-between gap-3 rounded-lg border border-border bg-card p-4 transition-all hover:border-module/40 hover:shadow-sm sm:flex-row sm:items-center"
                     >
                       <span className="min-w-0">
