@@ -9,12 +9,13 @@ WORKDIR /app
 RUN apt-get update -y && apt-get install -y openssl && rm -rf /var/lib/apt/lists/*
 
 COPY package*.json ./
-RUN npm install --legacy-peer-deps
+# --ignore-scripts prevents postinstall from running before scripts/ are copied
+RUN npm install --ignore-scripts --legacy-peer-deps
 
 COPY . .
 
 # Generate Prisma Client & compile TypeScript
-RUN npx prisma generate
+RUN node scripts/generate-prisma-client.mjs
 RUN npm run build
 
 # ==============================================================================
