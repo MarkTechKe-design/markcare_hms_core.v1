@@ -1,3 +1,4 @@
+import { getSiteUrl } from "@/lib/site-url";
 import type { Metadata } from "next";
 import Script from "next/script";
 import "./globals.css";
@@ -6,10 +7,13 @@ import { CardMotionProvider } from "@/components/marketing/card-motion-provider"
 import { DynamicFavicon } from "@/components/shared/dynamic-favicon";
 import { themeInitScript } from "@/lib/theme";
 
-const appUrl = process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000";
+const appUrl = getSiteUrl();
 
 export const metadata: Metadata = {
   metadataBase: new URL(appUrl),
+  alternates: {
+    canonical: "/",
+  },
   title: {
     default: "MarkCare Hospital Management System",
     template: "%s · MarkCare HMS",
@@ -44,12 +48,21 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en_KE",
     url: appUrl,
+    images: [
+      {
+        url: "/brand/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "MarkCare HMS Enterprise Healthcare Platform",
+      },
+    ],
   },
   twitter: {
-    card: "summary",
+    card: "summary_large_image",
     title: "MarkCare Hospital Management System",
     description:
       "Integrated healthcare operations platform connecting patient care, clinical workflows, laboratory, pharmacy, inpatient care, and hospital billing in one workspace.",
+    images: ["/brand/og-image.png"],
   },
 };
 
