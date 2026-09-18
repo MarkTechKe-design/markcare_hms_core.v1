@@ -1,3 +1,4 @@
+import Image from "next/image";
 "use client";
 
 import Link from "next/link";
@@ -14,6 +15,7 @@ import { cn } from "@/lib/utils";
 import { useAuth } from "@/providers/auth-provider";
 import { useScope } from "@/providers/scope-provider";
 import { useSidebar } from "@/providers/sidebar-provider";
+import { usePublicSettings } from "@/hooks/use-public-settings";
 
 /**
  * Meridian primary sidebar.
@@ -28,6 +30,8 @@ export function DashboardSidebar({ mobile = false }: { mobile?: boolean }) {
   const { collapsed, toggleSidebar, closeMobileSidebar } = useSidebar();
   const { facilityName, selectedBranchName } = useScope();
   const { user } = useAuth();
+  const { getSetting } = usePublicSettings();
+  const brandLogo = getSetting("BRAND_FAVICON_URL") || "/icon.png";
 
   const compact = collapsed && !mobile;
   const sections = visibleNavSections(user?.roleCode ?? "");

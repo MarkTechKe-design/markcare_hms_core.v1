@@ -1,6 +1,6 @@
 # Logging And Observability
 
-Invinceible Core HMS logs operational, clinical workflow, financial, and security events with a request ID where available. Logs are designed for managed production hosts such as Railway and Render where stdout/stderr are the main observability stream.
+MarkCare HMS logs operational, clinical workflow, financial, and security events with a request ID where available. Logs are designed for managed production hosts such as Railway and Render where stdout/stderr are the main observability stream.
 
 ## What Is Logged
 

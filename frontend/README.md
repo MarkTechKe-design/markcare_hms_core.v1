@@ -1,4 +1,4 @@
-# Invinceible Core HMS — Frontend
+# MarkCare HMS — Frontend
 
 Next.js 16 (App Router) + React 19 + Tailwind CSS 4, styled with the
 **Meridian design system** (2026): OKLCH design tokens, first-class light

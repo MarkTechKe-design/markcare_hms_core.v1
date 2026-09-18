@@ -1,6 +1,6 @@
 # Version 2 release checklist
 
-Use this checklist before promoting Invinceible Core HMS Version 2 to
+Use this checklist before promoting MarkCare HMS Version 2 to
 production.
 
 ## Code and build checks

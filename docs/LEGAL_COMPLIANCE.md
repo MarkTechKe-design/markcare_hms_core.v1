@@ -1,7 +1,7 @@
 # Legal & Compliance Module Architecture
 
 ## Overview
-The Legal & Compliance Module ensures that Invinceible Core HMS meets the stringent data protection and privacy requirements of operating a healthcare system in Kenya. This includes compliance with the **Data Protection Act, 2019** and the **Digital Health Act, 2023**, particularly regarding user consent, audit trails, and data minimization.
+The Legal & Compliance Module ensures that MarkCare HMS meets the stringent data protection and privacy requirements of operating a healthcare system in Kenya. This includes compliance with the **Data Protection Act, 2019** and the **Digital Health Act, 2023**, particularly regarding user consent, audit trails, and data minimization.
 
 ## Architecture & Workflow
 

@@ -1,7 +1,7 @@
 # System Integration Architecture: DHA & SHA
 
 ## Architecture Overview
-The Invinceible Core HMS V2 utilizes a highly resilient, offline-first integration layer to connect with the Kenyan Digital Health Agency (DHA) and Social Health Authority (SHA).
+The MarkCare HMS V2 utilizes a highly resilient, offline-first integration layer to connect with the Kenyan Digital Health Agency (DHA) and Social Health Authority (SHA).
 
 ## Core Principles
 1. **Asynchronous by Default:** All outbound data (claims, health records, registries) uses an enterprise-grade BullMQ-style backed database queue (`IntegrationQueueService`).

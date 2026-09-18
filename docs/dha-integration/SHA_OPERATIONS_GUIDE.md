@@ -1,7 +1,7 @@
 # SHA Operations Guide
 
 ## Overview
-This guide provides standard operating procedures for interacting with the Social Health Authority (SHA) and Digital Health Agency (DHA) through the Invinceible Core HMS V2.
+This guide provides standard operating procedures for interacting with the Social Health Authority (SHA) and Digital Health Agency (DHA) through the MarkCare HMS V2.
 
 ## 1. Patient Registration & Eligibility Verification
 ### Workflow

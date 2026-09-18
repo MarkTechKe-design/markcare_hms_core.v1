@@ -1,6 +1,6 @@
 # PDF and Printout Audit
 
-This audit covers official server-generated PDF documents in Invinceible Core HMS.
+This audit covers official server-generated PDF documents in MarkCare HMS.
 
 ## Server PDF endpoints
 

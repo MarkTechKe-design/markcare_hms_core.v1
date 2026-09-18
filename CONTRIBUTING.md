@@ -1,6 +1,6 @@
 # Contributing
 
-Invinceible Core HMS is healthcare infrastructure. Changes must protect patient safety, facility isolation, payment integrity, and operational uptime.
+MarkCare HMS is healthcare infrastructure. Changes must protect patient safety, facility isolation, payment integrity, and operational uptime.
 
 ## Engineering Rules
 

@@ -1,7 +1,7 @@
 # Contributing
 
 This document adapts the root [CONTRIBUTING.md](../CONTRIBUTING.md) for
-day-to-day engineering. Invinceible Core HMS is healthcare
+day-to-day engineering. MarkCare HMS is healthcare
 infrastructure: changes must protect **patient safety, facility
 isolation, payment integrity, and uptime**.
 

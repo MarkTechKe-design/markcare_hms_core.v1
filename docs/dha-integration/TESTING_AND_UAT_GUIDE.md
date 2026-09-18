@@ -1,7 +1,7 @@
 # Testing & UAT Guide: DHA/SHA Integration
 
 ## Overview
-This guide provides the necessary steps to validate the Invinceible Core HMS V2 against the DHA AfyaLink testing environment (Sandbox).
+This guide provides the necessary steps to validate the MarkCare HMS V2 against the DHA AfyaLink testing environment (Sandbox).
 
 ## Test Cases
 

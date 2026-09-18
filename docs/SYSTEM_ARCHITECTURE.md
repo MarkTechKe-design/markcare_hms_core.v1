@@ -1,6 +1,6 @@
 # System Architecture
 
-Invinceible Core HMS is a multi-tenant Hospital Management Information
+MarkCare HMS is a multi-tenant Hospital Management Information
 System for Kenyan healthcare facilities. It is a TypeScript monorepo with a
 NestJS REST backend, a Next.js frontend, a Prisma-managed relational
 database (MySQL canonical, PostgreSQL for Render production), and an

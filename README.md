@@ -186,7 +186,7 @@ npm audit --audit-level=moderate --omit=dev
 
 Start with the **[documentation index](docs/README.md)** or the
 consolidated **[Master System Documentation](docs/master/MASTER_SYSTEM_DOCUMENTATION.md)**
-([PDF edition](docs/master/Invinceible-Core-HMS-System-Documentation.pdf)).
+([PDF edition](docs/master/MarkCare-Core-HMS-System-Documentation.pdf)).
 
 Core documentation:
 

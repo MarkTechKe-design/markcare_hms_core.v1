@@ -302,7 +302,7 @@ patient care, claims, reporting, or DHA exchange.
 
 Before registering the patient, complete the master-data setup in this order:
 
-1. Sign in with the existing super administrator and select **Invinceible
+1. Sign in with the existing super administrator and select **MarkCare
    Demonstration Hospital → Demonstration Main Branch**.
 2. Open `/platform/catalogs`. Import the medicine, billing-service, and lab-test
    master records. This frontend area is super-administrator only.
@@ -502,7 +502,7 @@ roles and verify `/auth/me` changes to the intended account. Because the
 session is stored in one HttpOnly cookie, opening another tab in the same
 browser profile does not create a second independent role session. Use
 separate browser profiles only if stations must remain logged in concurrently.
-After every role change, confirm the header still shows **Invinceible
+After every role change, confirm the header still shows **MarkCare
 Demonstration Hospital / Demonstration Main Branch** before loading a queue.
 
 Capture evidence without exposing secrets:

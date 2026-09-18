@@ -1,4 +1,4 @@
-# Invinceible Core HMS Reports Engine
+# MarkCare HMS Reports Engine
 
 This is an optional Rust foundation for future high-volume HMS workloads.
 

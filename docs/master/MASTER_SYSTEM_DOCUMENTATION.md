@@ -1,4 +1,4 @@
-# Invinceible Core HMS
+# MarkCare HMS
 ## Complete System Documentation
 
 **Enterprise-grade Hospital Management Information System**
@@ -74,7 +74,7 @@ Multi-tenant · NestJS + Next.js + Prisma · KRA eTIMS & DHA ready
 
 ## System Architecture
 
-Invinceible Core HMS is a multi-tenant Hospital Management Information
+MarkCare HMS is a multi-tenant Hospital Management Information
 System for Kenyan healthcare facilities. It is a TypeScript monorepo with a
 NestJS REST backend, a Next.js frontend, a Prisma-managed relational
 database (MySQL canonical, PostgreSQL for Render production), and an
@@ -3470,7 +3470,7 @@ in the Nest graph; `forwardRef` is not used.
 ## Contributing
 
 This document adapts the root [CONTRIBUTING.md](../../CONTRIBUTING.md) for
-day-to-day engineering. Invinceible Core HMS is healthcare
+day-to-day engineering. MarkCare HMS is healthcare
 infrastructure: changes must protect **patient safety, facility
 isolation, payment integrity, and uptime**.
 

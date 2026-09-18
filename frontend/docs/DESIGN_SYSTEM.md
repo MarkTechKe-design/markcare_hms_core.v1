@@ -1,6 +1,6 @@
 # Meridian Design System (2026)
 
-The design language of Invinceible Core HMS: a bold, layered, healthcare-
+The design language of MarkCare HMS: a bold, layered, healthcare-
 professional system built on OKLCH tokens, dual themes, and per-module
 accent identities. Everything here is implemented in
 [`app/globals.css`](../app/globals.css) and

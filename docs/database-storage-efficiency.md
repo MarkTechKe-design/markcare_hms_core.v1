@@ -1,6 +1,6 @@
 # Database storage efficiency and retention
 
-This guide describes the Version 2 storage-efficiency posture for Invinceible Core HMS. The goal is to keep the Render PostgreSQL database small and fast without losing hospital history, billing integrity, stock traceability, SHA/insurance records, M-Pesa evidence, or legal auditability.
+This guide describes the Version 2 storage-efficiency posture for MarkCare HMS. The goal is to keep the Render PostgreSQL database small and fast without losing hospital history, billing integrity, stock traceability, SHA/insurance records, M-Pesa evidence, or legal auditability.
 
 ## What changed in Version 2
 

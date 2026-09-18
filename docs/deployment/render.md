@@ -1,6 +1,6 @@
 # Render production deployment
 
-This guide prepares Invinceible Core HMS to move production hosting from the
+This guide prepares MarkCare HMS to move production hosting from the
 current Railway backend and Vercel frontend setup to Render. Keep Railway and
 Vercel active until the Render backend, frontend, health checks, payments, and
 database access have been verified.

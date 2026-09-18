@@ -1,7 +1,7 @@
 # DHA/SHA Implementation Status Report
 
 ## Executive Summary
-This report details the completion of the DHA/SHA integration module for Invinceible Core HMS V2. The integration aligns with Kenyan Digital Health Agency (DHA) specifications and ensures a highly resilient, enterprise-grade connection for claims processing, patient eligibility, and registry verification.
+This report details the completion of the DHA/SHA integration module for MarkCare HMS V2. The integration aligns with Kenyan Digital Health Agency (DHA) specifications and ensures a highly resilient, enterprise-grade connection for claims processing, patient eligibility, and registry verification.
 
 ## Completed Work
 
@@ -40,4 +40,4 @@ This report details the completion of the DHA/SHA integration module for Invince
   - "Verify SHA Membership" integrated seamlessly into the new patient registration flow.
 
 ## Conclusion
-The Invinceible Core HMS V2 is fully equipped to interact with DHA and SHA services. The integration emphasizes stability, fault tolerance, and automated reconciliation, minimizing administrative burden on healthcare staff.
+The MarkCare HMS V2 is fully equipped to interact with DHA and SHA services. The integration emphasizes stability, fault tolerance, and automated reconciliation, minimizing administrative burden on healthcare staff.

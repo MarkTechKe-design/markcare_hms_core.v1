@@ -1,4 +1,4 @@
-# Invinceible Core HMS — Documentation
+# MarkCare HMS — Documentation
 
 Enterprise documentation for the complete Hospital Management Information
 System, reverse-engineered from the repository as the single source of
@@ -8,7 +8,7 @@ truth. Start here.
 
 - [Master System Documentation](master/MASTER_SYSTEM_DOCUMENTATION.md) —
   single consolidated document (also exported as
-  [PDF](master/Invinceible-Core-HMS-System-Documentation.pdf))
+  [PDF](master/MarkCare-Core-HMS-System-Documentation.pdf))
 
 ## 🏗 Architecture & code
 

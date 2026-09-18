@@ -1,6 +1,6 @@
 # High Availability Architecture
 
-Invinceible Core HMS should run as multiple stateless backend instances behind a load balancer, one production frontend deployment, one primary MySQL database, Redis for cache/rate limits/queues, and separate worker processes for heavy jobs.
+MarkCare HMS should run as multiple stateless backend instances behind a load balancer, one production frontend deployment, one primary MySQL database, Redis for cache/rate limits/queues, and separate worker processes for heavy jobs.
 
 ## Production topology
 
