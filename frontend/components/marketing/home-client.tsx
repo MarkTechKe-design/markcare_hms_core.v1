@@ -23,6 +23,7 @@ import { usePublicSettings } from "@/hooks/use-public-settings";
 
 
 export function HomeClient() {
+  const { hero } = marketingContent;
   const { getSetting } = usePublicSettings();
   const dynamicVideo =
     getSetting("HERO_BACKGROUND_VIDEO") ||
@@ -30,7 +31,6 @@ export function HomeClient() {
     hero.media.backgroundVideo ||
     "";
   const dynamicPreview = getSetting("HERO_PRODUCT_PREVIEW");
-  const { hero } = marketingContent;
 
   return (
     <div className="flex min-h-screen flex-col bg-background text-foreground antialiased selection:bg-primary/20">

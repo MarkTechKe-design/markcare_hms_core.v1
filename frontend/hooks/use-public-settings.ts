@@ -1,32 +1,33 @@
+"use client";
+
 import { useEffect, useState } from "react";
-import { apiFetch } from "@/lib/api/client";
+import { apiFetch } from "@/lib/api";
 
-export interface PublicSettingsMap {
-  FACILITY_NAME: string;
-  FACILITY_TYPE: string;
-  FACILITY_COUNTY: string;
-  FACILITY_TOWN: string;
-  FACILITY_PHONE: string;
-  FACILITY_EMAIL: string;
-  BRAND_LOGO_URL: string;
-  BRAND_LOGO_DARK_URL: string;
-  BRAND_FAVICON_URL: string;
-  HERO_HEADLINE: string;
-  HERO_DESCRIPTION: string;
-  HERO_BACKGROUND_VIDEO: string;
-  HERO_VIDEO_URL: string;
-  HERO_POSTER_URL: string;
-  HERO_BADGE: string;
-  HERO_PRODUCT_PREVIEW: string;
-  SCREENSHOT_CLINICAL: string;
-  SCREENSHOT_PHARMACY: string;
-  SCREENSHOT_LABORATORY: string;
-  SCREENSHOT_INPATIENT: string;
-  SCREENSHOT_BILLING: string;
-  [key: string]: string;
-}
+export type PublicSettingKey =
+  | "FACILITY_NAME"
+  | "FACILITY_TYPE"
+  | "FACILITY_COUNTY"
+  | "FACILITY_TOWN"
+  | "FACILITY_PHONE"
+  | "FACILITY_EMAIL"
+  | "BRAND_LOGO_URL"
+  | "BRAND_LOGO_DARK_URL"
+  | "BRAND_FAVICON_URL"
+  | "HERO_HEADLINE"
+  | "HERO_DESCRIPTION"
+  | "HERO_BACKGROUND_VIDEO"
+  | "HERO_VIDEO_URL"
+  | "HERO_POSTER_URL"
+  | "HERO_BADGE"
+  | "HERO_PRODUCT_PREVIEW"
+  | "SCREENSHOT_CLINICAL"
+  | "SCREENSHOT_PHARMACY"
+  | "SCREENSHOT_LABORATORY"
+  | "SCREENSHOT_INPATIENT"
+  | "SCREENSHOT_BILLING";
 
-// Enterprise repository defaults (Zero external hash dependencies in source code)
+export type PublicSettingsMap = Record<string, string>;
+
 const DEFAULT_SETTINGS: PublicSettingsMap = {
   FACILITY_NAME: "MarkCare Metropolitan Hospital",
   FACILITY_TYPE: "Level 5 Tertiary Referral Hospital",
@@ -63,13 +64,12 @@ export function usePublicSettings() {
         const res = await apiFetch<any>("/settings/public");
         if (!isMounted || !res) return;
 
-        const mapped: Partial<PublicSettingsMap> = {};
+        const mapped: Record<string, string> = {};
 
-        // Resilient parser: Handles both Array of entities and direct Key-Value dictionaries
         if (Array.isArray(res)) {
           for (const item of res) {
             if (item && item.settingKey && item.settingValue !== null && item.settingValue !== undefined) {
-              mapped[item.settingKey] = String(item.settingValue);
+              mapped[String(item.settingKey)] = String(item.settingValue);
             }
           }
         } else if (typeof res === "object") {
@@ -80,7 +80,6 @@ export function usePublicSettings() {
           }
         }
 
-        // Bridge legacy and standard video keys
         if (mapped.HERO_BACKGROUND_VIDEO && !mapped.HERO_VIDEO_URL) {
           mapped.HERO_VIDEO_URL = mapped.HERO_BACKGROUND_VIDEO;
         } else if (mapped.HERO_VIDEO_URL && !mapped.HERO_BACKGROUND_VIDEO) {
@@ -92,8 +91,7 @@ export function usePublicSettings() {
           ...mapped,
         }));
       } catch (err) {
-        // Graceful fallback: Retain local defaults without interrupting the UI
-        console.warn("[PublicSettings] Backend unreachable, using bundled fallback assets.", err);
+        console.warn("[PublicSettings] Backend unreachable, using fallback assets.", err);
       } finally {
         if (isMounted) setLoading(false);
       }
@@ -106,9 +104,14 @@ export function usePublicSettings() {
     };
   }, []);
 
-  const getSetting = (key: keyof PublicSettingsMap | string, fallback = "") => {
+  const getSetting = (key: PublicSettingKey | (string & {}), fallback = "") => {
     return settings[key] || fallback;
   };
 
-  return { settings, getSetting, loading };
+  return {
+    settings,
+    getSetting,
+    loading,
+    isLoading: loading,
+  };
 }
