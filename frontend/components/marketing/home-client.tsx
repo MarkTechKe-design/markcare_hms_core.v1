@@ -24,7 +24,11 @@ import { usePublicSettings } from "@/hooks/use-public-settings";
 
 export function HomeClient() {
   const { getSetting } = usePublicSettings();
-  const dynamicVideo = getSetting("HERO_BACKGROUND_VIDEO");
+  const dynamicVideo =
+    getSetting("HERO_BACKGROUND_VIDEO") ||
+    getSetting("HERO_VIDEO_URL") ||
+    hero.media.backgroundVideo ||
+    "";
   const dynamicPreview = getSetting("HERO_PRODUCT_PREVIEW");
   const { hero } = marketingContent;
 
